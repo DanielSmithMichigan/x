@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <iostream>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <unistd.h>
+
+using namespace std;
+using namespace cv;
+
+Mat ImageFromDisplay(int Width, int Height)
+{
+    Display* display = XOpenDisplay(NULL);
+    Window root = DefaultRootWindow(display);
+    XWindowAttributes attributes = {0};
+    XGetWindowAttributes(display, root, &attributes);
+    XImage* img = XGetImage(display, root, 0, 0 , Width, Height, AllPlanes, ZPixmap);
+    if (!img->data) {
+        cout << "No image data";
+        throw("No image data");
+    }
+    Mat scene = Mat(Height, Width, img->bits_per_pixel > 24 ? CV_8UC4 : CV_8UC3, img->data);
+    if (!scene.data) {
+        cout << "Error reading scene";
+        throw("Error reading scene");
+    }
+    cvtColor(scene, scene, CV_BGRA2BGR);
+    XFree(img);
+    XCloseDisplay(display);
+    return scene;
+}
+
+Mat MatchAgainst(Mat img_scene, Mat img_object, const Scalar& color, String Name = "")
+{
+    Mat result;
+    matchTemplate( img_scene, img_object, result, CV_TM_SQDIFF_NORMED );
+    double minVal; double maxVal; Point minLoc; Point maxLoc;
+    Point matchLoc;
+
+    minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, Mat() );
+    cout << Name << ": " << minVal << endl;
+    if (minVal < .25) {
+        matchLoc = minLoc;
+        rectangle( img_scene, matchLoc, Point( matchLoc.x + img_object.cols , matchLoc.y + img_object.rows ), color, 3 );
+    }
+    return img_scene;
+}
+
+int main(int argc, char** argv )
+{
+    Mat tin = imread("../images/tin.png", CV_LOAD_IMAGE_COLOR);
+    if (!tin.data) {
+        throw("Error reading scene");
+    }
+    Mat tin_mined = imread("../images/tin_mined.png", CV_LOAD_IMAGE_COLOR);
+    if (!tin_mined.data) {
+        throw("Error reading scene");
+    }
+    Mat img_scene;
+    while(true) {
+        waitKey(100);
+        Mat img_scene = ImageFromDisplay(800, 800);
+        img_scene = MatchAgainst(img_scene, tin, CV_RGB(255, 255, 255), "TIN");
+        img_scene = MatchAgainst(img_scene, tin_mined, CV_RGB(255, 0, 0), "MINED");
+        imshow( "Good Matches & Object detection", img_scene );
+    }
+    
+
+    
+    return 0;
+}
