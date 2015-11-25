@@ -26,19 +26,16 @@
         return scene;
     }
 
-    cv::Point findImage(cv::Mat &img_scene, cv::Mat &img_object, const cv::Scalar& color, string Name)
+    void findImage(cv::Mat &img_scene, cv::Mat &img_object, cv::Point &topLeft, float threshold)
     {
         cv::Mat result;
         matchTemplate( img_scene, img_object, result, CV_TM_SQDIFF_NORMED );
         double minVal; double maxVal; cv::Point minLoc; cv::Point maxLoc;
-        cv::Point matchLoc = cv::Point(-1, -1);
 
         minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat() );
-        if (minVal < .25) {
-            matchLoc.x = minLoc.x + (img_object.cols / 2);
-            matchLoc.y = minLoc.y + (img_object.rows / 2);
-            rectangle(img_scene, minLoc, cv::Point( minLoc.x + img_object.cols , minLoc.y + img_object.rows ), color, 3 );
+        if (minVal < threshold) {
+            topLeft.x = minLoc.x;
+            topLeft.y = minLoc.y;
         }
-        return matchLoc;
     }
 #endif

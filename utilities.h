@@ -13,5 +13,5 @@
 
 	void initialize();
 	cv::Mat ImageFromDisplay(int Width, int Height);
-	cv::Point findImage(cv::Mat &img_scene, cv::Mat &img_object, const cv::Scalar& color, string Name);
+	void findImage(cv::Mat &img_scene, cv::Mat &img_object, cv::Point &topLeft, float threshold = .25);
 #endif

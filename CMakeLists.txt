@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 project( main )
 find_package( OpenCV REQUIRED )
-add_executable( main main.cpp utilities.cpp interface.cpp ClickableObject.cpp)
+add_executable( main main.cpp utilities.cpp interface.cpp Object.cpp ImageObject.cpp)
 target_link_libraries( main ${OpenCV_LIBS} X11 Xtst)

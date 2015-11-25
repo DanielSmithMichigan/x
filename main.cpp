@@ -1,16 +1,17 @@
 #include "utilities.h"
 #include "interface.h"
-#include "ClickableObject.h"
+#include "ImageObject.h"
 
 using namespace std;
 
 int main(int argc, char** argv )
 {
-    cv::Mat img_scene = ImageFromDisplay(1640, 1050);
-    ClickableObject *compass = new ClickableObject("../images/compass.png", img_scene, CV_RGB(255, 255, 255));
+    cv::Mat imgScene = ImageFromDisplay(1640, 1050);
+    ImageObject *compass = new ImageObject("../images/compass.png", imgScene);
     compass->initialize();
+    compass->draw();
     compass->clickOn();
-    // imshow( "Good Matches & Object detection", img_scene );
+    imshow( "Good Matches & Object detection", imgScene );
     cv::waitKey(0);
     return 0;
 }
