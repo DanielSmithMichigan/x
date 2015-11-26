@@ -2,8 +2,8 @@
 #define ImageObject_cpp
 	#include "ImageObject.h"
 
-	ImageObject::ImageObject(string imageLocation, cv::Mat &sceneImage)
-	: Object(sceneImage), imageLocation(imageLocation) {
+	ImageObject::ImageObject(string imageLocation)
+	: imageLocation(imageLocation) {
 	}
 
 	void ImageObject::initialize() {
@@ -15,7 +15,7 @@
 		}
 		this->width = this->image.cols;
 		this->height = this->image.rows;
-		findImage(this->sceneImage, this->image, this->topLeft);
+		findImage(this->scene->getSceneImage(), this->image, this->topLeft);
 		Object::initialize();
 	}
 #endif

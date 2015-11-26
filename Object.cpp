@@ -2,12 +2,12 @@
 #define Object_cpp
 	#include "Object.h"
 
-	Object::Object(cv::Mat &sceneImage) 
-	: sceneImage(sceneImage) {
+	Object::Object() {
 		this->center = cv::Point(-1, -1);
 		this->topLeft = cv::Point(-1, -1);
 		this->height = -1;
 		this->width = -1;
+		this->scene = new Scene();
 	}
 
 	void Object::initialize() {
@@ -15,7 +15,8 @@
 	}
 
 	void Object::draw(const cv::Scalar &borderColor, int borderWidth) {
-		rectangle(this->sceneImage, 
+
+		rectangle(this->scene->getSceneImage(), 
 			this->topLeft, 
 			cv::Point(this->topLeft.x + this->width , this->topLeft.y + this->height), 
 			borderColor, 
@@ -29,7 +30,7 @@
 			cout << error << endl;
 			throw(error);
 		}
-		moveToPosition(this->center.x, this->center.y);
+		glideToPosition(this->center.x, this->center.y);
 		click(button);
 	}
 #endif

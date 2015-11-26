@@ -1,17 +1,15 @@
 #ifndef utilities_h
 #define utilities_h
 	#include <stdio.h>
-	#include <iostream>
-	#include <opencv2/core/core.hpp>
-	#include <opencv2/imgproc/imgproc.hpp>
-	#include <opencv2/highgui/highgui.hpp>
-	#include <X11/Xlib.h>
-	#include <X11/Xutil.h>
-	#include <unistd.h>
+	#include <stdlib.h>
+	#include <math.h>
+	#include <time.h>
+	#include <random>
 
 	using namespace std;
 
-	void initialize();
-	cv::Mat ImageFromDisplay(int Width, int Height);
-	void findImage(cv::Mat &img_scene, cv::Mat &img_object, cv::Point &topLeft, float threshold = .25);
+	float distanceTo(int x1, int y1, int x2, int y2);
+	int randomBetween(int min, int max);
+	void nsleep(long miliseconds);
+	int absMax(int amount, int max);
 #endif

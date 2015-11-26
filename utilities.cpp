@@ -2,40 +2,42 @@
 #define utilities_cpp
     #include "utilities.h"
 
-    using namespace std;
-
-    cv::Mat ImageFromDisplay(int Width, int Height)
-    {
-        Display* display = XOpenDisplay(NULL);
-        Window root = DefaultRootWindow(display);
-        XWindowAttributes attributes = {0};
-        XGetWindowAttributes(display, root, &attributes);
-        XImage* img = XGetImage(display, root, 0, 0 , Width, Height, AllPlanes, ZPixmap);
-        if (!img->data) {
-            cout << "No image data";
-            throw("No image data");
-        }
-        cv::Mat scene = cv::Mat(Height, Width, img->bits_per_pixel > 24 ? CV_8UC4 : CV_8UC3, img->data);
-        if (!scene.data) {
-            cout << "Error reading scene";
-            throw("Error reading scene");
-        }
-        cvtColor(scene, scene, CV_BGRA2BGR);
-        XFree(img);
-        XCloseDisplay(display);
-        return scene;
+    float distanceTo(int x1, int y1, int x2, int y2) {
+        return sqrt(
+            (abs(x1 - x2) * abs(x1 - x2))
+            + (abs(y1 - y2) * abs(y1 - y2))
+        );
     }
 
-    void findImage(cv::Mat &img_scene, cv::Mat &img_object, cv::Point &topLeft, float threshold)
-    {
-        cv::Mat result;
-        matchTemplate( img_scene, img_object, result, CV_TM_SQDIFF_NORMED );
-        double minVal; double maxVal; cv::Point minLoc; cv::Point maxLoc;
-
-        minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat() );
-        if (minVal < threshold) {
-            topLeft.x = minLoc.x;
-            topLeft.y = minLoc.y;
-        }
+    int randomBetween(int min, int max) {
+        int randNum = rand()%(max-min + 1) + min;
     }
+
+    void nsleep(long miliseconds)
+    {
+       struct timespec req, rem;
+
+       if(miliseconds > 999)
+       {   
+            req.tv_sec = (int)(miliseconds / 1000);                            /* Must be Non-Negative */
+            req.tv_nsec = (miliseconds - ((long)req.tv_sec * 1000)) * 1000000; /* Must be in range of 0 to 999999999 */
+       }   
+       else
+       {   
+            req.tv_sec = 0;                         /* Must be Non-Negative */
+            req.tv_nsec = miliseconds * 1000000;    /* Must be in range of 0 to 999999999 */
+       }   
+
+       nanosleep(&req , &rem);
+    }
+
+    int absMax(int amount, int maxAmount) {
+        if (amount > 0) {
+            amount = min(amount, maxAmount);
+        } else {
+            amount = max(amount, -1 * maxAmount);
+        }
+        return amount;
+    }
+
 #endif

@@ -1,6 +1,7 @@
 #ifndef ImageObject_h
 #define ImageObject_h
 	#include "Object.h"
+	#include "Scene.h"
 
 	using namespace std;
 
@@ -9,7 +10,7 @@
 			string imageLocation;
 			cv::Mat image;
 		public:
-			ImageObject(string imageLocation, cv::Mat &sceneImage);
+			ImageObject(string imageLocation);
 			void initialize();
 	};
 #endif

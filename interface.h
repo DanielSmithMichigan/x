@@ -10,11 +10,13 @@
 	#include <X11/Xlib.h>
 	#include <X11/Xutil.h>
 	#include <X11/extensions/XTest.h>
+	#include "utilities.h"
 	#define LEFT_CLICK 1
 	#define RIGHT_CLICK 3
 
 	using namespace std;
 
 	void moveToPosition(int x, int y);
+	void glideToPosition(int x, int y, int marginErr = 3, long interval = 1, int maxStepSize = 2);
 	void click(int button);
 #endif
