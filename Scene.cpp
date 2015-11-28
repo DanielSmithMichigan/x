@@ -9,7 +9,7 @@
 
 	void Scene::redraw() {
 		cout << "Redrawing scene" << endl;
-		nsleep(200);
+		nsleep(300);
 		Scene::image = ImageFromDisplay(SCENE_WIDTH, SCENE_HEIGHT);
 	}
 

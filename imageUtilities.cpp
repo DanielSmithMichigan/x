@@ -4,13 +4,20 @@
 
     using namespace std;
 
-    cv::Mat ImageFromDisplay(int Width, int Height)
+    bool imagesEqual(cv::Mat a, cv::Mat b) 
+    {    
+        cv::Point topLeft;
+        findImage(a, b, topLeft, .1);
+        return topLeft.x == 0 && topLeft.y == 0;
+    }
+
+    cv::Mat ImageFromDisplay(int Width, int Height, int x, int y)
     {
         Display* display = XOpenDisplay(NULL);
         Window root = DefaultRootWindow(display);
         XWindowAttributes attributes = {0};
         XGetWindowAttributes(display, root, &attributes);
-        XImage* img = XGetImage(display, root, 0, 0 , Width, Height, AllPlanes, ZPixmap);
+        XImage* img = XGetImage(display, root, x, y, Width, Height, AllPlanes, ZPixmap);
         if (!img->data) {
             cout << "No image data";
             throw("No image data");
@@ -33,6 +40,8 @@
         double minVal; double maxVal; cv::Point minLoc; cv::Point maxLoc;
         imshow("W", img_scene);
         minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat() );
+        topLeft.x = -1;
+        topLeft.y = -1;
         if (minVal < threshold) {
             topLeft.x = minLoc.x;
             topLeft.y = minLoc.y;

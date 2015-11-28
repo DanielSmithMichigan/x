@@ -10,6 +10,7 @@
 	#include <unistd.h>
 
 	using namespace std;
-	cv::Mat ImageFromDisplay(int Width, int Height);
+	bool imagesEqual(cv::Mat a, cv::Mat b);
+	cv::Mat ImageFromDisplay(int Width, int Height, int x = 0, int y = 0);
 	void findImage(cv::Mat &img_scene, cv::Mat &img_object, cv::Point &topLeft, float threshold = .25);
 #endif
