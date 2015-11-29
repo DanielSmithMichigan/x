@@ -9,10 +9,9 @@ int main(int argc, char** argv )
 	srand((unsigned) time(&t));
     Scene *scene = new Scene();
     scene->redraw();
-    // Inventory *inventory = new Inventory();
-    // cout << "MADE IT" << endl;
-    // inventory->initialize();
-    // inventory->dropAllItems();
-    // cv::waitKey(0);
+    Inventory *inventory = new Inventory();
+    inventory->initialize();
+    inventory->dropAllItems();
+    cv::waitKey(0);
     return 0;
 }

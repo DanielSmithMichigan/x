@@ -16,6 +16,7 @@
 		while(retriesAvailable-- > 0 && (topLeft.x == -1 || topLeft.y == -1)) {
 			topLeft = performMatch(imgScene);
 		}
+		return topLeft;
 	}
 
 	cv::Point Template::performMatch(cv::Mat &imgScene)
