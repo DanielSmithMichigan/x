@@ -15,7 +15,12 @@
 		}
 		this->width = this->image.cols;
 		this->height = this->image.rows;
-		findImage(this->scene->getSceneImage(), this->image, this->topLeft);
+		Template *tmpl = new Template(this->image);
+		this->topLeft = tmpl->match(this->scene->getSceneImage());
+		if (this->topLeft.x == -1 || this->topLeft.y == -1) {
+			cout << "Could not find template in image" << endl;
+			throw("NO_TEMPLATE");
+		}
 		Object::initialize();
 	}
 #endif
