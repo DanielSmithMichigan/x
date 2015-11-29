@@ -1,6 +1,7 @@
 #ifndef template_h
 #define template_h
-	#include "imageUtilities.h"
+	#include "Scene.h"
+	
 
 	using namespace std;
 

@@ -43,9 +43,12 @@
 	}
 
 	void Inventory::dropAllItems() {
+		markEmptyCells();
 		for (int i = 0; i < INVENTORY_COLS; i++) {
 			for (int j = 0; j < INVENTORY_ROWS; j++) {
+				cout << "Attempting slot (x: " << i << ", y: " << j << ")" << endl;
 				if (slotEmpty[i][j]) {
+					cout << "Slot empty. Continuing" << endl;
 					continue;
 				}
 				dropItem(i, j);

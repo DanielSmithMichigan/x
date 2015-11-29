@@ -13,6 +13,11 @@
 		Scene::image = ImageFromDisplay(SCENE_WIDTH, SCENE_HEIGHT);
 	}
 
+	void Scene::draw() {
+		imshow("W", Scene::image);
+		cv::waitKey(100000);
+	}
+
 	cv::Mat& Scene::getSceneImage() {
 		return Scene::image;
 	}
