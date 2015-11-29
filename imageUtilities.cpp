@@ -38,7 +38,6 @@
         cv::Mat result;
         matchTemplate( img_scene, img_object, result, CV_TM_SQDIFF_NORMED );
         double minVal; double maxVal; cv::Point minLoc; cv::Point maxLoc;
-        imshow("W", img_scene);
         minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat() );
         topLeft.x = -1;
         topLeft.y = -1;
