@@ -2,40 +2,64 @@
 #define template_cpp
 	#include "Template.h"
 
-	Template::Template(cv::Mat &imgObject) 
-	:imgObject(imgObject) {
+	Template::Template(string imageLocation) 
+	{
+		imgObject = cv::imread(imageLocation, CV_LOAD_IMAGE_COLOR);
+		if (!imgObject.data) {
+			string error = "Image at this location did not load: " + imageLocation;
+			cout << error;
+			throw(error);
+		}
 		retries = 5;
-		threshold = .2;
+		threshold = .4;
 		retryInterval = 200;
+		width = imgObject.cols;
+		height = imgObject.rows;
+		topLeft = cv::Point(-1, -1);
 	}
 
-	cv::Point Template::match(cv::Mat &imgScene)
+	cv::Mat Template::preprocessImage(cv::Mat &imgIn)
+	{
+		return imgIn;
+	}
+
+	bool Template::match(cv::Mat &imgScene)
 	{
 		Scene *scene = new Scene();
 		int retriesAvailable = this->retries;
-		cv::Point topLeft = cv::Point(-1, -1);
-		topLeft = performMatch(scene->getSceneImage());
+		topLeft = performMatch(imgScene);
 		while(--retriesAvailable > 0 && (topLeft.x == -1 || topLeft.y == -1)) {
 			cout << "Matching template retry: " << retriesAvailable << endl;
 			nsleep(retryInterval);
 			scene->redraw();
-			topLeft = performMatch(scene->getSceneImage());
+			topLeft = performMatch(imgScene);
 		}
-		return topLeft;
+
+		if (topLeft.x == -1 || topLeft.y == -1) {
+			return false;
+		}
+		return true;
 	}
 
 	cv::Point Template::performMatch(cv::Mat &imgScene)
 	{
 		cv::Point topLeft = cv::Point(-1, -1);
 		cv::Mat result;
-		matchTemplate(imgScene, imgObject, result, CV_TM_SQDIFF_NORMED );
+		cv::Mat imgSceneCompare = preprocessImage(imgScene);
+		cv::Mat imgObjectCompare = preprocessImage(imgObject);
+		matchTemplate(imgSceneCompare, imgObjectCompare, result, CV_TM_SQDIFF_NORMED );
 		double minVal, maxVal; 
 		cv::Point minLoc, maxLoc;
 		minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat() );
+		cout << "MinVal: " << minVal << endl;
 		if (minVal < threshold) {
-			cout << "MinVal: " << minVal << endl;
 			topLeft.x = minLoc.x;
 			topLeft.y = minLoc.y;
+		} else {
+		    vector<int> compression_params;
+			string numString = std::to_string(randomBetween(1000, 9999));
+			cv::imwrite("../log/Scene" + numString + ".tiff", imgSceneCompare, compression_params);
+			cv::imwrite("../log/Object" + numString + ".tiff", imgObjectCompare, compression_params);
 		}
 		return topLeft;
 	}

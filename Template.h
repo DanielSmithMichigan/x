@@ -10,11 +10,15 @@
 			int retries;
 			float threshold;
 			int retryInterval;
-
 			cv::Mat imgObject;
 			cv::Point performMatch(cv::Mat &imgScene);
+		protected:
+			virtual cv::Mat preprocessImage(cv::Mat &imageIn);
 		public:
-			Template(cv::Mat &imgScene);
-		    cv::Point match(cv::Mat &imgObject);
+			Template(string imageLocation);
+		    bool match(cv::Mat &imgScene);
+		    int width;
+		    int height;
+		    cv::Point topLeft;
 	};
 #endif

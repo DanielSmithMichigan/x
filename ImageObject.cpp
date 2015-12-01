@@ -2,25 +2,42 @@
 #define ImageObject_cpp
 	#include "ImageObject.h"
 
-	ImageObject::ImageObject(string imageLocation)
-	: imageLocation(imageLocation) {
+	ImageObject::ImageObject()
+	: Object() {
 	}
 
-	void ImageObject::initialize() {
-		this->image = cv::imread(this->imageLocation, CV_LOAD_IMAGE_COLOR);
-		if (!this->image.data) {
-			string error = "Image at this location did not load: " + this->imageLocation;
-			cout << error;
-			throw(error);
+	ImageObject::ImageObject(string imageLocation)
+	{
+		templates.push_back(new Template(imageLocation));
+		ImageObject();
+	}
+
+	void ImageObject::addTemplate(Template* tmpl) 
+	{
+		templates.push_back(tmpl);
+	}
+
+	void ImageObject::initialize() 
+	{
+		match();
+		Object::initialize();
+	}
+
+	void ImageObject::match() 
+	{
+		bool found = false;
+		for(std::vector<Template*>::iterator iter = templates.begin(); iter != templates.end(); ++iter) {
+			if (!found &&
+				(*iter)->match(scene->getSceneImage())) {
+				height = (*iter)->height;
+				width = (*iter)->width;
+				topLeft = (*iter)->topLeft;
+				found = true;
+			}
 		}
-		this->width = this->image.cols;
-		this->height = this->image.rows;
-		Template *tmpl = new Template(this->image);
-		this->topLeft = tmpl->match(this->scene->getSceneImage());
-		if (this->topLeft.x == -1 || this->topLeft.y == -1) {
+		if (!found) {
 			cout << "Could not find template in image" << endl;
 			throw("NO_TEMPLATE");
 		}
-		Object::initialize();
 	}
 #endif

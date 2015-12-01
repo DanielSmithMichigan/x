@@ -36,7 +36,9 @@
 		items[x][y]->clickOn(RIGHT_CLICK);
 		Scene *scene = new Scene();
 		scene->redraw();
-		ImageObject *dropButton = new ImageObject("../images/drop_button.png");
+		ImageObject *dropButton = new ImageObject();
+		ThresholdTemplate *tmpl = new ThresholdTemplate("../images/drop_button.png");
+		dropButton->addTemplate(tmpl);
 		dropButton->initialize();
 		dropButton->draw();
 		dropButton->clickOn();

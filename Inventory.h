@@ -2,6 +2,7 @@
 #define inventory_h
 	#include "ImageObject.h"
 	#include "Scene.h"
+	#include "ThresholdTemplate.h"
 	#include "utilities.h"
 	#define INVENTORY_ROWS 7
 	#define INVENTORY_COLS 4
