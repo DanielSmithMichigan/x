@@ -37,6 +37,8 @@
 		}
 		if (!found) {
 			cout << "Could not find template in image" << endl;
+			string numString = std::to_string(randomBetween(1000, 9999));
+			cv::imwrite("../log/Scene" + numString + ".png", scene->getSceneImage());
 			throw("NO_TEMPLATE");
 		}
 	}

@@ -10,8 +10,8 @@
 			cout << error;
 			throw(error);
 		}
-		retries = 5;
-		threshold = .4;
+		retries = 1;
+		threshold = .1;
 		retryInterval = 200;
 		width = imgObject.cols;
 		height = imgObject.rows;
@@ -55,11 +55,6 @@
 		if (minVal < threshold) {
 			topLeft.x = minLoc.x;
 			topLeft.y = minLoc.y;
-		} else {
-		    vector<int> compression_params;
-			string numString = std::to_string(randomBetween(1000, 9999));
-			cv::imwrite("../log/Scene" + numString + ".tiff", imgSceneCompare, compression_params);
-			cv::imwrite("../log/Object" + numString + ".tiff", imgObjectCompare, compression_params);
 		}
 		return topLeft;
 	}
