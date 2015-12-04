@@ -1,6 +1,6 @@
 #ifndef inventory_h
 #define inventory_h
-	#include "ImageObject.h"
+	#include "Dialog.h"
 	#include "Scene.h"
 	#include "ThresholdTemplate.h"
 	#include "utilities.h"

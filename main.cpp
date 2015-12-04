@@ -11,7 +11,7 @@ int main(int argc, char** argv )
     scene->redraw();
     Inventory *inventory = new Inventory();
     inventory->initialize();
-    inventory->dropAllItems();
+    inventory->dropItem(0, 0);
     cv::waitKey(0);
     return 0;
 }

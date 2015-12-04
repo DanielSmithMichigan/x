@@ -2,7 +2,7 @@
 #define thresholdtemplate_cpp
 	#include "ThresholdTemplate.h"
 
-	ThresholdTemplate::ThresholdTemplate(string imageLocation) : Template(imageLocation) {
+	ThresholdTemplate::ThresholdTemplate(string imageLocation) : ImageTemplate(imageLocation) {
 		this->maxValue = 255;
 		this->threshold = 120;
 		this->thresholdType = cv::THRESH_BINARY;

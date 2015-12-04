@@ -2,7 +2,7 @@
 #define ImageObject_h
 	#include "Object.h"
 	#include "Scene.h"
-	#include "Template.h"
+	#include "ImageTemplate.h"
 	#define MATCH_RGB 0
 	#define MATCH_THRESHOLD 1
 

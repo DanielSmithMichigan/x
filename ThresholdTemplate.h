@@ -1,10 +1,10 @@
 #ifndef thresholdtemplate_h
 #define thresholdtemplate_h
-	#include "Template.h"
+	#include "ImageTemplate.h"
 	
 	using namespace std;
 
-	class ThresholdTemplate : public Template {
+	class ThresholdTemplate : public ImageTemplate {
 		private:
 			int thresholdType;
 			int threshold;

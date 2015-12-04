@@ -36,13 +36,8 @@
 		items[x][y]->clickOn(RIGHT_CLICK);
 		Scene *scene = new Scene();
 		scene->redraw();
-		ImageObject *dropButton = new ImageObject();
-		dropButton->addTemplate(new ThresholdTemplate("../images/drop_button1.png"));
-		dropButton->addTemplate(new ThresholdTemplate("../images/drop_button2.png"));
-		dropButton->addTemplate(new ThresholdTemplate("../images/drop_button3.png"));
-		dropButton->addTemplate(new ThresholdTemplate("../images/drop_button4.png"));
-		dropButton->initialize();
-		dropButton->clickOn();
+		Dialog *dialog = new Dialog();
+		dialog->initialize();
 	}
 
 	void Inventory::dropAllItems() {

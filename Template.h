@@ -1,24 +1,22 @@
 #ifndef template_h
 #define template_h
 	#include "Scene.h"
-	
 
 	using namespace std;
 
 	class Template {
 		private:
-			int retries;
-			float threshold;
-			int retryInterval;
-			cv::Mat imgObject;
-			cv::Point performMatch(cv::Mat &imgScene);
 		protected:
-			virtual cv::Mat preprocessImage(cv::Mat &imageIn);
+			virtual cv::Point performMatch(cv::Mat &imgScene) = 0;
+			int retries;
+			int retryInterval;
 		public:
-			Template(string imageLocation);
-		    bool match(cv::Mat &imgScene);
+			Template();
+			virtual void prepareForRetry();
+		    bool match();
 		    int width;
 		    int height;
 		    cv::Point topLeft;
+		    Scene* scene;
 	};
 #endif

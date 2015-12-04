@@ -5,6 +5,8 @@
 	#include <opencv2/core/core.hpp>
 	#include <opencv2/imgproc/imgproc.hpp>
 	#include <opencv2/highgui/highgui.hpp>
+	#include <opencv2/features2d.hpp>
+	#include <opencv2/text.hpp>
 	#include <X11/Xlib.h>
 	#include <X11/Xutil.h>
 	#include <unistd.h>

@@ -8,7 +8,7 @@
 
 	ImageObject::ImageObject(string imageLocation)
 	{
-		templates.push_back(new Template(imageLocation));
+		templates.push_back(new ImageTemplate(imageLocation));
 		ImageObject();
 	}
 
@@ -28,7 +28,7 @@
 		bool found = false;
 		for(std::vector<Template*>::iterator iter = templates.begin(); iter != templates.end(); ++iter) {
 			if (!found &&
-				(*iter)->match(scene->getSceneImage())) {
+				(*iter)->match()) {
 				height = (*iter)->height;
 				width = (*iter)->width;
 				topLeft = (*iter)->topLeft;
