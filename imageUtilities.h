@@ -10,6 +10,9 @@
 	#include <X11/Xlib.h>
 	#include <X11/Xutil.h>
 	#include <unistd.h>
+	#include <algorithm> 
+	#include <stdio.h>
+	#include <ctype.h>
 
 	using namespace std;
 	bool imagesEqual(cv::Mat a, cv::Mat b);

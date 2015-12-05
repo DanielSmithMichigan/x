@@ -15,7 +15,7 @@
 		ImageObject *bottomOfDialog = new ImageObject("../images/bottom_corner.png");
 		bottomOfDialog->initialize();
 		int cellWidth = (bottomOfDialog->topLeft.x - marginCell) - (topOfDialog->topLeft.x + marginCell);
-		vector<OcrObject*> dialogBoxes;
+		dialogBoxes;
 		OcrObject* currDialogBox;
 		for (int y = topOfDialog->topLeft.y + topOfDialog->height + marginTop; 
 			y <= bottomOfDialog->topLeft.y; 
@@ -26,7 +26,19 @@
 			currDialogBox->width = cellWidth;
 			currDialogBox->height = cellHeight;
 			currDialogBox->initialize();
-			currDialogBox->draw(CV_RGB(255, 0, 0), 1);
+			dialogBoxes.push_back(currDialogBox);
+		}
+	}
+
+	void Dialog::select(string matchString)
+	{
+		cout << "Attemping to find " << matchString << endl;
+		for(std::vector<OcrObject*>::iterator iter = dialogBoxes.begin(); iter != dialogBoxes.end(); ++iter) {
+			if ((*iter)->match(matchString)) {
+				cout << "Found match" << endl;
+				(*iter)->clickOn();
+				return;
+			}
 		}
 	}
 #endif

@@ -38,6 +38,7 @@
 		scene->redraw();
 		Dialog *dialog = new Dialog();
 		dialog->initialize();
+		dialog->select("Drop");
 	}
 
 	void Inventory::dropAllItems() {
