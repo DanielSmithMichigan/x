@@ -13,6 +13,7 @@
 		public:
 			Dialog();
 			bool select(string matchString);
+			bool match(string matchString);
 			void initialize();
 	};
 #endif
