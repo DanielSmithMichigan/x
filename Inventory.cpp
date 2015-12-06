@@ -17,7 +17,7 @@
 	}
 
 	void Inventory::initialize() {
-		ImageObject *topOfInventory = new ImageObject("../images/top_of_inventory.png");
+		ImageObject *topOfInventory = new ImageObject("../images/TopOfInventory.png");
 		topOfInventory->initialize();
 		for (int i = 0; i < INVENTORY_COLS; i++) {
 			int x = topOfInventory->topLeft.x + marginLeft + (i * cellWidth) + (i * cellMarginX * 2);
@@ -59,7 +59,7 @@
 
 	void Inventory::markEmptyCells() {
 		full = true;
-		cv::Mat emptySlotImage = cv::imread("../images/empty_slot.png");
+		cv::Mat emptySlotImage = cv::imread("../images/EmptySlot.png");
 		for (int i = 0; i < INVENTORY_COLS; i++) {
 			for (int j = 0; j < INVENTORY_ROWS; j++) {
 				slotEmpty[i][j] = imagesEqual(imageFromSlot(i, j), emptySlotImage);

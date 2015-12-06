@@ -5,6 +5,10 @@
 	#include <math.h>
 	#include <time.h>
 	#include <random>
+	#include <vector>
+	#include <string>
+	#include <iostream>
+	#include <dirent.h>
 
 	using namespace std;
 
@@ -12,4 +16,5 @@
 	int randomBetween(int min, int max);
 	void nsleep(long miliseconds);
 	int absMax(int amount, int max);
+	void getFilesInFolder(string path, vector<string> &output);
 #endif

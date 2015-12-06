@@ -40,4 +40,24 @@
         return amount;
     }
 
+    void getFilesInFolder(string path, vector<string> &output) {
+        DIR *dirObj = opendir(path.c_str());
+
+        struct dirent *entry;
+
+        while ((entry = readdir(dirObj)) != NULL)
+        {
+            if (entry->d_name[0] == '.') {
+                continue;
+            }
+            if (entry->d_type == DT_DIR) {
+                getFilesInFolder(path + "/" + entry->d_name, output);            
+            } else {
+                output.push_back(path + "/" + entry->d_name);
+            }
+        }
+
+        closedir(dirObj);
+    }
+
 #endif

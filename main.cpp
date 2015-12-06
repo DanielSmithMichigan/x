@@ -34,12 +34,22 @@ int main(int argc, char** argv )
     Scene *scene = new Scene();
     scene->redraw();
 
-    ImageObject *swordSymbol = new ImageObject("../images/sword_symbol.png");
-    swordSymbol->initialize();
     Object *compass = new Object();
-    compass->width = 17;
-    compass->height = 17;
-    compass->topLeft = cv::Point(swordSymbol->topLeft.x + 53, swordSymbol->topLeft.y - 660);
+    compass->width = 19;
+    compass->height = 19;
+    ImageObject *worldMap = new ImageObject("../images/WorldMap.png");
+    if (worldMap->initialize()) {
+        compass->topLeft = cv::Point(worldMap->topLeft.x - 154, worldMap->topLeft.y - 150);
+    } else {
+        ImageObject *helpButton = new ImageObject("../images/HelpButton.png");
+        if (helpButton->initialize()) {
+            compass->topLeft = cv::Point(worldMap->topLeft.x - 154, worldMap->topLeft.y);
+        } else {
+            string error = "Could not locate compass";
+            cout << error << endl;
+            throw(error);
+        }
+    }
     compass->initialize();
     compass->clickOn();
     keypress(ZOOM_OUT_KEY, 3000);
@@ -47,33 +57,25 @@ int main(int argc, char** argv )
 
     vector<ImageObject*> imageObjects;
 
-    ImageObject *silverRock1 = new ImageObject();
-    silverRock1->addTemplate(new ImageTemplate("../images/rocks/silver_01/1.png"));
-    silverRock1->addTemplate(new ImageTemplate("../images/rocks/silver_01/2.png"));
-    silverRock1->addTemplate(new ImageTemplate("../images/rocks/silver_01/3.png"));
-    silverRock1->addTemplate(new ImageTemplate("../images/rocks/silver_01/4.png"));
-    silverRock1->addTemplate(new ImageTemplate("../images/rocks/silver_01/5.png"));
+    DIR *dirObj = opendir("../images/Rocks");
+    struct dirent *entry;
+    vector<string> rockImages;
+    while ((entry = readdir(dirObj)) != NULL)
+    {
+        if (entry->d_name[0] == '.') {
+            continue;
+        }
 
-    ImageObject *silverRock2 = new ImageObject();
-    silverRock2->addTemplate(new ImageTemplate("../images/rocks/silver_02/1.png"));
-    silverRock2->addTemplate(new ImageTemplate("../images/rocks/silver_02/2.png"));
-    silverRock2->addTemplate(new ImageTemplate("../images/rocks/silver_02/3.png"));
-    silverRock2->addTemplate(new ImageTemplate("../images/rocks/silver_02/4.png"));
-    silverRock2->addTemplate(new ImageTemplate("../images/rocks/silver_02/5.png"));
-    silverRock2->addTemplate(new ImageTemplate("../images/rocks/silver_02/6.png"));
-    silverRock2->addTemplate(new ImageTemplate("../images/rocks/silver_02/7.png"));
-    silverRock2->addTemplate(new ImageTemplate("../images/rocks/silver_02/8.png"));
-    silverRock2->addTemplate(new ImageTemplate("../images/rocks/silver_02/9.png"));
+        getFilesInFolder((string)"../images/Rocks/" + entry->d_name, rockImages);
+        ImageObject *currRock = new ImageObject();
+        for(vector<string>::iterator iter = rockImages.begin(); iter != rockImages.end(); ++iter) {
+            currRock->addTemplate(new ImageTemplate(*iter));
+        }
+        imageObjects.push_back(currRock);
+        rockImages.clear();
+    }
 
-    ImageObject *tinRock1 = new ImageObject();
-    tinRock1->addTemplate(new ImageTemplate("../images/rocks/tin_01/1.png"));
-    tinRock1->addTemplate(new ImageTemplate("../images/rocks/tin_01/2.png"));
-    tinRock1->addTemplate(new ImageTemplate("../images/rocks/tin_01/3.png"));
-    tinRock1->addTemplate(new ImageTemplate("../images/rocks/tin_01/4.png"));
-
-    imageObjects.push_back(silverRock1);
-    imageObjects.push_back(silverRock2);
-    imageObjects.push_back(tinRock1);
+    closedir(dirObj);
 
     Dialog* dialog = new Dialog();
 
@@ -99,7 +101,6 @@ int main(int argc, char** argv )
             }
         }
 
-        imshow("W", scene->getSceneImage());
         cv::waitKey(100);
     }
     cout << "Finished!!" << endl;

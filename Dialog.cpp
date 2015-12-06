@@ -12,9 +12,9 @@
 	void Dialog::initialize()
 	{
 		scene->redraw();
-		ImageObject *topOfDialog = new ImageObject("../images/choose_option.png");
+		ImageObject *topOfDialog = new ImageObject("../images/ChooseOption.png");
 		topOfDialog->initialize();
-		ImageObject *bottomOfDialog = new ImageObject("../images/bottom_corner.png");
+		ImageObject *bottomOfDialog = new ImageObject("../images/BottomCorner.png");
 		bottomOfDialog->initialize();
 		int cellWidth = (bottomOfDialog->topLeft.x - marginCell) - (topOfDialog->topLeft.x + marginCell);
 		dialogBoxes.clear();
