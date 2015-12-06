@@ -20,6 +20,7 @@ int main(int argc, char** argv )
     strings.push_back("Craft");
     strings.push_back("Mine");
     strings.push_back("MineRocks");
+    strings.push_back("MineHacks");
 
     // Create a SimString database with two person names.
     simstring::ngram_generator gen(strings.size(), false);
@@ -87,12 +88,13 @@ int main(int argc, char** argv )
         if (inventory->full) {
             inventory->dropAllItems();
         }
+        random_shuffle(imageObjects.begin(), imageObjects.end());
         for(std::vector<ImageObject*>::iterator iter = imageObjects.begin(); iter != imageObjects.end(); ++iter) {
             if ((*iter)->initialize()) {
                 (*iter)->clickOn(RIGHT_CLICK);
                 nsleep(5);
                 dialog->initialize();
-                if (dialog->match("MineRocks")) {
+                if (dialog->match("MineRocks") || dialog->match("MineHacks")) {
                     dialog->select("Cancel");
                     continue;
                 } else if (dialog->select("Mine")) {
