@@ -1,6 +1,9 @@
 #include "ImageObject.h"
 #include "Inventory.h"
 #include "Scene.h"
+#define ZOOM_IN_KEY 65369
+#define ZOOM_OUT_KEY 65397
+#define VIEW_UP_KEY 65391
 using namespace std;
 
 int main(int argc, char** argv )
@@ -29,9 +32,20 @@ int main(int argc, char** argv )
 
     Scene *scene = new Scene();
     scene->redraw();
-    Inventory *inventory = new Inventory();
-    inventory->initialize();
-    inventory->dropAllItems();
+
+    ImageObject *swordSymbol = new ImageObject("../images/sword_symbol.png");
+    swordSymbol->initialize();
+    Object *compass = new Object();
+    compass->width = 17;
+    compass->height = 17;
+    compass->topLeft = cv::Point(swordSymbol->topLeft.x + 53, swordSymbol->topLeft.y - 660);
+    compass->initialize();
+    compass->clickOn();
+    keypress(ZOOM_OUT_KEY, 3000);
+    keypress(VIEW_UP_KEY, 3000);
+    // Inventory *inventory = new Inventory();
+    // inventory->initialize();
+    // inventory->dropAllItems();
     cv::waitKey(0);
     return 0;
 }

@@ -49,4 +49,21 @@
 		int up = XTestFakeButtonEvent(display, button, false, 0);
 	    XFlush(display);
 	}
+
+
+	void keypress(int button, int holdDuration) {
+	    Display *display = XOpenDisplay(NULL);		
+		if(display == NULL)
+		{
+			fprintf(stderr, "Error opening display");
+			exit(EXIT_FAILURE);
+		}
+    	XTestFakeKeyEvent(display, button, true, 0);
+    	if (holdDuration > 0) {
+	    	XFlush(display);
+    		nsleep(holdDuration);
+    	}
+    	XTestFakeKeyEvent(display, button, false, 0);
+	    XFlush(display);
+	}
 #endif
