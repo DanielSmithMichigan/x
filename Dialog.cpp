@@ -32,6 +32,18 @@
 		}
 	}
 
+	bool Dialog::match(string matchString)
+	{
+		cout << "Attemping to find " << matchString << endl;
+		for(std::vector<OcrObject*>::iterator iter = dialogBoxes.begin(); iter != dialogBoxes.end(); ++iter) {
+			if ((*iter)->match(matchString)) {
+				cout << "Found match" << endl;
+				return true;
+			}
+		}
+		return false;
+	}
+
 	bool Dialog::select(string matchString)
 	{
 		cout << "Attemping to find " << matchString << endl;

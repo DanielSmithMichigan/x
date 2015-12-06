@@ -19,6 +19,7 @@ int main(int argc, char** argv )
     strings.push_back("Use");
     strings.push_back("Craft");
     strings.push_back("Mine");
+    strings.push_back("MineRocks");
 
     // Create a SimString database with two person names.
     simstring::ngram_generator gen(strings.size(), false);
@@ -80,8 +81,7 @@ int main(int argc, char** argv )
     Dialog* dialog = new Dialog();
 
     Inventory *inventory = new Inventory();
-    int x = 50;
-    while(--x > 0) {
+    while(true) {
         scene->redraw();
         inventory->initialize();
         if (inventory->full) {
@@ -92,11 +92,14 @@ int main(int argc, char** argv )
                 (*iter)->clickOn(RIGHT_CLICK);
                 nsleep(5);
                 dialog->initialize();
-                if (dialog->select("Mine")) {
+                if (dialog->match("MineRocks")) {
+                    dialog->select("Cancel");
+                    continue;
+                } else if (dialog->select("Mine")) {
                     nsleep(20000);
                     break;
                 } else{
-                  dialog->select("Cancel");
+                    dialog->select("Cancel");
                 }
             }
         }
