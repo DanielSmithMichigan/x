@@ -6,10 +6,9 @@
 
     bool imagesEqual(cv::Mat a, cv::Mat b) 
     {    
-        return false;
-        // cv::Point topLeft;
-        // findImage(a, b, topLeft, .1);
-        // return topLeft.x == 0 && topLeft.y == 0;
+        cv::Point topLeft;
+        findImage(a, b, topLeft, .1);
+        return topLeft.x == 0 && topLeft.y == 0;
     }
 
     cv::Mat ImageFromDisplay(int Width, int Height, int x, int y)

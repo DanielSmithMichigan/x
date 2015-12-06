@@ -2,15 +2,17 @@
 #define Dialog_h
 	#include "DropButton.h"
 	#include "OcrObject.h"
+	#include "Scene.h"
 	class Dialog {
 		private:
+			Scene* scene;
 			int marginTop;
 			int marginCell;
 			int cellHeight;
 			vector<OcrObject*> dialogBoxes;
 		public:
 			Dialog();
-			void select(string matchString);
+			bool select(string matchString);
 			void initialize();
 	};
 #endif

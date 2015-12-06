@@ -11,6 +11,7 @@
 	int Inventory::cellMarginY = 5;
 	Object* Inventory::items[INVENTORY_COLS][INVENTORY_ROWS] = {};
 	bool Inventory::slotEmpty[INVENTORY_COLS][INVENTORY_ROWS] = {};
+	bool Inventory::full = false;
 
 	Inventory::Inventory() {
 	}
@@ -57,10 +58,15 @@
 	}
 
 	void Inventory::markEmptyCells() {
+		full = true;
 		cv::Mat emptySlotImage = cv::imread("../images/empty_slot.png");
 		for (int i = 0; i < INVENTORY_COLS; i++) {
 			for (int j = 0; j < INVENTORY_ROWS; j++) {
 				slotEmpty[i][j] = imagesEqual(imageFromSlot(i, j), emptySlotImage);
+				if (slotEmpty[i][j]) {
+					items[i][j]->draw();
+				}
+				full = !slotEmpty[i][j] && full;
 			}
 		}
 	}

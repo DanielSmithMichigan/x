@@ -15,8 +15,8 @@
 			ImageObject();
 			ImageObject(string imageLocation);
 			void addTemplate(Template* tmpl);
-			void initialize();
-			void match();
+			bool initialize();
+			bool match();
 			int matchType;
 	};
 #endif

@@ -17,13 +17,14 @@
 		templates.push_back(tmpl);
 	}
 
-	void ImageObject::initialize() 
+	bool ImageObject::initialize() 
 	{
 		match();
 		Object::initialize();
+		return topLeft.x != -1 && topLeft.y != -1;
 	}
 
-	void ImageObject::match() 
+	bool ImageObject::match() 
 	{
 		bool found = false;
 		for(std::vector<Template*>::iterator iter = templates.begin(); iter != templates.end(); ++iter) {
@@ -39,7 +40,7 @@
 			cout << "Could not find template in image" << endl;
 			string numString = std::to_string(randomBetween(1000, 9999));
 			cv::imwrite("../log/Scene" + numString + ".png", scene->getSceneImage());
-			throw("NO_TEMPLATE");
 		}
+		return found;
 	}
 #endif

@@ -27,5 +27,6 @@
 			static void dropAllItems();
 			static cv::Mat imageFromSlot(int x, int y);
 			static void markEmptyCells();
+			static bool full;
 	};
 #endif

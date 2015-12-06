@@ -11,7 +11,7 @@
 			cout << error;
 			throw(error);
 		}
-		threshold = .1;
+		threshold = .15;
 		width = imgObject.cols;
 		height = imgObject.rows;
 	}

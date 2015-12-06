@@ -48,6 +48,7 @@
 		int down = XTestFakeButtonEvent(display, button, true, 0);
 		int up = XTestFakeButtonEvent(display, button, false, 0);
 	    XFlush(display);
+	    XCloseDisplay(display);
 	}
 
 
@@ -65,5 +66,6 @@
     	}
     	XTestFakeKeyEvent(display, button, false, 0);
 	    XFlush(display);
+	    XCloseDisplay(display);
 	}
 #endif
