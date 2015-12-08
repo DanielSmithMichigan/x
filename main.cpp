@@ -6,6 +6,36 @@
 #define VIEW_UP_KEY 65391
 using namespace std;
 
+void waitForMiningFinished(Scene *scene, OcrObject *eventLine, int retries = 20) {
+    if (retries <= 0) {
+        return;
+    }
+    cout << "Waiting to get ore. Try: " << retries << endl;
+    nsleep(1000);
+    scene->redraw();
+    eventLine->initialize();
+    cout << "Event line best guess: " << eventLine->bestGuess << endl;
+    if (!eventLine->match("Yournanage")) {
+        waitForMiningFinished(scene, eventLine, --retries);
+    }
+}
+
+void waitForSwing(Scene *scene, OcrObject *eventLine, int retries = 20) {
+    if (retries <= 0) {
+        return;
+    }
+    cout << "Waiting for pick to swing. Try: " << retries << endl;
+    nsleep(1000);
+    scene->redraw();
+    eventLine->initialize();
+    cout << "Event line best guess: " << eventLine->bestGuess << endl;
+    if (!eventLine->match("YouSiving")) {
+        waitForSwing(scene, eventLine, --retries);
+    } else {
+        waitForMiningFinished(scene, eventLine);
+    }
+}
+
 int main(int argc, char** argv )
 {
 	time_t t;
@@ -20,7 +50,10 @@ int main(int argc, char** argv )
     strings.push_back("Craft");
     strings.push_back("Mine");
     strings.push_back("MineRocks");
+    strings.push_back("MineClay");
     strings.push_back("MineHacks");
+    strings.push_back("Yournanage");
+    strings.push_back("YouSiving");
 
     // Create a SimString database with two person names.
     simstring::ngram_generator gen(strings.size(), false);
@@ -79,6 +112,15 @@ int main(int argc, char** argv )
 
     closedir(dirObj);
 
+    ImageObject *chatUpArrow = new ImageObject("../images/ChatUpArrow.png");
+    chatUpArrow->initialize();
+    OcrObject *eventLine = new OcrObject();
+    eventLine->threshold = 150;
+    eventLine->width = 528;
+    eventLine->height = 16;
+    eventLine->topLeft = cv::Point(chatUpArrow->topLeft.x - 528, chatUpArrow->topLeft.y + 126);
+    eventLine->initialize();
+
     Dialog* dialog = new Dialog();
 
     Inventory *inventory = new Inventory();
@@ -94,11 +136,11 @@ int main(int argc, char** argv )
                 (*iter)->clickOn(RIGHT_CLICK);
                 nsleep(5);
                 dialog->initialize();
-                if (dialog->match("MineRocks") || dialog->match("MineHacks")) {
+                if (dialog->match("MineRocks") || dialog->match("MineHacks") || dialog->match("MineClay")) {
                     dialog->select("Cancel");
                     continue;
                 } else if (dialog->select("Mine")) {
-                    nsleep(20000);
+                    waitForSwing(scene, eventLine);
                     break;
                 } else{
                     dialog->select("Cancel");

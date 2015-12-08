@@ -13,6 +13,7 @@
 		protected:
 			virtual cv::Mat preprocessImage(cv::Mat &imageIn);
 		public:
+			bool logFailure;
 			ImageTemplate(string imageLocation);
 	};
 #endif

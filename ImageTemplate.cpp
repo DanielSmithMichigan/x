@@ -14,6 +14,7 @@
 		threshold = .15;
 		width = imgObject.cols;
 		height = imgObject.rows;
+		logFailure = false;
 	}
 
 	cv::Mat ImageTemplate::preprocessImage(cv::Mat &imgIn)
@@ -41,6 +42,10 @@
 		if (minVal < threshold) {
 			topLeft.x = minLoc.x;
 			topLeft.y = minLoc.y;
+		} else if (logFailure) {
+			cout << "Could not find template in image" << endl;
+			string numString = std::to_string(randomBetween(1000, 9999));
+			cv::imwrite("../log/Template" + numString + ".png", scene->getSceneImage());
 		}
 		return topLeft;
 	}

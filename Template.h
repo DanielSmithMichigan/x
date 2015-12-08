@@ -8,7 +8,6 @@
 		private:
 		protected:
 			virtual cv::Point performMatch(cv::Mat &imgScene) = 0;
-			int retries;
 			int retryInterval;
 		public:
 			Template();
@@ -16,6 +15,7 @@
 		    bool match();
 		    int width;
 		    int height;
+			int retries;
 		    cv::Point topLeft;
 		    Scene* scene;
 	};

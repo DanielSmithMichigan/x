@@ -22,6 +22,7 @@
 		topLeft = performMatch(scene->getSceneImage());
 		while(--retriesAvailable > 0 && (topLeft.x == -1 || topLeft.y == -1)) {
 			cout << "Matching template retry: " << retriesAvailable << endl;
+			prepareForRetry();
 			topLeft = performMatch(scene->getSceneImage());
 		}
 

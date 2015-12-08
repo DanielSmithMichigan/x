@@ -9,7 +9,6 @@
 		private:
 			cv::Ptr<cv::text::OCRTesseract> ocr;
 			int maxValue;
-			int threshold;
 			int thresholdType;
 			int minHeight;
 			cv::Mat prepareImage(cv::Mat &imageIn);
@@ -19,6 +18,7 @@
 			OcrObject();
 			void initialize();
 			bool match(string matchString);
+			int threshold;
 			string bestGuess;
 	};
 #endif

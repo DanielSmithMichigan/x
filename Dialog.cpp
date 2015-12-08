@@ -12,9 +12,19 @@
 	void Dialog::initialize()
 	{
 		scene->redraw();
-		ImageObject *topOfDialog = new ImageObject("../images/ChooseOption.png");
+		ImageObject *topOfDialog = new ImageObject();
+		ImageTemplate *chooseOption = new ImageTemplate("../images/ChooseOption.png");
+		chooseOption->retries = 4;
+		chooseOption->logFailure = true;
+		topOfDialog->addTemplate(chooseOption);
+		cout << "Searching top of dialog" << endl;
 		topOfDialog->initialize();
-		ImageObject *bottomOfDialog = new ImageObject("../images/BottomCorner.png");
+		ImageObject *bottomOfDialog = new ImageObject();
+		ImageTemplate *bottomCorner = new ImageTemplate("../images/BottomCorner.png");
+		bottomCorner->retries = 4;
+		bottomCorner->logFailure = true;
+		bottomOfDialog->addTemplate(bottomCorner);
+		cout << "Searching bottom of dialog" << endl;
 		bottomOfDialog->initialize();
 		int cellWidth = (bottomOfDialog->topLeft.x - marginCell) - (topOfDialog->topLeft.x + marginCell);
 		dialogBoxes.clear();
