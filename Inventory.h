@@ -11,7 +11,7 @@
 
 	class Inventory {
 		private:
-			static Object *items[INVENTORY_COLS][INVENTORY_ROWS];
+			static unique_ptr<Object> items[INVENTORY_COLS][INVENTORY_ROWS];
 			static bool slotEmpty[INVENTORY_COLS][INVENTORY_ROWS];
 			static int width;
 			static int marginTop;
@@ -20,6 +20,7 @@
 			static int cellHeight;
 			static int cellMarginX;
 			static int cellMarginY;
+			static unique_ptr<Scene> scene;
 		public:
 			Inventory();
 			static void initialize();

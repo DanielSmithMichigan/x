@@ -45,8 +45,8 @@
 			fprintf(stderr, "Error opening display");
 			exit(EXIT_FAILURE);
 		}
-		int down = XTestFakeButtonEvent(display, button, true, 0);
-		int up = XTestFakeButtonEvent(display, button, false, 0);
+		XTestFakeButtonEvent(display, button, true, 0);
+		XTestFakeButtonEvent(display, button, false, 0);
 	    XFlush(display);
 	    XCloseDisplay(display);
 	}

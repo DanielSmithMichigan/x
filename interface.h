@@ -10,6 +10,7 @@
 	#include <X11/Xlib.h>
 	#include <X11/Xutil.h>
 	#include <X11/extensions/XTest.h>
+	#include <memory>
 	#include "utilities.h"
 	#define LEFT_CLICK 1
 	#define RIGHT_CLICK 3

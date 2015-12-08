@@ -9,6 +9,7 @@
 	#include <string>
 	#include <iostream>
 	#include <dirent.h>
+	#include <memory>
 
 	using namespace std;
 

@@ -104,7 +104,8 @@ int main(int argc, char** argv )
         getFilesInFolder((string)"../images/Rocks/" + entry->d_name, rockImages);
         ImageObject *currRock = new ImageObject();
         for(vector<string>::iterator iter = rockImages.begin(); iter != rockImages.end(); ++iter) {
-            currRock->addTemplate(new ImageTemplate(*iter));
+            unique_ptr<ImageTemplate> tempObj(new ImageTemplate(*iter));
+            currRock->addTemplate(move(tempObj));
         }
         imageObjects.push_back(currRock);
         rockImages.clear();

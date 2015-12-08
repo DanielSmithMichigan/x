@@ -10,11 +10,11 @@
 
 	class ImageObject : public Object {
 		private:
-			vector<Template*> templates;
+			vector<unique_ptr<Template>> templates;
 		public:
 			ImageObject();
 			ImageObject(string imageLocation);
-			void addTemplate(Template* tmpl);
+			void addTemplate(unique_ptr<Template> tmpl);
 			bool initialize();
 			bool match();
 			int matchType;

@@ -9,7 +9,7 @@
 		width = -1;
 		height = -1;
 		topLeft = cv::Point(-1, -1);
-		scene = new Scene();
+		unique_ptr<Scene> scene (new Scene());
 	}
 
 	void Template::prepareForRetry()

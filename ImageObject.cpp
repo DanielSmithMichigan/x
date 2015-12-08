@@ -8,13 +8,14 @@
 
 	ImageObject::ImageObject(string imageLocation)
 	{
-		templates.push_back(new ImageTemplate(imageLocation));
+		unique_ptr<ImageTemplate> tmpl(new ImageTemplate(imageLocation));
+		templates.push_back(move(tmpl));
 		ImageObject();
 	}
 
-	void ImageObject::addTemplate(Template* tmpl) 
+	void ImageObject::addTemplate(unique_ptr<Template> tmpl) 
 	{
-		templates.push_back(tmpl);
+		templates.push_back(move(tmpl));
 	}
 
 	bool ImageObject::initialize() 
@@ -27,7 +28,7 @@
 	bool ImageObject::match() 
 	{
 		bool found = false;
-		for(std::vector<Template*>::iterator iter = templates.begin(); iter != templates.end(); ++iter) {
+		for(std::vector<unique_ptr<Template>>::iterator iter = templates.begin(); iter != templates.end(); ++iter) {
 			if (!found &&
 				(*iter)->match()) {
 				height = (*iter)->height;

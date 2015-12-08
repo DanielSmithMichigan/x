@@ -8,7 +8,7 @@
 
 	class Object {
 		protected:
-			Scene *scene;
+			unique_ptr<Scene> scene;
 		public:
 			Object();
 			void initialize();

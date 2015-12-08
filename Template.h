@@ -17,6 +17,6 @@
 		    int height;
 			int retries;
 		    cv::Point topLeft;
-		    Scene* scene;
+			unique_ptr<Scene> scene;
 	};
 #endif
