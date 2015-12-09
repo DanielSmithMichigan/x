@@ -36,6 +36,7 @@
 			currDialogBox->topLeft = cv::Point(topOfDialog->topLeft.x + marginCell, y);
 			currDialogBox->width = cellWidth;
 			currDialogBox->height = cellHeight;
+			currDialogBox->clickMarginHeight = 2;
 			currDialogBox->initialize();
 			dialogBoxes.push_back(move(currDialogBox));
 		}

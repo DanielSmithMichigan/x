@@ -5,6 +5,8 @@
 	Object::Object() {
 		center = cv::Point(-1, -1);
 		topLeft = cv::Point(-1, -1);
+		clickMarginHeight = 0;
+		clickMarginWidth = 0;
 		height = -1;
 		width = -1;
 		unique_ptr<Scene> scene (new Scene());
@@ -30,7 +32,9 @@
 			cout << error << endl;
 			throw(error);
 		}
-		glideToPosition(center.x, center.y);
+		int x = randomBetween(topLeft.x + clickMarginWidth, topLeft.x + width - clickMarginWidth);
+		int y = randomBetween(topLeft.y + clickMarginHeight, topLeft.y + height - clickMarginHeight);
+		glideToPosition(x, y);
 		click(button);
 	}
 #endif

@@ -13,22 +13,28 @@
         int randNum = rand()%(max-min + 1) + min;
     }
 
-    void nsleep(long miliseconds)
+    void nsleep(long milliseconds)
     {
+       milliseconds += randomBetween(0, milliseconds * .5);
+       cout << "Sleep time: " << milliseconds << endl;
        struct timespec req, rem;
 
-       if(miliseconds > 999)
+       if(milliseconds > 999)
        {   
-            req.tv_sec = (int)(miliseconds / 1000);                            /* Must be Non-Negative */
-            req.tv_nsec = (miliseconds - ((long)req.tv_sec * 1000)) * 1000000; /* Must be in range of 0 to 999999999 */
+            req.tv_sec = (int)(milliseconds / 1000);                            /* Must be Non-Negative */
+            req.tv_nsec = (milliseconds - ((long)req.tv_sec * 1000)) * 1000000; /* Must be in range of 0 to 999999999 */
        }   
        else
        {   
             req.tv_sec = 0;                         /* Must be Non-Negative */
-            req.tv_nsec = miliseconds * 1000000;    /* Must be in range of 0 to 999999999 */
+            req.tv_nsec = milliseconds * 1000000;    /* Must be in range of 0 to 999999999 */
        }   
 
        nanosleep(&req , &rem);
+    }
+
+    bool chance(int n) {
+        return randomBetween(0, n+2) > n;
     }
 
     int absMax(int amount, int maxAmount) {

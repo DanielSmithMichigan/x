@@ -16,6 +16,8 @@
 			void clickOn(int button=1);
 			int width;
 			int height;
+			int clickMarginHeight;
+			int clickMarginWidth;
 			cv::Point center;
 			cv::Point topLeft;
 	};

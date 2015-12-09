@@ -18,4 +18,5 @@
 	void nsleep(long miliseconds);
 	int absMax(int amount, int max);
 	void getFilesInFolder(string path, vector<string> &output);
+	bool chance(int n);
 #endif

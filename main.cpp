@@ -67,7 +67,7 @@ int main(int argc, char** argv )
     dbw.close();
 
     Scene *scene = new Scene();
-    scene->redraw();
+    scene->getScreen();
 
     Object *compass = new Object();
     compass->width = 19;
@@ -105,6 +105,8 @@ int main(int argc, char** argv )
         ImageObject *currRock = new ImageObject();
         for(vector<string>::iterator iter = rockImages.begin(); iter != rockImages.end(); ++iter) {
             unique_ptr<ImageTemplate> tempObj(new ImageTemplate(*iter));
+            currRock->clickMarginHeight = 10;
+            currRock->clickMarginWidth = 10;
             currRock->addTemplate(move(tempObj));
         }
         imageObjects.push_back(currRock);
@@ -126,6 +128,12 @@ int main(int argc, char** argv )
 
     Inventory *inventory = new Inventory();
     while(true) {
+        if (chance(1000)) {
+            nsleep(1000 * 60 * 5);
+        }
+        if (chance(100)) {
+            nsleep(1000 * 30);
+        }
         scene->redraw();
         inventory->initialize();
         if (inventory->full) {
