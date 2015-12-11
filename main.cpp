@@ -2,7 +2,6 @@
 #include "ImageObject.h"
 #include "Inventory.h"
 #include "Scene.h"
-#include "nvwa/debug_new.h"
 #define ZOOM_IN_KEY 65369
 #define ZOOM_OUT_KEY 65397
 #define VIEW_UP_KEY 65391
