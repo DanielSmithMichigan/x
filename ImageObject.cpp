@@ -7,7 +7,7 @@
 	}
 
 	ImageObject::~ImageObject() {
-		// vector<unique_ptr<Template>>().swap(templates);
+		vector<unique_ptr<Template>>().swap(templates);
 	}
 
 	ImageObject::ImageObject(string imageLocation)
