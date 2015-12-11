@@ -8,6 +8,9 @@
 		thresholdType = cv::THRESH_BINARY;
 	}
 
+	ThresholdTemplate::~ThresholdTemplate() {
+	}
+
 	cv::Mat ThresholdTemplate::preprocessImage(cv::Mat &imageIn) {
 		cout << "Converting to threshold image" << endl;
 		cv::Mat imageOut;

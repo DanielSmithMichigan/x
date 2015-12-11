@@ -16,6 +16,7 @@
 			double simstringThreshold;
 		public:
 			OcrObject();
+			virtual ~OcrObject();
 			void initialize();
 			bool match(string matchString);
 			int threshold;

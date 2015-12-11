@@ -6,6 +6,11 @@
 	: Object() {
 	}
 
+	ImageObject::~ImageObject() {
+		templates.clear();
+		templates.shrink_to_fit();
+	}
+
 	ImageObject::ImageObject(string imageLocation)
 	{
 		unique_ptr<ImageTemplate> tmpl(new ImageTemplate(imageLocation));

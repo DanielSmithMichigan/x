@@ -14,6 +14,7 @@
 		public:
 			ImageObject();
 			ImageObject(string imageLocation);
+			~ImageObject();
 			void addTemplate(unique_ptr<Template> tmpl);
 			bool initialize();
 			bool match();

@@ -9,8 +9,6 @@
 
 	void Scene::redraw() {
 		cout << "Redrawing scene" << endl;
-		image.release();
-		delete [] image.data;
 		getScreen();
 	}
 
@@ -24,7 +22,7 @@
 		cv::waitKey(100000);
 	}
 
-	cv::Mat& Scene::getSceneImage() {
+	cv::Mat Scene::getSceneImage() {
 		return Scene::image;
 	}
 #endif

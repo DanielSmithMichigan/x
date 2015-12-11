@@ -11,6 +11,7 @@
 			unique_ptr<Scene> scene;
 		public:
 			Object();
+			virtual ~Object();
 			void initialize();
 			void draw(const cv::Scalar &borderColor = CV_RGB(255, 0, 0), int borderWidth = 3);
 			void clickOn(int button=1);

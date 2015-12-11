@@ -17,6 +17,9 @@
 		logFailure = false;
 	}
 
+	ImageTemplate::~ImageTemplate() {
+	}
+
 	cv::Mat ImageTemplate::preprocessImage(cv::Mat &imgIn)
 	{
 		return imgIn;

@@ -9,6 +9,9 @@
 		cellHeight = 16 - (marginCell * 2);
 	}
 
+	Dialog::~Dialog() {
+	}
+
 	void Dialog::initialize()
 	{
 		scene->redraw();
@@ -26,8 +29,8 @@
 		bottomOfDialog->addTemplate(move(bottomCorner));
 		cout << "Searching bottom of dialog" << endl;
 		bottomOfDialog->initialize();
+		vector<unique_ptr<OcrObject>>().swap(dialogBoxes);
 		int cellWidth = (bottomOfDialog->topLeft.x - marginCell) - (topOfDialog->topLeft.x + marginCell);
-		dialogBoxes.clear();
 		for (int y = topOfDialog->topLeft.y + topOfDialog->height + marginTop; 
 			y <= bottomOfDialog->topLeft.y; 
 			y += cellHeight + marginCell) {

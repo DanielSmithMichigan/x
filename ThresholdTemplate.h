@@ -12,5 +12,6 @@
 		    cv::Mat preprocessImage(cv::Mat &imageIn);
 		public:
 			ThresholdTemplate(string imageLocation);
+			virtual ~ThresholdTemplate();
 	};
 #endif

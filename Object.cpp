@@ -12,6 +12,10 @@
 		unique_ptr<Scene> scene (new Scene());
 	}
 
+	Object::~Object() {
+		
+	}
+
 	void Object::initialize() {
 		center = cv::Point(topLeft.x + (width / 2), topLeft.y + (height/ 2));
 	}

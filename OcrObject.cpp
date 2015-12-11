@@ -12,10 +12,14 @@
 		thresholdType = cv::THRESH_BINARY;
 	}
 
+	OcrObject::~OcrObject() {
+	}
+
 	void OcrObject::initialize() {
 		cout << "Initializing" << endl;
 	    dbr.open("../simstring/words.db");
-		cv::Mat preparedImage = prepareImage(scene->getSceneImage());
+	    cv::Mat sceneImage = scene->getSceneImage();
+		cv::Mat preparedImage = prepareImage(sceneImage);
 		ocr->run(preparedImage, bestGuess);
 		cout << "Best Guess: " << bestGuess << endl;
 		Object::initialize();

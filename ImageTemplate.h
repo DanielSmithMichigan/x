@@ -15,5 +15,6 @@
 		public:
 			bool logFailure;
 			ImageTemplate(string imageLocation);
+			virtual ~ImageTemplate();
 	};
 #endif

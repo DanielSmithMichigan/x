@@ -11,6 +11,7 @@
 			int retryInterval;
 		public:
 			Template();
+			virtual ~Template();
 			virtual void prepareForRetry();
 		    bool match();
 		    int width;

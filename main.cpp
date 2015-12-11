@@ -1,6 +1,8 @@
+
 #include "ImageObject.h"
 #include "Inventory.h"
 #include "Scene.h"
+#include "nvwa/debug_new.h"
 #define ZOOM_IN_KEY 65369
 #define ZOOM_OUT_KEY 65397
 #define VIEW_UP_KEY 65391
@@ -68,15 +70,14 @@ int main(int argc, char** argv )
 
     Scene *scene = new Scene();
     scene->getScreen();
-
-    Object *compass = new Object();
+    unique_ptr<Object> compass(new Object());
     compass->width = 19;
     compass->height = 19;
-    ImageObject *worldMap = new ImageObject("../images/WorldMap.png");
+    unique_ptr<ImageObject> worldMap (new ImageObject("../images/WorldMap.png"));
     if (worldMap->initialize()) {
         compass->topLeft = cv::Point(worldMap->topLeft.x - 154, worldMap->topLeft.y - 150);
     } else {
-        ImageObject *helpButton = new ImageObject("../images/HelpButton.png");
+        unique_ptr<ImageObject> helpButton (new ImageObject("../images/HelpButton.png"));
         if (helpButton->initialize()) {
             compass->topLeft = cv::Point(worldMap->topLeft.x - 154, worldMap->topLeft.y);
         } else {
