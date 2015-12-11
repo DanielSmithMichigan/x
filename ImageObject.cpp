@@ -7,8 +7,7 @@
 	}
 
 	ImageObject::~ImageObject() {
-		templates.clear();
-		templates.shrink_to_fit();
+		// vector<unique_ptr<Template>>().swap(templates);
 	}
 
 	ImageObject::ImageObject(string imageLocation)
