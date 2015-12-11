@@ -51,7 +51,7 @@
 			topLeft.y = minLoc.y;
 		} else if (logFailure) {
 			cout << "Could not find template in image" << endl;
-			string numString = std::to_string(randomBetween(1000, 9999));
+			string numString = to_string(randomBetween(1000, 9999));
 			cv::imwrite("../log/Template" + numString + ".png", scene->getSceneImage());
 		}
 		return topLeft;

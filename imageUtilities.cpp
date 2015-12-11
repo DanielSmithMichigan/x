@@ -28,7 +28,7 @@
             throw("Error reading scene");
         }
         cvtColor(scene, scene, CV_BGRA2BGR);
-        XFree(img);
+        XDestroyImage(img);
         XCloseDisplay(display);
         return scene;
     }
