@@ -40,7 +40,7 @@
 			currDialogBox->width = cellWidth;
 			currDialogBox->height = cellHeight;
 			currDialogBox->clickMarginHeight = 4;
-			currDialogBox->clickMarginWidth = 20;
+			currDialogBox->clickMarginWidth = 10;
 			currDialogBox->initialize();
 			dialogBoxes.push_back(move(currDialogBox));
 		}
