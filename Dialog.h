@@ -16,6 +16,6 @@
 			~Dialog();
 			bool select(string matchString);
 			bool match(string matchString);
-			void initialize();
+			bool initialize();
 	};
 #endif

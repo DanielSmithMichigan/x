@@ -12,7 +12,7 @@
 	Dialog::~Dialog() {
 	}
 
-	void Dialog::initialize()
+	bool Dialog::initialize()
 	{
 		scene->redraw();
 		unique_ptr<ImageObject> topOfDialog(new ImageObject());
@@ -20,15 +20,17 @@
 		chooseOption->retries = 4;
 		chooseOption->logFailure = true;
 		topOfDialog->addTemplate(move(chooseOption));
-		cout << "Searching top of dialog" << endl;
-		topOfDialog->initialize();
+		if (!topOfDialog->initialize()) {
+			return false;
+		}
 		unique_ptr<ImageObject> bottomOfDialog (new ImageObject());
 		unique_ptr<ImageTemplate> bottomCorner (new ImageTemplate("../images/BottomCorner.png"));
 		bottomCorner->retries = 4;
 		bottomCorner->logFailure = true;
 		bottomOfDialog->addTemplate(move(bottomCorner));
-		cout << "Searching bottom of dialog" << endl;
-		bottomOfDialog->initialize();
+		if (!bottomOfDialog->initialize()) {
+			return false;
+		}
 		vector<unique_ptr<OcrObject>>().swap(dialogBoxes);
 		int cellWidth = (bottomOfDialog->topLeft.x - marginCell) - (topOfDialog->topLeft.x + marginCell);
 		for (int y = topOfDialog->topLeft.y + topOfDialog->height + marginTop; 
@@ -44,6 +46,7 @@
 			currDialogBox->initialize();
 			dialogBoxes.push_back(move(currDialogBox));
 		}
+		return true;
 	}
 
 	bool Dialog::match(string matchString)

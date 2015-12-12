@@ -144,15 +144,16 @@ int main(int argc, char** argv )
             if ((*iter)->initialize()) {
                 (*iter)->clickOn(RIGHT_CLICK);
                 nsleep(5);
-                dialog->initialize();
-                if (dialog->match("MineRocks") || dialog->match("MineHacks") || dialog->match("MineClay")) {
-                    dialog->select("Cancel");
-                    continue;
-                } else if (dialog->select("Mine")) {
-                    waitForSwing(scene, eventLine);
-                    break;
-                } else{
-                    dialog->select("Cancel");
+                if (dialog->initialize()) {
+                    if (dialog->match("MineRocks") || dialog->match("MineHacks") || dialog->match("MineClay")) {
+                        dialog->select("Cancel");
+                        continue;
+                    } else if (dialog->select("Mine")) {
+                        waitForSwing(scene, eventLine);
+                        break;
+                    } else{
+                        dialog->select("Cancel");
+                    }
                 }
             }
         }

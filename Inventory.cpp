@@ -38,8 +38,9 @@
 		items[x][y]->clickOn(RIGHT_CLICK);
 		scene->redraw();
 		unique_ptr<Dialog> dialog(new Dialog());
-		dialog->initialize();
-		dialog->select("Drop");
+		if (dialog->initialize()) {
+			dialog->select("Drop");
+		}
 	}
 
 	void Inventory::dropAllItems() {
