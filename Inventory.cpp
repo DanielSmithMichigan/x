@@ -36,7 +36,6 @@
 
 	void Inventory::dropItem(int x, int y) {
 		items[x][y]->clickOn(RIGHT_CLICK);
-		scene->redraw();
 		unique_ptr<Dialog> dialog(new Dialog());
 		if (dialog->initialize()) {
 			dialog->select("Drop");
