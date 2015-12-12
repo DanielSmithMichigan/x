@@ -21,7 +21,7 @@ void waitForMiningFinished(Scene *scene, OcrObject *eventLine, int retries = 20)
     }
 }
 
-void waitForSwing(Scene *scene, OcrObject *eventLine, int retries = 20) {
+void waitForSwing(Scene *scene, OcrObject *eventLine, int retries = 5) {
     if (retries <= 0) {
         return;
     }
