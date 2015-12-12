@@ -40,14 +40,14 @@
 
 	bool OcrObject::match(string matchString) {
 		cout << "Matching against: " << matchString << endl;
-	    std::vector<std::string> matches;
+	    vector<string> matches;
 	    string searchString = bestGuess;
-	    searchString.erase(std::remove_if(searchString.begin(), searchString.end(), ::isspace), searchString.end());
+	    searchString.erase(remove_if(searchString.begin(), searchString.end(), ::isspace), searchString.end());
 	    searchString = searchString.substr(0, matchString.length());
 	    cout << "Searching database for " << searchString << endl;
-	    dbr.retrieve(searchString, simstring::cosine, simstringThreshold, std::back_inserter(matches));
+	    dbr.retrieve(searchString, simstring::cosine, simstringThreshold, back_inserter(matches));
 	    cout << "Number of matches: " << matches.size() << endl;
-		for(std::vector<string>::iterator iter = matches.begin(); iter != matches.end(); ++iter) {
+		for(vector<string>::iterator iter = matches.begin(); iter != matches.end(); ++iter) {
 			cout << "Checking match: " << *iter << endl;
 		}
 	    return find(matches.begin(), matches.end(), matchString) != matches.end();
