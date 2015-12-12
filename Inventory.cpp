@@ -53,7 +53,7 @@
 					continue;
 				}
 				dropItem(i, j);
-				nsleep(500);
+				nsleep(200);
 			}
 		}
 	}

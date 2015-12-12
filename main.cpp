@@ -16,7 +16,7 @@ void waitForMiningFinished(Scene *scene, OcrObject *eventLine, int retries = 20)
     scene->redraw();
     eventLine->initialize();
     cout << "Event line best guess: " << eventLine->bestGuess << endl;
-    if (!eventLine->match("Yournanage")) {
+    if (!eventLine->match("Yournanage") && !eventLine->match("Youmanage")) {
         waitForMiningFinished(scene, eventLine, --retries);
     }
 }
@@ -30,7 +30,7 @@ void waitForSwing(Scene *scene, OcrObject *eventLine, int retries = 5) {
     scene->redraw();
     eventLine->initialize();
     cout << "Event line best guess: " << eventLine->bestGuess << endl;
-    if (!eventLine->match("YouSiving")) {
+    if (!eventLine->match("YouSiving") && !eventLine->match("Youswing")) {
         waitForSwing(scene, eventLine, --retries);
     } else {
         waitForMiningFinished(scene, eventLine);
@@ -52,9 +52,11 @@ int main(int argc, char** argv )
     strings.push_back("Mine");
     strings.push_back("MineRocks");
     strings.push_back("MineClay");
-    strings.push_back("MineHacks");
+    strings.push_back("MineClag");
     strings.push_back("Yournanage");
     strings.push_back("YouSiving");
+    strings.push_back("Youmanage");
+    strings.push_back("Youswing");
 
     // Create a SimString database with two person names.
     simstring::ngram_generator gen(strings.size(), false);
@@ -116,20 +118,24 @@ int main(int argc, char** argv )
     closedir(dirObj);
 
     ImageObject *chatUpArrow = new ImageObject("../images/ChatUpArrow.png");
+    cout << "Finding chat up arrow" << endl;
     chatUpArrow->initialize();
     OcrObject *eventLine = new OcrObject();
     eventLine->threshold = 150;
     eventLine->width = 528;
     eventLine->height = 16;
     eventLine->topLeft = cv::Point(chatUpArrow->topLeft.x - 528, chatUpArrow->topLeft.y + 126);
+    cout << "Finding event line" << endl;
     eventLine->initialize();
+    cout << "MADE IT" << endl;
+    cout << flush;
 
     Dialog* dialog = new Dialog();
 
     Inventory *inventory = new Inventory();
     while(true) {
         if (chance(1000)) {
-            nsleep(1000 * 60 * 5);
+            nsleep(1000 * 60);
         }
         if (chance(100)) {
             nsleep(1000 * 30);
@@ -139,13 +145,14 @@ int main(int argc, char** argv )
         if (inventory->full) {
             inventory->dropAllItems();
         }
+        cout << "Running: " << endl;
         random_shuffle(imageObjects.begin(), imageObjects.end());
         for(std::vector<ImageObject*>::iterator iter = imageObjects.begin(); iter != imageObjects.end(); ++iter) {
             if ((*iter)->initialize()) {
                 (*iter)->clickOn(RIGHT_CLICK);
                 nsleep(5);
                 if (dialog->initialize()) {
-                    if (dialog->match("MineRocks") || dialog->match("MineHacks") || dialog->match("MineClay")) {
+                    if (dialog->match("MineRocks") || dialog->match("MineClay") || dialog->match("MineClag")) {
                         dialog->select("Cancel");
                         continue;
                     } else if (dialog->select("Mine")) {

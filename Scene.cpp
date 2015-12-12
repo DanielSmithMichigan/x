@@ -13,7 +13,7 @@
 	}
 
 	void Scene::getScreen() {
-		nsleep(300);		
+		nsleep(50);		
 		image = ImageFromDisplay(SCENE_WIDTH, SCENE_HEIGHT);
 	}
 

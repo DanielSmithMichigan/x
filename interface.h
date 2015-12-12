@@ -18,7 +18,7 @@
 	using namespace std;
 
 	void moveToPosition(int x, int y);
-	void glideToPosition(int x, int y, int marginErr = 3, long interval = 1, int maxStepSize = 2);
+	void glideToPosition(int x, int y, int marginErr = 0, long interval = 1, int maxStepSize = 1);
 	void click(int button);
 	void keypress(int button, int holdDuration = 0);
 #endif
