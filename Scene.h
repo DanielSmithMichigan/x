@@ -2,6 +2,7 @@
 #define Scene_h
 	#include "imageUtilities.h"
 	#include "utilities.h"
+	#include <map>
 	#define SCENE_WIDTH 1600
 	#define SCENE_HEIGHT 900
 

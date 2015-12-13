@@ -3,7 +3,7 @@
 	#include "ImageTemplate.h"
 
 	ImageTemplate::ImageTemplate(string imageLocation) 
-	: Template()
+	: ImageTemplate()
 	{
 		imgObject = cv::imread(imageLocation, CV_LOAD_IMAGE_COLOR);
 		if (!imgObject.data) {
@@ -11,9 +11,17 @@
 			cout << error;
 			throw(error);
 		}
-		threshold = .15;
 		width = imgObject.cols;
 		height = imgObject.rows;
+	}
+
+	ImageTemplate::ImageTemplate(cv::Mat i) : ImageTemplate() {
+		imgObject = i;
+	}
+
+	ImageTemplate::ImageTemplate()
+	: Template() {
+		threshold = .15;
 		logFailure = false;
 	}
 

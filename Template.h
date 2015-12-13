@@ -13,7 +13,7 @@
 			Template();
 			virtual ~Template();
 			virtual void prepareForRetry();
-		    bool match();
+		    bool match(cv::Mat sceneImage);
 		    int width;
 		    int height;
 			int retries;

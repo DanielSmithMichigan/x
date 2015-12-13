@@ -34,7 +34,7 @@
 		bool found = false;
 		for(std::vector<unique_ptr<Template>>::iterator iter = templates.begin(); iter != templates.end(); ++iter) {
 			if (!found &&
-				(*iter)->match()) {
+				(*iter)->match(scene->getSceneImage())) {
 				height = (*iter)->height;
 				width = (*iter)->width;
 				topLeft = (*iter)->topLeft;

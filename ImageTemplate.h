@@ -15,6 +15,8 @@
 		public:
 			bool logFailure;
 			ImageTemplate(string imageLocation);
+			ImageTemplate(cv::Mat i);
+			ImageTemplate();
 			virtual ~ImageTemplate();
 	};
 #endif

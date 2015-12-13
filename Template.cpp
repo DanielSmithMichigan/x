@@ -20,10 +20,9 @@
 	{
 	}
 
-	bool Template::match()
+	bool Template::match(cv::Mat sceneImage)
 	{
 		int retriesAvailable = this->retries;
-		cv::Mat sceneImage = scene->getSceneImage();
 		topLeft = performMatch(sceneImage);
 		while(--retriesAvailable > 0 && (topLeft.x == -1 || topLeft.y == -1)) {
 			cout << "Matching template retry: " << retriesAvailable << endl;

@@ -29,6 +29,16 @@
 			borderWidth);
 	}
 
+	cv::Mat Object::getImage() {
+		if (center.x == -1
+			|| center.y == -1) {
+			string error = "Object not initialized, or could not be found in scene";
+			cout << error << endl;
+			throw(error);
+		}
+		return ImageFromDisplay(width, height, topLeft.x, topLeft.y);
+	}
+
 	void Object::clickOn(int button) {
 		if (center.x == -1
 			|| center.y == -1) {
