@@ -45,6 +45,7 @@ int main(int argc, char** argv )
 
     vector<string> strings;
     strings.push_back("Drop");
+    strings.push_back("DropUncut");
     strings.push_back("Cancel");
     strings.push_back("Examine");
     strings.push_back("Use");
