@@ -76,10 +76,10 @@ int main(int argc, char** argv )
     unique_ptr<Map> interfaceMap(new Map());
     interfaceMap->initialize();
     interfaceMap->locate();
-    interfaceMap->goTo("MINING_GUILD_LADDER");
-    cout << "PLANE: " << interfaceMap->currentPlane << endl;
-    cout << "X: " << interfaceMap->x << endl;
-    cout << "Y: " << interfaceMap->y << endl;
+    // interfaceMap->goTo("MINING_GUILD_LADDER");
+    // cout << "PLANE: " << interfaceMap->currentPlane << endl;
+    // cout << "X: " << interfaceMap->x << endl;
+    // cout << "Y: " << interfaceMap->y << endl;
 
     // unique_ptr<Object> compass(new Object());
     // compass->width = 19;

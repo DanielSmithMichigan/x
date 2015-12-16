@@ -1,6 +1,7 @@
 #ifndef Map_h
 #define Map_h
 	#include "ImageObject.h"
+	#include "SurfTemplate.h"
 	#define MAP_WIDTH 103
 	#define MAP_HEIGHT 103
 

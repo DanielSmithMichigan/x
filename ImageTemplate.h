@@ -7,10 +7,10 @@
 	class ImageTemplate : public Template {
 		private:
 			float threshold;
-			cv::Mat imgObject;
 			virtual cv::Point performMatch(cv::Mat &imgScene);
 			void prepareForRetry();
 		protected:
+			cv::Mat imgObject;
 			virtual cv::Mat preprocessImage(cv::Mat &imageIn);
 		public:
 			bool logFailure;

@@ -54,7 +54,7 @@
 
 	bool Map::locate() {
 		cout << "Attempting to find plane" << endl;
-		unique_ptr<ImageTemplate> currentMap(new ImageTemplate(getImage()));
+		unique_ptr<SurfTemplate> currentMap(new SurfTemplate(getImage()));
 		for(vector<plane>::iterator iter = planes.begin(); iter != planes.end(); ++iter) {
 			if (currentMap->match((*iter).image)) {
 				currentPlane = (*iter).name;
