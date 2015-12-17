@@ -10,6 +10,9 @@
 		    cv::Ptr<cv::xfeatures2d::SURF> surf;
 		    cv::FlannBasedMatcher matcher;
 		    double distance;
+		    double maxScaling;
+		    double maxRotation;
+		    double maxAngleTolerance;
 		    int minHessian;
 		public:
 			SurfTemplate(cv::Mat imgObj);

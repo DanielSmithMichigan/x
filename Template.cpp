@@ -8,6 +8,8 @@
 		retryInterval = 200;
 		width = -1;
 		height = -1;
+		rotation = 0;
+		scaling = 1; 
 		topLeft = cv::Point(-1, -1);
 		unique_ptr<Scene> scene (new Scene());
 	}
@@ -20,7 +22,7 @@
 	{
 	}
 
-	bool Template::match(cv::Mat sceneImage)
+	bool Template::match(cv::Mat &sceneImage)
 	{
 		int retriesAvailable = this->retries;
 		topLeft = performMatch(sceneImage);

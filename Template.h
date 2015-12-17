@@ -13,10 +13,12 @@
 			Template();
 			virtual ~Template();
 			virtual void prepareForRetry();
-		    bool match(cv::Mat sceneImage);
+		    bool match(cv::Mat &sceneImage);
 		    int width;
 		    int height;
 			int retries;
+			double rotation;
+			double scaling;
 		    cv::Point topLeft;
 			unique_ptr<Scene> scene;
 	};

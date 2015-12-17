@@ -10,6 +10,7 @@
 	#include <iostream>
 	#include <dirent.h>
 	#include <memory>
+	#include <fstream>
 
 	using namespace std;
 
@@ -19,4 +20,10 @@
 	int absMax(int amount, int max);
 	void getFilesInFolder(string path, vector<string> &output);
 	bool chance(int n);
+	double getRotationFromPoints(double x1, double y1, double x2, double y2);
+	double getScalingFromPoints(double x1, double y1, double x2, double y2, double origWidth);
+	double hypotenuse(double a, double b);
+	double findAngle(double x1, double y1, double x2, double y2, double x3, double y3);
+	double cosineLaw(double a, double b, double c);
+	void writeToFile(double text, string filename);
 #endif

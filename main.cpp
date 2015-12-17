@@ -74,8 +74,11 @@ int main(int argc, char** argv )
     scene->getScreen();
 
     unique_ptr<Map> interfaceMap(new Map());
-    interfaceMap->initialize();
-    interfaceMap->locate();
+    while(1) {
+        interfaceMap->initialize();
+        interfaceMap->locate();
+        cv::waitKey(500);
+    }
     // interfaceMap->goTo("MINING_GUILD_LADDER");
     // cout << "PLANE: " << interfaceMap->currentPlane << endl;
     // cout << "X: " << interfaceMap->x << endl;

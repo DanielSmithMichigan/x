@@ -6,6 +6,7 @@
 	}
 
 	void Map::initialize() {
+		vector<plane>().swap(planes);
 		struct plane minersGuild("MINERS_GUILD", "../images/MinersGuild.png");
 		planes.push_back(minersGuild);
 		struct plane falador("FALADOR", "../images/Falador.png");

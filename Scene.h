@@ -15,7 +15,7 @@
 			Scene();
 			static void getScreen();
 			static void redraw();
-			static cv::Mat getSceneImage();
+			static cv::Mat &getSceneImage();
 			static void draw();
 	};
 #endif

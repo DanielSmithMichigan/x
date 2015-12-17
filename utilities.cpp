@@ -10,7 +10,7 @@
     }
 
     int randomBetween(int min, int max) {
-        int randNum = rand()%(max-min + 1) + min;
+        return rand()%(max-min + 1) + min;
     }
 
     void nsleep(long milliseconds)
@@ -64,6 +64,50 @@
         }
 
         closedir(dirObj);
+    }
+
+    double getRotationFromPoints(double x1, double y1, double x2, double y2) {
+        double width = x2 - x1;
+        double height = y2 - y1;
+        double h = hypotenuse(width, height);
+        return cosineLaw(height, width, h);
+    }
+
+    double getScalingFromPoints(double x1, double y1, double x2, double y2, double origWidth) {
+        double width = x2 - x1;
+        double height = y2 - y1;
+        double h = hypotenuse(width, height);
+        return h / origWidth;
+    }
+
+    double hypotenuse(double a, double b) {
+        return sqrt(a * a + b * b);
+    }
+
+    double findAngle(double x1, double y1, double x2, double y2, double x3, double y3) {
+        double d = abs(y2 - y1);
+        double e = abs(x2 - x1);
+        double f = abs(x3 - x2);
+        double g = abs(y3 - y2);
+        double a = hypotenuse(d, e);
+        double b = hypotenuse(f, g);
+        double h = abs(x3 - x1);
+        double i = abs(y3 - y1);
+        double c = hypotenuse(h, i);
+        return cosineLaw(c, a, b);
+    }
+
+    double cosineLaw(double b, double a, double c) {
+        double numerator = a * a - b * b + c * c;
+        double denominator = 2 * a * c;
+        return acos(numerator / denominator);
+    }
+
+    void writeToFile(double text, string filename) {
+        std::ofstream outfile;
+        outfile.open(filename, ios_base::app);
+        outfile << text; 
+        outfile << "\n";
     }
 
 #endif
