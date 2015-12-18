@@ -75,8 +75,11 @@ int main(int argc, char** argv )
 
     unique_ptr<Map> interfaceMap(new Map());
     interfaceMap->initialize();
-    interfaceMap->locate();
-    interfaceMap->goTo("MINING_GUILD_1");
+    int x = 50;
+    while(x-- > 0) {
+        interfaceMap->goTo("FALADOR_BANK");
+        interfaceMap->goTo("FALADOR_LADDER");
+    }
     cv::waitKey(500);
     // while(1) {
     // }

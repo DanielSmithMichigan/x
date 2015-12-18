@@ -23,12 +23,12 @@
 		locations["MINING_GUILD_LADDER"] = minersGuildLadder;
 		struct location faladorLadder;
 		faladorLadder.x = 96;
-		faladorLadder.y = 90;
+		faladorLadder.y = 135;
 		faladorLadder.plane = "FALADOR";
 		locations["FALADOR_LADDER"] = faladorLadder;
 		struct location faladorBank;
-		faladorBank.x = 73;
-		faladorBank.y = 64;
+		faladorBank.x = 83;
+		faladorBank.y = 73;
 		faladorBank.plane = "FALADOR";
 		locations["FALADOR_BANK"] = faladorBank;
 
@@ -86,6 +86,7 @@
 		clickX += directionX == "EAST"? distanceX : -1 * distanceX;
 		clickY += directionY == "SOUTH"? distanceY : -1 * distanceY;
 		glideToPosition(clickX, clickY);
+		click(LEFT_CLICK);
 	}
 
 	void Map::goTo(string l) {
@@ -95,9 +96,11 @@
 			throw(error);
 		}
 		location loc = locations[l];
-		while(distanceBetween(x, y, loc.x, loc.y) > 10) {
-			approachPosition(l);
-			cv::waitKey(500);
+		while(distanceBetween(x, y, loc.x, loc.y) > 25) {
+			if (locate()) {
+				approachPosition(l);
+			}
+			cv::waitKey(1500);
 		}
 	}
 
