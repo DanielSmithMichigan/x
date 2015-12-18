@@ -25,6 +25,7 @@
 		private:
 			vector<plane> planes;
 			map<string, location> locations;
+			void approachPosition(string l);
 		public:
 			Map();
 			void initialize();

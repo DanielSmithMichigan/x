@@ -84,6 +84,10 @@
         return sqrt(a * a + b * b);
     }
 
+    double distanceBetween(double x1, double y1, double x2, double y2) {
+        return hypotenuse(x2 - x1, y2 - y1);
+    }
+
     double findAngle(double x1, double y1, double x2, double y2, double x3, double y3) {
         double d = abs(y2 - y1);
         double e = abs(x2 - x1);

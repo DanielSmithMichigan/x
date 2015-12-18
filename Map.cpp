@@ -69,18 +69,13 @@
 		return false;
 	}
 
-	void Map::goTo(string l) {
+	void Map::approachPosition(string l) {
 		if (!locations.count(l)) {
 			string error = "Could not find location: " + l;
 			cout << error << endl;
 			throw(error);
 		}
 		location loc = locations[l];
-		if (loc.plane != currentPlane) {
-			string error = "Current plane: " + currentPlane + " Desired Plane: " + loc.plane;
-			cout << error << endl;
-			throw(error);
-		}
 		int maxDistance = width / 2;
 		string directionX = x > loc.x? "WEST" : "EAST";
 		string directionY = y > loc.y? "NORTH" : "SOUTH";
@@ -91,6 +86,19 @@
 		clickX += directionX == "EAST"? distanceX : -1 * distanceX;
 		clickY += directionY == "SOUTH"? distanceY : -1 * distanceY;
 		glideToPosition(clickX, clickY);
+	}
+
+	void Map::goTo(string l) {
+		if (!locations.count(l)) {
+			string error = "Could not find location: " + l;
+			cout << error << endl;
+			throw(error);
+		}
+		location loc = locations[l];
+		while(distanceBetween(x, y, loc.x, loc.y) > 10) {
+			approachPosition(l);
+			cv::waitKey(500);
+		}
 	}
 
 #endif

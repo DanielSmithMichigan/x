@@ -23,6 +23,7 @@
 	double getRotationFromPoints(double x1, double y1, double x2, double y2);
 	double getScalingFromPoints(double x1, double y1, double x2, double y2, double origWidth);
 	double hypotenuse(double a, double b);
+	double distanceBetween(double x1, double y1, double x2, double y2);
 	double findAngle(double x1, double y1, double x2, double y2, double x3, double y3);
 	double cosineLaw(double a, double b, double c);
 	void writeToFile(double text, string filename);
