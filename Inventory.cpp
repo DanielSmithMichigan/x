@@ -38,7 +38,8 @@
 		items[x][y]->clickOn(RIGHT_CLICK);
 		unique_ptr<Dialog> dialog(new Dialog());
 		if (dialog->initialize()) {
-			if (!dialog->match("DropUncut")) {
+			if (!dialog->match("DropUncut")
+				&& dialog->match("Drop")) {
 				dialog->select("Drop");
 			} else {
 				dialog->select("Cancel");
