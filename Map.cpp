@@ -89,13 +89,17 @@
 		click(LEFT_CLICK);
 	}
 
-	void Map::goTo(string l) {
+	bool Map::goTo(string l) {
 		if (!locations.count(l)) {
 			string error = "Could not find location: " + l;
 			cout << error << endl;
 			throw(error);
 		}
 		location loc = locations[l];
+	    while (loc.plane != currentPlane) {
+	        locate();
+	        nsleep(500);
+	    }
 		while(distanceBetween(x, y, loc.x, loc.y) > 25) {
 			if (locate()) {
 				approachPosition(l);
@@ -103,6 +107,7 @@
 			nsleep(1500);
 		}
 		nsleep(500);
+		return true;
 	}
 
 #endif

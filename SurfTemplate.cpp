@@ -10,7 +10,12 @@
 		maxScaling = .15;
 		maxRotation = .05;
 		maxAngleTolerance = .12;
+		retries = 0;
 		surf = cv::xfeatures2d::SURF::create(minHessian);
+	}
+
+	cv::Mat SurfTemplate::prepareForRetry(cv::Mat sceneImage) {
+		return sceneImage;
 	}
 
 	cv::Point SurfTemplate::performMatch(cv::Mat &imgScene) {

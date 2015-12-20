@@ -38,9 +38,11 @@
                 dialog->initialize();
                 if (dialog->match("Climb")) {
                 	dialog->select("Climb");
+                    nsleep(500);
                 	return true;
                 } else if (dialog->match("Clim")) {
                 	dialog->select("Clim");
+                    nsleep(500);
                 	return true;
                 } else {
                 	dialog->select("Cancel");

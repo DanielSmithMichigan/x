@@ -30,7 +30,7 @@
 			Map();
 			void initialize();
 			bool locate();
-			void goTo(string l);
+			bool goTo(string l);
 			string currentPlane;
 			int x;
 			int y;

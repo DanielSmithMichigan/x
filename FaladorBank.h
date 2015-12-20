@@ -4,6 +4,7 @@
 	#include "ErodeFilter.h"
 	#include "RangeFilter.h"
 	#include "Dialog.h"
+	#include "ImageObject.h"
 
 	class FaladorBank {
 		private:
@@ -23,5 +24,7 @@
 			FaladorBank();
 			~FaladorBank();
 			bool use();
+			bool open();
+			bool close();
 	};
 #endif

@@ -84,23 +84,57 @@ int main(int argc, char** argv )
     unique_ptr<MiningGuildLadder> miningGuildLadder(new MiningGuildLadder());
     unique_ptr<Map> interfaceMap(new Map());
     interfaceMap->initialize();
-    // interfaceMap->goTo("MINING_GUILD_1");
-    // interfaceMap->goTo("MINING_GUILD_LADDER");
-    // while(!miningGuildLadder->use()) {
-    //     nsleep(50);
-    // }
-    // nsleep(500);
-    // while(!faladorLadder->use()) {
-    //     nsleep(50);
-    // }
-    // nsleep(500);
-    // while(!miningGuildLadder->use()) {
-    //     nsleep(50);
-    // }
-    nsleep(500);
-    interfaceMap->goTo("FALADOR_BANK");
-    while(!bank->use()) {
-        nsleep(50);
+    int x = 5;
+    while (x-- > 0) {
+        
+        while (true) {
+            if (interfaceMap->goTo("FALADOR_LADDER")) {
+                break;
+            }
+        }
+
+        while(true) {
+            if (faladorLadder->use()) {
+                break;
+            }
+        }
+
+        while (true) {
+            if (interfaceMap->goTo("MINING_GUILD_1")) {
+                break;
+            }
+        }
+
+        while (true) {
+            if (interfaceMap->goTo("MINING_GUILD_LADDER")) {
+                break;
+            }
+        }
+
+        while(true) {
+            if (miningGuildLadder->use()) {
+                break;
+            }
+        }
+        while (true) {
+            if (interfaceMap->goTo("FALADOR_BANK")) {
+                break;
+            }
+        }
+        
+        while(true) {
+            bank->use();
+            if (bank->open()) {
+                break;
+            }
+        }
+
+        while (true) {
+            bank->close();
+            if (!bank->open()) {
+                break;
+            }
+        }
     }
 
     // interfaceMap->goTo("MINING_GUILD_LADDER");
