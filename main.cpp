@@ -3,6 +3,7 @@
 #include "Inventory.h"
 #include "Scene.h"
 #include "Map.h"
+#include "FaladorLadder.h"
 #define ZOOM_IN_KEY 65369
 #define ZOOM_OUT_KEY 65397
 #define VIEW_UP_KEY 65391
@@ -58,6 +59,8 @@ int main(int argc, char** argv )
     strings.push_back("YouSiving");
     strings.push_back("Youmanage");
     strings.push_back("Youswing");
+    strings.push_back("Clim");
+    strings.push_back("Climb");
 
     // Create a SimString database with two person names.
     simstring::ngram_generator gen(strings.size(), false);
@@ -73,16 +76,15 @@ int main(int argc, char** argv )
     Scene *scene = new Scene();
     scene->getScreen();
 
+    unique_ptr<FaladorLadder> ladder(new FaladorLadder());
     unique_ptr<Map> interfaceMap(new Map());
     interfaceMap->initialize();
-    int x = 50;
-    while(x-- > 0) {
-        interfaceMap->goTo("FALADOR_BANK");
-        interfaceMap->goTo("FALADOR_LADDER");
+    interfaceMap->goTo("FALADOR_LADDER");
+    while(!ladder->use()) {
+        cv::waitKey(50);
     }
     cv::waitKey(500);
-    // while(1) {
-    // }
+
     // interfaceMap->goTo("MINING_GUILD_LADDER");
     // cout << "PLANE: " << interfaceMap->currentPlane << endl;
     // cout << "X: " << interfaceMap->x << endl;

@@ -12,7 +12,7 @@
 
 	ImageObject::ImageObject(string imageLocation)
 	{
-		unique_ptr<ImageTemplate> tmpl(new ImageTemplate(imageLocation));
+		unique_ptr<Template> tmpl(new Template(imageLocation));
 		templates.push_back(move(tmpl));
 		ImageObject();
 	}

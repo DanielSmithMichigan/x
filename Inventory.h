@@ -2,7 +2,7 @@
 #define inventory_h
 	#include "Dialog.h"
 	#include "Scene.h"
-	#include "ThresholdTemplate.h"
+	#include "Template.h"
 	#include "utilities.h"
 	#define INVENTORY_ROWS 7
 	#define INVENTORY_COLS 4

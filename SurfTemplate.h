@@ -1,10 +1,10 @@
 #ifndef surftemplate_h
 #define surftemplate_h
-	#include "ImageTemplate.h"
+	#include "Template.h"
 	
 	using namespace std;
 
-	class SurfTemplate : public ImageTemplate {
+	class SurfTemplate : public Template {
 		private:
 		    cv::Point performMatch(cv::Mat &imageIn);
 		    cv::Ptr<cv::xfeatures2d::SURF> surf;
