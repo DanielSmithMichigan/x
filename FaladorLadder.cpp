@@ -3,7 +3,7 @@
 	#include "FaladorLadder.h"
 
 	FaladorLadder::FaladorLadder() {
-		minGuessDistance = 10;
+		minGuessDistance = 50;
 	    unique_ptr<Scene> scene(new Scene());
 		dialog.reset(new Dialog());
 	    ladderRange.reset(new RangeFilter());
@@ -20,10 +20,10 @@
 	    ladderStructureRange.reset(new RangeFilter());
 	    ladderStructureRange->lowHue = 13;
 	    ladderStructureRange->highHue = 17;
-	    ladderStructureRange->lowSaturation = 130;
-	    ladderStructureRange->highSaturation = 135;
-	    ladderStructureRange->lowValue = 0;
-	    ladderStructureRange->highValue = 255;
+	    ladderStructureRange->lowSaturation = 120;
+	    ladderStructureRange->highSaturation = 140;
+	    ladderStructureRange->lowValue = 105;
+	    ladderStructureRange->highValue = 138;
 
 	    ladderStructureErode.reset(new ErodeFilter());
 	    ladderStructureErode->kernelSize = 1;

@@ -16,6 +16,7 @@
 			unique_ptr<RangeFilter> matRange;
 			unique_ptr<ErodeFilter> matErode;
 			unique_ptr<ErodeFilter> matDilate;
+			unique_ptr<RangeFilter> matTwoRange;
 			unique_ptr<Dialog> dialog;
 			int minGuessDistance;
 		public:

@@ -3,14 +3,16 @@
 	#include "MiningGuildLadder.h"
 
 	MiningGuildLadder::MiningGuildLadder() {
-		minGuessDistance = 10;
+		minGuessDistance = 50;
 	    unique_ptr<Scene> scene(new Scene());
 		dialog.reset(new Dialog());
 	    ladderRange.reset(new RangeFilter());
-	    ladderRange->lowHue = 13;
-	    ladderRange->highHue = 13;
-	    ladderRange->lowSaturation = 63;
-	    ladderRange->highSaturation = 65;
+	    ladderRange->lowHue = 18;
+	    ladderRange->highHue = 24;
+	    ladderRange->lowSaturation = 51;
+	    ladderRange->highSaturation = 68;
+        ladderRange->lowValue = 64;
+        ladderRange->highValue = 104;
 
 	    ladderErode.reset(new ErodeFilter());
 	    ladderErode->kernelSize = 1;

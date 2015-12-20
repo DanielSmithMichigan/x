@@ -63,6 +63,7 @@ int main(int argc, char** argv )
     strings.push_back("Youswing");
     strings.push_back("Clim");
     strings.push_back("Climb");
+    strings.push_back("Bank");
 
     // Create a SimString database with two person names.
     simstring::ngram_generator gen(strings.size(), false);
@@ -83,23 +84,23 @@ int main(int argc, char** argv )
     unique_ptr<MiningGuildLadder> miningGuildLadder(new MiningGuildLadder());
     unique_ptr<Map> interfaceMap(new Map());
     interfaceMap->initialize();
-    interfaceMap->goTo("MINING_GUILD_1");
-    interfaceMap->goTo("MINING_GUILD_LADDER");
-    while(!miningGuildLadder->use()) {
-        cv::waitKey(50);
-    }
-    cv::waitKey(500);
-    while(!faladorLadder->use()) {
-        cv::waitKey(50);
-    }
-    cv::waitKey(500);
-    while(!miningGuildLadder->use()) {
-        cv::waitKey(50);
-    }
-    cv::waitKey(500);
+    // interfaceMap->goTo("MINING_GUILD_1");
+    // interfaceMap->goTo("MINING_GUILD_LADDER");
+    // while(!miningGuildLadder->use()) {
+    //     nsleep(50);
+    // }
+    // nsleep(500);
+    // while(!faladorLadder->use()) {
+    //     nsleep(50);
+    // }
+    // nsleep(500);
+    // while(!miningGuildLadder->use()) {
+    //     nsleep(50);
+    // }
+    nsleep(500);
     interfaceMap->goTo("FALADOR_BANK");
     while(!bank->use()) {
-        cv::waitKey(50);
+        nsleep(50);
     }
 
     // interfaceMap->goTo("MINING_GUILD_LADDER");

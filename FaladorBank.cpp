@@ -3,14 +3,14 @@
 	#include "FaladorBank.h"
 
 	FaladorBank::FaladorBank() {
-		minGuessDistance = 10;
+		minGuessDistance = 50;
 	    unique_ptr<Scene> scene(new Scene());
 		dialog.reset(new Dialog());
 	    noteRange.reset(new RangeFilter());
-	    noteRange->lowHue = 13;
-	    noteRange->highHue = 13;
-	    noteRange->lowSaturation = 63;
-	    noteRange->highSaturation = 65;
+	    noteRange->lowHue = 10;
+	    noteRange->highHue = 15;
+	    // noteRange->lowSaturation = 63;
+	    noteRange->highSaturation = 100;
 
 	    noteErode.reset(new ErodeFilter());
 	    noteErode->kernelSize = 1;
@@ -30,12 +30,12 @@
 	    bankFloorDilate->mode = "DILATE";
 
 	    matRange.reset(new RangeFilter());
-	    matRange->lowHue = 29;
+	    matRange->lowHue = 25;
 	    matRange->highHue = 33;
 	    matRange->lowSaturation = 19;
 	    matRange->highSaturation = 25;
-	    matRange->lowValue = 201;
-	    matRange->highValue = 203;
+	    matRange->lowValue = 180;
+	    matRange->highValue = 223;
 
 	    matErode.reset(new ErodeFilter());
 	    matErode->kernelSize = 1;
@@ -43,6 +43,14 @@
 	    matDilate.reset(new ErodeFilter());
 	    matDilate->kernelSize = 50;
 	    matDilate->mode = "DILATE";
+
+	    matTwoRange.reset(new RangeFilter());
+	    matTwoRange->lowHue = 0;
+	    matTwoRange->highHue = 180;
+	    matTwoRange->lowSaturation = 0;
+	    matTwoRange->highSaturation = 2;
+	    matTwoRange->lowValue = 250;
+	    matTwoRange->highValue = 255;
 	}
 
 	FaladorBank::~FaladorBank() {
@@ -68,8 +76,14 @@
         mat = matRange->apply(mat);
         mat = matErode->apply(mat);
         mat = matDilate->apply(mat);
-        scene->redraw();
         cv::bitwise_and(note, mat, note);
+        scene->redraw();
+        mat = scene->getSceneImage();
+        mat = matTwoRange->apply(mat);
+        mat = matErode->apply(mat);
+        mat = matDilate->apply(mat);
+        cv::bitwise_and(note, mat, note);
+        scene->redraw();
         double minVal, maxVal; 
         cv::Point minLoc, maxLoc;
         while(true) {

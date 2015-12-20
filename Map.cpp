@@ -100,8 +100,9 @@
 			if (locate()) {
 				approachPosition(l);
 			}
-			cv::waitKey(1500);
+			nsleep(1500);
 		}
+		nsleep(500);
 	}
 
 #endif
