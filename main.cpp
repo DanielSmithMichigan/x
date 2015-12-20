@@ -4,6 +4,8 @@
 #include "Scene.h"
 #include "Map.h"
 #include "FaladorLadder.h"
+#include "FaladorBank.h"
+#include "MiningGuildLadder.h"
 #define ZOOM_IN_KEY 65369
 #define ZOOM_OUT_KEY 65397
 #define VIEW_UP_KEY 65391
@@ -76,14 +78,29 @@ int main(int argc, char** argv )
     Scene *scene = new Scene();
     scene->getScreen();
 
-    unique_ptr<FaladorLadder> ladder(new FaladorLadder());
+    unique_ptr<FaladorLadder> faladorLadder(new FaladorLadder());
+    unique_ptr<FaladorBank> bank(new FaladorBank());
+    unique_ptr<MiningGuildLadder> miningGuildLadder(new MiningGuildLadder());
     unique_ptr<Map> interfaceMap(new Map());
     interfaceMap->initialize();
-    interfaceMap->goTo("FALADOR_LADDER");
-    while(!ladder->use()) {
+    interfaceMap->goTo("MINING_GUILD_1");
+    interfaceMap->goTo("MINING_GUILD_LADDER");
+    while(!miningGuildLadder->use()) {
         cv::waitKey(50);
     }
     cv::waitKey(500);
+    while(!faladorLadder->use()) {
+        cv::waitKey(50);
+    }
+    cv::waitKey(500);
+    while(!miningGuildLadder->use()) {
+        cv::waitKey(50);
+    }
+    cv::waitKey(500);
+    interfaceMap->goTo("FALADOR_BANK");
+    while(!bank->use()) {
+        cv::waitKey(50);
+    }
 
     // interfaceMap->goTo("MINING_GUILD_LADDER");
     // cout << "PLANE: " << interfaceMap->currentPlane << endl;
