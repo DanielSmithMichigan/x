@@ -6,10 +6,11 @@
 		private:
         	unique_ptr<Dialog> dialog;
         	unique_ptr<Inventory> inventory;
-        	vector<unique_ptr<ImageObject>> imageObjects;
+        	vector<unique_ptr<ImageObject>> rocks;
+			unique_ptr<Scene> scene;
 			void waitForOre(int startingAmount, int retries = 20);
 		public:
-			void Minesite::mine();
+			void mine();
 			Minesite();
 			~Minesite();
 	};

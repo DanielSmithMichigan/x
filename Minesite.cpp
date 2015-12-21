@@ -3,6 +3,7 @@
 	#include "Minesite.h"
 
 	Minesite::Minesite() {
+        scene.reset(new Scene());
         inventory.reset(new Inventory());
         dialog.reset(new Dialog());
         vector<unique_ptr<ImageObject>>().swap(rocks);
@@ -44,7 +45,7 @@
             }
             inventory->initialize();
             random_shuffle(rocks.begin(), rocks.end());
-            for(std::vector<ImageObject*>::iterator iter = rocks.begin(); iter != rocks.end(); ++iter) {
+            for(vector<unique_ptr<ImageObject>>::iterator iter = rocks.begin(); iter != rocks.end(); ++iter) {
                 if ((*iter)->initialize()) {
                     (*iter)->clickOn(RIGHT_CLICK);
                     nsleep(5);

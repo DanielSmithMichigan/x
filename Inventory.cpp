@@ -9,6 +9,7 @@
 	int Inventory::cellHeight = 26;
 	int Inventory::cellMarginX = 10;
 	int Inventory::cellMarginY = 5;
+	int Inventory::numItems = 5;
 	unique_ptr<Object> Inventory::items[INVENTORY_COLS][INVENTORY_ROWS] = {};
 	bool Inventory::slotEmpty[INVENTORY_COLS][INVENTORY_ROWS] = {};
 	bool Inventory::full = false;
@@ -67,7 +68,7 @@
 					cout << "Slot empty. Continuing" << endl;
 					continue;
 				}
-				items[x][y]->clickOn(RIGHT_CLICK);
+				items[i][j]->clickOn(RIGHT_CLICK);
 				unique_ptr<Dialog> dialog(new Dialog());
 				if (dialog->initialize()) {
 					if (!dialog->match("Deposit-All")) {

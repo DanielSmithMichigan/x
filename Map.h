@@ -4,6 +4,7 @@
 	#include "SurfTemplate.h"
 	#define MAP_WIDTH 103
 	#define MAP_HEIGHT 103
+	#define MAP_COORD_OFFSET 6
 
 	using namespace std;
 
