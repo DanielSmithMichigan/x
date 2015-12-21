@@ -26,8 +26,10 @@
 			static void initialize();
 			static void dropItem(int x, int y);
 			static void dropAllItems();
+			static void bankAllItems();
 			static cv::Mat imageFromSlot(int x, int y);
 			static void markEmptyCells();
+			static int numItems;
 			static bool full;
 	};
 #endif

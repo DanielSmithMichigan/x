@@ -3,9 +3,6 @@
 	#include "Map.h"
 
 	Map::Map() {
-	}
-
-	void Map::initialize() {
 		vector<plane>().swap(planes);
 		struct plane minersGuild("MINERS_GUILD", "../images/MinersGuild.png");
 		planes.push_back(minersGuild);
@@ -50,6 +47,15 @@
 	            throw(error);
 	        }
 	    }
+	}
+
+	void Map::initialize() {
+		while(true) {
+			if (locate()) {
+				break;
+			}
+			nsleep(500);
+		}
 	    Object::initialize();
 	}
 

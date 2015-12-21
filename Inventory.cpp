@@ -18,6 +18,7 @@
 	}
 
 	void Inventory::initialize() {
+		scene->redraw();
 		unique_ptr<ImageObject> topOfInventory(new ImageObject("../images/TopOfInventory.png"));
 		topOfInventory->initialize();
 		for (int i = 0; i < INVENTORY_COLS; i++) {
@@ -57,16 +58,41 @@
 		}
 	}
 
+	void Inventory::bankAllItems() {
+		markEmptyCells();
+		for (int i = 0; i < INVENTORY_COLS; i++) {
+			for (int j = 0; j < INVENTORY_ROWS; j++) {
+				cout << "Attempting slot (x: " << i << ", y: " << j << ")" << endl;
+				if (slotEmpty[i][j]) {
+					cout << "Slot empty. Continuing" << endl;
+					continue;
+				}
+				items[x][y]->clickOn(RIGHT_CLICK);
+				unique_ptr<Dialog> dialog(new Dialog());
+				if (dialog->initialize()) {
+					if (!dialog->match("Deposit-All")) {
+						dialog->select("Deposit-All");
+					} else {
+						dialog->select("Cancel");
+					}
+				}
+				nsleep(200);
+			}
+		}
+	}
+
+
 	void Inventory::markEmptyCells() {
+		numItems = 0;
 		full = true;
 		cv::Mat emptySlotImage = cv::imread("../images/EmptySlot.png");
 		for (int i = 0; i < INVENTORY_COLS; i++) {
 			for (int j = 0; j < INVENTORY_ROWS; j++) {
 				slotEmpty[i][j] = imagesEqual(imageFromSlot(i, j), emptySlotImage);
-				if (slotEmpty[i][j]) {
-					items[i][j]->draw();
+				if (!slotEmpty[i][j]) {
+					numItems++;
+					full = false;
 				}
-				full = !slotEmpty[i][j] && full;
 			}
 		}
 	}
