@@ -12,7 +12,7 @@
 
 	ImageObject::ImageObject(string imageLocation)
 	{
-		unique_ptr<ImageTemplate> tmpl(new ImageTemplate(imageLocation));
+		unique_ptr<Template> tmpl(new Template(imageLocation));
 		templates.push_back(move(tmpl));
 		ImageObject();
 	}
@@ -34,7 +34,7 @@
 		bool found = false;
 		for(std::vector<unique_ptr<Template>>::iterator iter = templates.begin(); iter != templates.end(); ++iter) {
 			if (!found &&
-				(*iter)->match()) {
+				(*iter)->match(scene->getSceneImage())) {
 				height = (*iter)->height;
 				width = (*iter)->width;
 				topLeft = (*iter)->topLeft;

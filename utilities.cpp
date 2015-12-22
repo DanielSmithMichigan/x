@@ -10,27 +10,29 @@
     }
 
     int randomBetween(int min, int max) {
-        int randNum = rand()%(max-min + 1) + min;
+        return rand()%(max-min + 1) + min;
     }
 
     void nsleep(long milliseconds)
     {
-       milliseconds += randomBetween(0, milliseconds * .5);
-       cout << "Sleep time: " << milliseconds << endl;
-       struct timespec req, rem;
+        milliseconds += randomBetween(0, milliseconds * .5);
+        if (milliseconds > 1500) {
+            cout << "Sleeping for: " << milliseconds << endl;
+        }
+        struct timespec req, rem;
 
-       if(milliseconds > 999)
-       {   
+        if(milliseconds > 999)
+        {   
             req.tv_sec = (int)(milliseconds / 1000);                            /* Must be Non-Negative */
             req.tv_nsec = (milliseconds - ((long)req.tv_sec * 1000)) * 1000000; /* Must be in range of 0 to 999999999 */
-       }   
-       else
-       {   
+        }   
+        else
+        {   
             req.tv_sec = 0;                         /* Must be Non-Negative */
             req.tv_nsec = milliseconds * 1000000;    /* Must be in range of 0 to 999999999 */
-       }   
+        }   
 
-       nanosleep(&req , &rem);
+        nanosleep(&req , &rem);
     }
 
     bool chance(int n) {
@@ -64,6 +66,54 @@
         }
 
         closedir(dirObj);
+    }
+
+    double getRotationFromPoints(double x1, double y1, double x2, double y2) {
+        double width = x2 - x1;
+        double height = y2 - y1;
+        double h = hypotenuse(width, height);
+        return cosineLaw(height, width, h);
+    }
+
+    double getScalingFromPoints(double x1, double y1, double x2, double y2, double origWidth) {
+        double width = x2 - x1;
+        double height = y2 - y1;
+        double h = hypotenuse(width, height);
+        return h / origWidth;
+    }
+
+    double hypotenuse(double a, double b) {
+        return sqrt(a * a + b * b);
+    }
+
+    double distanceBetween(double x1, double y1, double x2, double y2) {
+        return hypotenuse(x2 - x1, y2 - y1);
+    }
+
+    double findAngle(double x1, double y1, double x2, double y2, double x3, double y3) {
+        double d = abs(y2 - y1);
+        double e = abs(x2 - x1);
+        double f = abs(x3 - x2);
+        double g = abs(y3 - y2);
+        double a = hypotenuse(d, e);
+        double b = hypotenuse(f, g);
+        double h = abs(x3 - x1);
+        double i = abs(y3 - y1);
+        double c = hypotenuse(h, i);
+        return cosineLaw(c, a, b);
+    }
+
+    double cosineLaw(double b, double a, double c) {
+        double numerator = a * a - b * b + c * c;
+        double denominator = 2 * a * c;
+        return acos(numerator / denominator);
+    }
+
+    void writeToFile(double text, string filename) {
+        std::ofstream outfile;
+        outfile.open(filename, ios_base::app);
+        outfile << text; 
+        outfile << "\n";
     }
 
 #endif

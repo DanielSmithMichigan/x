@@ -7,6 +7,8 @@
 	#include <opencv2/highgui/highgui.hpp>
 	#include <opencv2/features2d.hpp>
 	#include <opencv2/text.hpp>
+    #include <opencv2/xfeatures2d/nonfree.hpp>
+	#include <opencv2/calib3d/calib3d.hpp>
 	#include <X11/Xlib.h>
 	#include <X11/Xutil.h>
 	#include <unistd.h>

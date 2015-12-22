@@ -2,7 +2,7 @@
 #define inventory_h
 	#include "Dialog.h"
 	#include "Scene.h"
-	#include "ThresholdTemplate.h"
+	#include "Template.h"
 	#include "utilities.h"
 	#define INVENTORY_ROWS 7
 	#define INVENTORY_COLS 4
@@ -26,8 +26,10 @@
 			static void initialize();
 			static void dropItem(int x, int y);
 			static void dropAllItems();
+			static void bankAllItems();
 			static cv::Mat imageFromSlot(int x, int y);
 			static void markEmptyCells();
+			static int numItems;
 			static bool full;
 	};
 #endif

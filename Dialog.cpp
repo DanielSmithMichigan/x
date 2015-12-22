@@ -1,5 +1,5 @@
-#ifndef DropButton_cpp
-#define DropButton_cpp
+#ifndef Dialog_cpp
+#define Dialog_cpp
 	#include "Dialog.h"
 
 	Dialog::Dialog() {
@@ -16,7 +16,7 @@
 	{
 		scene->redraw();
 		unique_ptr<ImageObject> topOfDialog(new ImageObject());
-		unique_ptr<ImageTemplate> chooseOption(new ImageTemplate("../images/ChooseOption.png"));
+		unique_ptr<Template> chooseOption(new Template("../images/ChooseOption.png"));
 		chooseOption->retries = 4;
 		chooseOption->logFailure = true;
 		topOfDialog->addTemplate(move(chooseOption));
@@ -24,7 +24,7 @@
 			return false;
 		}
 		unique_ptr<ImageObject> bottomOfDialog (new ImageObject());
-		unique_ptr<ImageTemplate> bottomCorner (new ImageTemplate("../images/BottomCorner.png"));
+		unique_ptr<Template> bottomCorner (new Template("../images/BottomCorner.png"));
 		bottomCorner->retries = 4;
 		bottomCorner->logFailure = true;
 		bottomOfDialog->addTemplate(move(bottomCorner));

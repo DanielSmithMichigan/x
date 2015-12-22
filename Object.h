@@ -3,6 +3,7 @@
 	#include "Scene.h"
 	#include "imageUtilities.h"
 	#include "interface.h"
+	#include <map>
 
 	using namespace std;
 
@@ -15,6 +16,7 @@
 			void initialize();
 			void draw(const cv::Scalar &borderColor = CV_RGB(255, 0, 0), int borderWidth = 3);
 			void clickOn(int button=1);
+			cv::Mat getImage();
 			int width;
 			int height;
 			int clickMarginHeight;

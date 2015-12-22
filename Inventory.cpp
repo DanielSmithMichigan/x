@@ -9,6 +9,7 @@
 	int Inventory::cellHeight = 26;
 	int Inventory::cellMarginX = 10;
 	int Inventory::cellMarginY = 5;
+	int Inventory::numItems = 5;
 	unique_ptr<Object> Inventory::items[INVENTORY_COLS][INVENTORY_ROWS] = {};
 	bool Inventory::slotEmpty[INVENTORY_COLS][INVENTORY_ROWS] = {};
 	bool Inventory::full = false;
@@ -18,6 +19,7 @@
 	}
 
 	void Inventory::initialize() {
+		scene->redraw();
 		unique_ptr<ImageObject> topOfInventory(new ImageObject("../images/TopOfInventory.png"));
 		topOfInventory->initialize();
 		for (int i = 0; i < INVENTORY_COLS; i++) {
@@ -51,9 +53,7 @@
 		markEmptyCells();
 		for (int i = 0; i < INVENTORY_COLS; i++) {
 			for (int j = 0; j < INVENTORY_ROWS; j++) {
-				cout << "Attempting slot (x: " << i << ", y: " << j << ")" << endl;
 				if (slotEmpty[i][j]) {
-					cout << "Slot empty. Continuing" << endl;
 					continue;
 				}
 				dropItem(i, j);
@@ -62,16 +62,46 @@
 		}
 	}
 
+	void Inventory::bankAllItems() {
+		markEmptyCells();
+		for (int i = 0; i < INVENTORY_COLS; i++) {
+			for (int j = 0; j < INVENTORY_ROWS; j++) {
+				if (slotEmpty[i][j]) {
+					continue;
+				}
+				items[i][j]->clickOn(RIGHT_CLICK);
+				unique_ptr<Dialog> dialog(new Dialog());
+				if (dialog->initialize()) {
+					if (dialog->match("Deposit-All")) {
+						dialog->select("Deposit-All");
+						nsleep(100);
+						markEmptyCells();
+					} else if (dialog->match("OepositAll")) {
+						dialog->select("OepositAll");
+						nsleep(100);
+						markEmptyCells();
+					} else {
+						dialog->select("Cancel");
+					}
+				}
+				nsleep(200);
+			}
+		}
+	}
+
+
 	void Inventory::markEmptyCells() {
+		numItems = 0;
 		full = true;
 		cv::Mat emptySlotImage = cv::imread("../images/EmptySlot.png");
 		for (int i = 0; i < INVENTORY_COLS; i++) {
 			for (int j = 0; j < INVENTORY_ROWS; j++) {
 				slotEmpty[i][j] = imagesEqual(imageFromSlot(i, j), emptySlotImage);
 				if (slotEmpty[i][j]) {
-					items[i][j]->draw();
+					full = false;
+				} else {
+					numItems++;
 				}
-				full = !slotEmpty[i][j] && full;
 			}
 		}
 	}
