@@ -4,7 +4,7 @@
 	#include "SurfTemplate.h"
 	#define MAP_WIDTH 103
 	#define MAP_HEIGHT 103
-	#define MAP_COORD_OFFSET 6
+	#define MAP_COORD_OFFSET 0
 
 	using namespace std;
 
@@ -31,7 +31,7 @@
 			Map();
 			void initialize();
 			bool locate();
-			bool goTo(string l);
+			bool goTo(string l, int maxDistance = 25);
 			string currentPlane;
 			int x;
 			int y;

@@ -34,10 +34,8 @@
 
 	    unique_ptr<ImageObject> worldMap (new ImageObject("../images/WorldMap.png"));
 	    if (worldMap->initialize()) {
-	    	cout << "Found using world map" << endl;
 	        topLeft = cv::Point(worldMap->topLeft.x - 118, worldMap->topLeft.y - 118);
 	    } else {
-	    	cout << "Could not initialize using world map" << endl;
 	        unique_ptr<ImageObject> helpButton (new ImageObject("../images/HelpButton.png"));
 	        if (helpButton->initialize()) {
 	            topLeft = cv::Point(worldMap->topLeft.x - 118, worldMap->topLeft.y + 32);
@@ -50,24 +48,26 @@
 	}
 
 	void Map::initialize() {
+	    Object::initialize();
 		while(true) {
 			if (locate()) {
 				break;
 			}
 			nsleep(500);
 		}
-	    Object::initialize();
 	}
 
 	bool Map::locate() {
-		cout << "Attempting to find plane" << endl;
 		unique_ptr<SurfTemplate> currentMap(new SurfTemplate(getImage()));
 		for(vector<plane>::iterator iter = planes.begin(); iter != planes.end(); ++iter) {
+			cout << "Testing: " << (*iter).name << endl;
 			if (currentMap->match((*iter).image)) {
 				currentPlane = (*iter).name;
 				x = currentMap->topLeft.x + (width / 2);
 				y = currentMap->topLeft.y + (height / 2);
-				cout << "Plane is: " << (*iter).name << endl;
+				cout << "Plane is: " << (*iter).name 
+				     << " X: " << x << " Y: " << y
+					 << endl;
 				return true;
 			}
 		}
@@ -95,24 +95,39 @@
 		click(LEFT_CLICK);
 	}
 
-	bool Map::goTo(string l) {
+	bool Map::goTo(string l, int maxDistance) {
 		if (!locations.count(l)) {
 			string error = "Could not find location: " + l;
 			cout << error << endl;
 			throw(error);
 		}
+		while (true) {
+			if (locate()) {
+				break;
+			}
+			nsleep(500);
+		}
 		location loc = locations[l];
 	    while (loc.plane != currentPlane) {
-	        locate();
+	    	cout << "Current plane: " << currentPlane << endl
+	    	     << "Target plane: " << loc.plane << endl;
+	    	bool result = locate();
+	        cout << "Locate result: " << result << endl;
 	        nsleep(500);
 	    }
-		while(distanceBetween(x, y, loc.x, loc.y) > 25) {
-			if (locate()) {
-				approachPosition(l);
+	    double dist = distanceBetween(x, y, loc.x, loc.y);
+	    cout << "Distance: " << dist << endl;
+	    if (dist > maxDistance) {
+			while(dist > maxDistance) {
+				if (locate()) {
+					approachPosition(l);
+				}
+				nsleep(1500);
+			    dist = distanceBetween(x, y, loc.x, loc.y);
+			    cout << "Distance: " << dist << endl;
 			}
-			nsleep(1500);
+			nsleep(2500);
 		}
-		nsleep(500);
 		return true;
 	}
 

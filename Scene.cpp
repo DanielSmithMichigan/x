@@ -8,7 +8,6 @@
 	}
 
 	void Scene::redraw() {
-		cout << "Redrawing scene" << endl;
 		getScreen();
 	}
 

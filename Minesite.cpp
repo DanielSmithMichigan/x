@@ -3,6 +3,8 @@
 	#include "Minesite.h"
 
 	Minesite::Minesite() {
+        interfaceMap.reset(new Map());
+        interfaceMap->initialize();
         scene.reset(new Scene());
         inventory.reset(new Inventory());
         dialog.reset(new Dialog());
@@ -35,7 +37,7 @@
 	Minesite::~Minesite() {
 	}
 
-    void Minesite::mine() {
+    void Minesite::mine(string miningLocation) {
         while(!inventory->full) {
             if (chance(1000)) {
                 nsleep(1000 * 60);
@@ -57,12 +59,14 @@
                             scene->redraw();
                             inventory->markEmptyCells();
                             waitForOre(inventory->numItems);
+                            interfaceMap->goTo(miningLocation, 45);
                             break;
                         } else{
                             dialog->select("Cancel");
                         }
                     }
                 }
+                scene->redraw();
             }
 
             nsleep(100);
@@ -70,10 +74,11 @@
     }
 
     void Minesite::waitForOre(int startingAmount, int retries) {
+        cout << "Retries: " << retries << endl;
         if (retries <= 0) {
             return;
         }
-        if (inventory->numItems <= startingAmount) {
+        if (inventory->numItems > startingAmount) {
             return;
         }
         nsleep(1000);

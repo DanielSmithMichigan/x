@@ -34,6 +34,7 @@ int main(int argc, char** argv )
     strings.push_back("Climb");
     strings.push_back("Bank");
     strings.push_back("Deposit-All");
+    strings.push_back("OepositAll");
 
     // Create a SimString database with two person names.
     simstring::ngram_generator gen(strings.size(), false);
@@ -66,9 +67,10 @@ int main(int argc, char** argv )
         }
     }
     compass->initialize();
-    compass->clickOn();
-    keypress(ZOOM_OUT_KEY, 3000);
-    keypress(VIEW_UP_KEY, 3000);
+    // compass->clickOn();
+    // nsleep(5);
+    // keypress(ZOOM_OUT_KEY, 3000);
+    // keypress(VIEW_UP_KEY, 3000);
 
     unique_ptr<Inventory> inventory(new Inventory());
     unique_ptr<FaladorLadder> faladorLadder(new FaladorLadder());
@@ -82,6 +84,7 @@ int main(int argc, char** argv )
         inventory->initialize();
 
         if (inventory->full) {
+            cout << "INVENTORY IS FULL" << endl;
             if (interfaceMap->currentPlane == "FALADOR") {
                 while (true) {
                     if (interfaceMap->goTo("FALADOR_BANK")) {
@@ -132,7 +135,7 @@ int main(int argc, char** argv )
                         break;
                     }
                 }
-                minesite->mine();
+                minesite->mine("MINING_GUILD_1");
             }
 
         }

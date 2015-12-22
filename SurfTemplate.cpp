@@ -5,11 +5,11 @@
 	// using namespace cv::xfeatures2d;
 
 	SurfTemplate::SurfTemplate(cv::Mat imgObj) : Template(imgObj) {
-		distance = .4;
-		minHessian = 20;
+		distance = .5;
+		minHessian = 10;
 		maxScaling = .15;
 		maxRotation = .05;
-		maxAngleTolerance = .12;
+		maxAngleTolerance = .15;
 		retries = 0;
 		surf = cv::xfeatures2d::SURF::create(minHessian);
 	}
@@ -45,6 +45,7 @@
 		try {
 			H = cv::findHomography( objPoints, scenePoints, CV_RANSAC );
 		} catch(cv::Exception) {
+			cout << "Can't find homography" << endl;
 			return cv::Point(-1, -1);
 		}
 
@@ -57,6 +58,7 @@
 		try {
 			perspectiveTransform( objCorners, sceneCorners, H);
 		} catch(cv::Exception) {
+			cout << "Can't transform" << endl;
 			return cv::Point(-1, -1);
 		}
 		
@@ -75,21 +77,32 @@
 			                      sceneCorners[0].x, sceneCorners[0].y,
 			                      sceneCorners[1].x, sceneCorners[1].y);
 		if (abs(angle1 - M_PI / 2) > maxAngleTolerance) {
+			cout << "Angle tolerance" << endl
+			     << "Angle: " << abs(angle1 - M_PI / 2) << endl;
 			return cv::Point(-1, -1);
 		}
 		if (abs(angle2 - M_PI / 2) > maxAngleTolerance) {
+			cout << "Angle tolerance" << endl
+			     << "Angle: " << abs(angle2 - M_PI / 2) << endl;
 			return cv::Point(-1, -1);
 		}
 		if (abs(angle3 - M_PI / 2) > maxAngleTolerance) {
+			cout << "Angle tolerance" << endl
+			     << "Angle: " << abs(angle3 - M_PI / 2) << endl;
 			return cv::Point(-1, -1);
 		}
 		if (abs(angle4 - M_PI / 2) > maxAngleTolerance) {
+			cout << "Angle tolerance" << endl
+			     << "Angle: " << abs(angle4 - M_PI / 2) << endl;
 			return cv::Point(-1, -1);
 		}
 		if (abs(1 - scaling) > maxScaling) {
+			cout << "Scaling tolerance" << endl;
 			return cv::Point(-1, -1);
 		}
 		if (abs(rotation) > maxAngleTolerance) {
+			cout << "Angle tolerance" << endl
+			     << "Angle: " << abs(rotation) << endl;
 			return cv::Point(-1, -1);
 		}
 		topLeft = sceneCorners[0];
