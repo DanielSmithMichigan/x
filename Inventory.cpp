@@ -80,6 +80,10 @@
 						dialog->select("OepositAll");
 						nsleep(100);
 						markEmptyCells();
+					} else if (dialog->match("Oeposit")) {
+						dialog->select("Oeposit");
+						nsleep(100);
+						markEmptyCells();
 					} else {
 						dialog->select("Cancel");
 					}

@@ -36,6 +36,7 @@ int main(int argc, char** argv )
     strings.push_back("Bank");
     strings.push_back("Deposit-All");
     strings.push_back("OepositAll");
+    strings.push_back("Oeposit");
 
     // Create a SimString database with two person names.
     simstring::ngram_generator gen(strings.size(), false);
@@ -79,8 +80,7 @@ int main(int argc, char** argv )
     unique_ptr<MiningGuildLadder> miningGuildLadder(new MiningGuildLadder());
     unique_ptr<Map> interfaceMap(new Map());
     unique_ptr<Minesite> minesite(new Minesite());
-    int x = 5;
-    while (x-- > 0) {
+    while (true) {
         interfaceMap->initialize();
         inventory->initialize();
 
@@ -88,7 +88,7 @@ int main(int argc, char** argv )
             cout << "INVENTORY IS FULL" << endl;
             if (interfaceMap->currentPlane == "FALADOR") {
                 while (true) {
-                    if (interfaceMap->goTo("FALADOR_BANK")) {
+                    if (interfaceMap->goTo("FALADOR_BANK", 10)) {
                         break;
                     }
                 }

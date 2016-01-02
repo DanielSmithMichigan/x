@@ -25,7 +25,7 @@
 		locations["FALADOR_LADDER"] = faladorLadder;
 		struct location faladorBank;
 		faladorBank.x = 100;
-		faladorBank.y = 116;
+		faladorBank.y = 123;
 		faladorBank.plane = "FALADOR";
 		locations["FALADOR_BANK"] = faladorBank;
 
