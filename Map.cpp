@@ -38,7 +38,7 @@
 	    } else {
 	        unique_ptr<ImageObject> helpButton (new ImageObject("../images/HelpButton.png"));
 	        if (helpButton->initialize()) {
-	            topLeft = cv::Point(worldMap->topLeft.x - 118, worldMap->topLeft.y + 32);
+	            topLeft = cv::Point(helpButton->topLeft.x - 118, helpButton->topLeft.y + 32);
 	        } else {
 	            string error = "Could not locate map";
 	            cout << error << endl;

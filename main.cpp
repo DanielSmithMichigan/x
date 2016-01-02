@@ -7,6 +7,9 @@
 #include "FaladorBank.h"
 #include "MiningGuildLadder.h"
 #include "Minesite.h"
+#include "WindowFilter.h"
+#include "CornerFilter.h"
+#include "ErodeFilter.h"
 #define ZOOM_IN_KEY 65369
 #define ZOOM_OUT_KEY 65397
 #define VIEW_UP_KEY 65391
