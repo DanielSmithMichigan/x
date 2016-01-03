@@ -4,7 +4,7 @@
 	#include "ErodeFilter.h"
 	#include "RangeFilter.h"
 	#include "CornerFilter.h"
-	#include "Dialog.h"
+	#include "Select.h"
 
 	class Rock {
 		private:
@@ -17,8 +17,9 @@
 			unique_ptr<RangeFilter> coalRange;
 			unique_ptr<RangeFilter> mithrilRange;
 			unique_ptr<RangeFilter> adamRange;
-			unique_ptr<Dialog> dialog;
-			int minGuessDistance;
+			unique_ptr<Select> select;
+			vector<string> goodDialog;
+			vector<string> badDialog;
 		public:
 			Rock();
 			~Rock();

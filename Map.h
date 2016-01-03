@@ -29,6 +29,7 @@
 			void approachPosition(string l);
 		public:
 			Map();
+			~Map();
 			void initialize();
 			bool locate();
 			bool goTo(string l, int maxDistance = 25);

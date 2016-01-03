@@ -4,8 +4,8 @@
 	#include "ErodeFilter.h"
 	#include "RangeFilter.h"
 	#include "WindowFilter.h"
-	#include "Dialog.h"
 	#include "ImageObject.h"
+	#include "Select.h"
 
 	class FaladorBank {
 		private:
@@ -20,8 +20,9 @@
 			unique_ptr<ErodeFilter> matErode;
 			unique_ptr<ErodeFilter> matDilate;
 			unique_ptr<RangeFilter> matTwoRange;
-			unique_ptr<Dialog> dialog;
-			int minGuessDistance;
+			unique_ptr<Select> select;
+			vector<string> goodDialog;
+			vector<string> badDialog;
 		public:
 			FaladorBank();
 			~FaladorBank();

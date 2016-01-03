@@ -18,6 +18,10 @@
 	Inventory::Inventory() {
 	}
 
+	Inventory::~Inventory() {
+		
+	}
+
 	void Inventory::initialize() {
 		scene->redraw();
 		unique_ptr<ImageObject> topOfInventory(new ImageObject("../images/TopOfInventory.png"));

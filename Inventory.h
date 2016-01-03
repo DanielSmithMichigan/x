@@ -23,6 +23,7 @@
 			static unique_ptr<Scene> scene;
 		public:
 			Inventory();
+			~Inventory();
 			static void initialize();
 			static void dropItem(int x, int y);
 			static void dropAllItems();

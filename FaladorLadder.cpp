@@ -3,9 +3,10 @@
 	#include "FaladorLadder.h"
 
 	FaladorLadder::FaladorLadder() {
-		minGuessDistance = 50;
 	    unique_ptr<Scene> scene(new Scene());
-		dialog.reset(new Dialog());
+		select.reset(new Select());
+		goodDialog.push_back("Climb");
+		goodDialog.push_back("Clim");
 
 		windowFilter.reset(new WindowFilter());
 	    ladderRange.reset(new RangeFilter());
@@ -96,36 +97,11 @@
         cv::bitwise_or(blackness, grayness, blackness);
         cv::bitwise_and(ladder, blackness, ladder);
         ladder = ladderErode->apply(ladder);
-
-        double minVal, maxVal; 
-        cv::Point minLoc, maxLoc;
-        while(true) {
-            minMaxLoc( ladder, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat() );
-            if (maxVal > 100) {
-                glideToPosition(maxLoc.x, maxLoc.y);
-                click(RIGHT_CLICK);
-                dialog->initialize();
-                if (dialog->match("Climb")) {
-                	dialog->select("Climb");
-    				nsleep(5000);
-					glideToPosition(1081, 180);
-					click(LEFT_CLICK);
-					nsleep(1000);
-                	return true;
-                } else if (dialog->match("Clim")) {
-                	dialog->select("Clim");
-    				nsleep(5000);
-					glideToPosition(1081, 180);
-					click(LEFT_CLICK);
-					nsleep(1000);
-                	return true;
-                } else {
-                	dialog->select("Cancel");
-                	cv::circle(ladder, maxLoc, minGuessDistance, CV_RGB(0,0,0), -1);
-                }
-            } else {
-                break;
-            }
+        if (select->selectDialog(ladder, goodDialog, badDialog)) {
+			glideToPosition(1081, 180);
+			click(LEFT_CLICK);
+			nsleep(1000);
+			return true;
         }
         return false;
 	} 

@@ -8,6 +8,8 @@
 		planes.push_back(minersGuild);
 		struct plane falador("FALADOR", "../images/Falador.png");
 		planes.push_back(falador);
+		struct plane minersGuildDungeon("MINERS_GUILD_DUNGEON", "../images/MinersGuildDungeon.png");
+		planes.push_back(minersGuildDungeon);
 		struct location miningGuild1;
 		miningGuild1.x = 175;
 		miningGuild1.y = 136;
@@ -28,6 +30,16 @@
 		faladorBank.y = 123;
 		faladorBank.plane = "FALADOR";
 		locations["FALADOR_BANK"] = faladorBank;
+		struct location minersGuildDungeon1;
+		minersGuildDungeon1.x = 198;
+		minersGuildDungeon1.y = 214;
+		minersGuildDungeon1.plane = "MINERS_GUILD_DUNGEON";
+		locations["MINERS_GUILD_DUNGEON_1"] = minersGuildDungeon1;
+		struct location minersGuildDungeonEntrance;
+		minersGuildDungeonEntrance.x = 186;
+		minersGuildDungeonEntrance.y = 182;
+		minersGuildDungeonEntrance.plane = "MINERS_GUILD_DUNGEON";
+		locations["MINERS_GUILD_DUNGEON_ENTRANCE"] = minersGuildDungeonEntrance;
 
 		width = 103;
 		height = 103;
@@ -45,6 +57,10 @@
 	            throw(error);
 	        }
 	    }
+	}
+
+	Map::~Map() {
+
 	}
 
 	void Map::initialize() {

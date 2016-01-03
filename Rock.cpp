@@ -4,9 +4,10 @@
 
 	Rock::Rock() {
 		oreType = "COAL";
-		minGuessDistance = 50;
 	    unique_ptr<Scene> scene(new Scene());
-		dialog.reset(new Dialog());
+		select.reset(new Select());
+		goodDialog.push_back("Mine");
+		badDialog.push_back("MineRocks");
 
 	    rockBaseRange.reset(new RangeFilter());
 	    rockBaseRange->lowHue = 21;
@@ -56,21 +57,6 @@
 
 	bool Rock::use()
 	{
-		cv::Point playerLocation;
-	    unique_ptr<ImageObject> worldMap (new ImageObject("../images/WorldMap.png"));
-	    if (worldMap->initialize()) {
-	        playerLocation = cv::Point(worldMap->topLeft.x - 442, worldMap->topLeft.y + 263);
-	    } else {
-	        unique_ptr<ImageObject> helpButton (new ImageObject("../images/HelpButton.png"));
-	        if (helpButton->initialize()) {
-	            playerLocation = cv::Point(helpButton->topLeft.x - 442, helpButton->topLeft.y + 295);
-	        } else {
-	            string error = "Could not locate map";
-	            cout << error << endl;
-	            throw(error);
-	        }
-	    }
-
 		cv::Mat rockBase, ore;
 
         scene->redraw();
@@ -90,51 +76,6 @@
         }
 
         cv::bitwise_and(ore, rockBase, ore);
-        cv::Point closestLocation;
-        bool found = false;
-        double minDistance = -1;
-        double currDistance = -1;
-        double minVal, maxVal;
-        cv::Point minLoc, maxLoc;
-
-        while(true) {
-        	minMaxLoc(ore, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat());
-        	found = false;
-        	minDistance = -1;
-			for( int x = 0; x < ore.cols ; x++ )
-			{ 
-				for( int y = 0; y < ore.rows; y++ )
-				{
-					if(ore.at<uchar>(y,x) == 255)
-					{
-						currDistance = distanceTo(x, y, playerLocation.x, playerLocation.y);
-						if (minDistance == -1 || currDistance < minDistance) {
-							minDistance = currDistance;
-							closestLocation = cv::Point(x, y);
-							found = true;
-						}
-					}
-				}
-			}
-
-            if (found) {
-                glideToPosition(closestLocation.x, closestLocation.y, 4);
-                click(RIGHT_CLICK);
-                dialog->initialize();
-                if (dialog->match("MineRocks")) {
-                	dialog->select("Cancel");
-                	cv::circle(ore, closestLocation, minGuessDistance, CV_RGB(0,0,0), -1);
-                } else if (dialog->match("Mine")) {
-                	dialog->select("Mine");
-                	return true;
-                } else {
-                	dialog->select("Cancel");
-                	cv::circle(ore, closestLocation, minGuessDistance, CV_RGB(0,0,0), -1);
-                }
-            } else {
-                break;
-            }
-        }
-        return false;
+        return select->selectDialog(ore, goodDialog, badDialog);
 	} 
 #endif

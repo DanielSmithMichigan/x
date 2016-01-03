@@ -3,9 +3,10 @@
 	#include "FaladorBank.h"
 
 	FaladorBank::FaladorBank() {
-		minGuessDistance = 50;
 	    unique_ptr<Scene> scene(new Scene());
-		dialog.reset(new Dialog());
+	    select.reset(new Select());
+	    goodDialog.push_back("Bank");
+
 
 		windowFilter.reset(new WindowFilter());
 	    noteRange.reset(new RangeFilter());
@@ -84,28 +85,7 @@
         mat = matErode->apply(mat);
         mat = matDilate->apply(mat);
         cv::bitwise_and(note, mat, note);
-
-        scene->redraw();
-        double minVal, maxVal; 
-        cv::Point minLoc, maxLoc;
-        while(true) {
-            minMaxLoc( note, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat() );
-            if (maxVal > 100) {
-                glideToPosition(maxLoc.x, maxLoc.y);
-                click(RIGHT_CLICK);
-                dialog->initialize();
-                if (dialog->match("Bank")) {
-                	dialog->select("Bank");
-                	return true;
-                } else {
-                	dialog->select("Cancel");
-                	cv::circle(note, maxLoc, minGuessDistance, CV_RGB(0,0,0), -1);
-                }
-            } else {
-                break;
-            }
-        }
-        return false;
+        return select->selectDialog(note, goodDialog, badDialog);
 	} 
 
 	bool FaladorBank::open() {

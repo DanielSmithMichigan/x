@@ -4,7 +4,7 @@
 	#include "ErodeFilter.h"
 	#include "RangeFilter.h"
 	#include "WindowFilter.h"
-	#include "Dialog.h"
+	#include "Select.h"
 
 	class FaladorLadder {
 		private:
@@ -21,8 +21,9 @@
 			unique_ptr<RangeFilter> graynessRange;
 			unique_ptr<ErodeFilter> graynessErode;
 			unique_ptr<ErodeFilter> graynessDilate;
-			unique_ptr<Dialog> dialog;
-			int minGuessDistance;
+			unique_ptr<Select> select;
+			vector<string> goodDialog;
+			vector<string> badDialog;
 		public:
 			FaladorLadder();
 			~FaladorLadder();

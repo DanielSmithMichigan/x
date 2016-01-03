@@ -3,8 +3,8 @@
 	#include "OcrObject.h"
 	#include "ErodeFilter.h"
 	#include "RangeFilter.h"
-	#include "Dialog.h"
 	#include "WindowFilter.h"
+	#include "Select.h"
 
 	class MiningGuildLadder {
 		private:
@@ -12,8 +12,9 @@
 			unique_ptr<WindowFilter> windowFilter;
 			unique_ptr<RangeFilter> ladderRange;
 			unique_ptr<ErodeFilter> ladderErode;
-			unique_ptr<Dialog> dialog;
-			int minGuessDistance;
+			unique_ptr<Select> select;
+			vector<string> goodDialog;
+			vector<string> badDialog;
 		public:
 			MiningGuildLadder();
 			~MiningGuildLadder();
