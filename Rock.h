@@ -9,7 +9,6 @@
 	class Rock {
 		private:
 			unique_ptr<Scene> scene;
-			unique_ptr<CornerFilter> cornerFilter;
 			unique_ptr<RangeFilter> rockBaseRange;
 			unique_ptr<ErodeFilter> rockBaseErode;
 			unique_ptr<ErodeFilter> rockBaseDilate;

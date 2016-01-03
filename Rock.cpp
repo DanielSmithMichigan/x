@@ -8,8 +8,6 @@
 	    unique_ptr<Scene> scene(new Scene());
 		dialog.reset(new Dialog());
 
-		cornerFilter.reset(new CornerFilter());
-
 	    rockBaseRange.reset(new RangeFilter());
 	    rockBaseRange->lowHue = 21;
 	    rockBaseRange->highHue = 23;
@@ -73,10 +71,7 @@
 	        }
 	    }
 
-		cv::Mat corners, rockBase, ore;
-        scene->redraw();
-        corners = scene->getSceneImage();
-        corners = cornerFilter->apply(corners);
+		cv::Mat rockBase, ore;
 
         scene->redraw();
         rockBase = scene->getSceneImage();
@@ -93,35 +88,37 @@
         } else if (oreType == "ADAM") {
         	ore = adamRange->apply(ore);
         }
-        ore = oreErode->apply(ore);
-        ore = oreDilate->apply(ore);
 
-        cv::bitwise_and(ore, corners, ore);
         cv::bitwise_and(ore, rockBase, ore);
-
         cv::Point closestLocation;
         bool found = false;
         double minDistance = -1;
         double currDistance = -1;
+        double minVal, maxVal;
+        cv::Point minLoc, maxLoc;
+
         while(true) {
+        	minMaxLoc(ore, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat());
         	found = false;
         	minDistance = -1;
 			for( int x = 0; x < ore.cols ; x++ )
 			{ 
 				for( int y = 0; y < ore.rows; y++ )
 				{
-					if( (int) ore.at<float>(y,x) > 100)
+					if(ore.at<uchar>(y,x) == 255)
 					{
 						currDistance = distanceTo(x, y, playerLocation.x, playerLocation.y);
 						if (minDistance == -1 || currDistance < minDistance) {
+							minDistance = currDistance;
 							closestLocation = cv::Point(x, y);
 							found = true;
 						}
 					}
 				}
 			}
+
             if (found) {
-                glideToPosition(closestLocation.x, closestLocation.y);
+                glideToPosition(closestLocation.x, closestLocation.y, 4);
                 click(RIGHT_CLICK);
                 dialog->initialize();
                 if (dialog->match("MineRocks")) {

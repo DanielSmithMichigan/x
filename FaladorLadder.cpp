@@ -6,6 +6,8 @@
 		minGuessDistance = 50;
 	    unique_ptr<Scene> scene(new Scene());
 		dialog.reset(new Dialog());
+
+		windowFilter.reset(new WindowFilter());
 	    ladderRange.reset(new RangeFilter());
 	    ladderRange->lowHue = 18;
 	    ladderRange->highHue = 22;
@@ -68,12 +70,11 @@
 
 	bool FaladorLadder::use()
 	{
-	    cv::Mat ladder;
-	    cv::Mat ladderStructure;
-	    cv::Mat blackness;
-	    cv::Mat grayness;
+	    cv::Mat ladder, ladderStructure, blackness, grayness;
+
         scene->redraw();
         ladder = scene->getSceneImage();
+        ladder = windowFilter->apply(ladder);
         ladder = ladderRange->apply(ladder);
         ladder = ladderErode->apply(ladder);
         scene->redraw();
@@ -95,6 +96,7 @@
         cv::bitwise_or(blackness, grayness, blackness);
         cv::bitwise_and(ladder, blackness, ladder);
         ladder = ladderErode->apply(ladder);
+
         double minVal, maxVal; 
         cv::Point minLoc, maxLoc;
         while(true) {
@@ -106,10 +108,16 @@
                 if (dialog->match("Climb")) {
                 	dialog->select("Climb");
     				nsleep(5000);
+					glideToPosition(1081, 180);
+					click(LEFT_CLICK);
+					nsleep(1000);
                 	return true;
                 } else if (dialog->match("Clim")) {
                 	dialog->select("Clim");
     				nsleep(5000);
+					glideToPosition(1081, 180);
+					click(LEFT_CLICK);
+					nsleep(1000);
                 	return true;
                 } else {
                 	dialog->select("Cancel");

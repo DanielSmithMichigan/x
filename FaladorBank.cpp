@@ -6,10 +6,12 @@
 		minGuessDistance = 50;
 	    unique_ptr<Scene> scene(new Scene());
 		dialog.reset(new Dialog());
+
+		windowFilter.reset(new WindowFilter());
 	    noteRange.reset(new RangeFilter());
+
 	    noteRange->lowHue = 10;
 	    noteRange->highHue = 15;
-	    // noteRange->lowSaturation = 63;
 	    noteRange->highSaturation = 100;
 
 	    noteErode.reset(new ErodeFilter());
@@ -58,11 +60,10 @@
 
 	bool FaladorBank::use()
 	{
-	    cv::Mat note;
-	    cv::Mat bankFloor;
-	    cv::Mat mat;
+	    cv::Mat note, bankFloor, mat;
         scene->redraw();
         note = scene->getSceneImage();
+        note = windowFilter->apply(note);
         note = noteRange->apply(note);
         note = noteErode->apply(note);
         scene->redraw();
@@ -83,6 +84,7 @@
         mat = matErode->apply(mat);
         mat = matDilate->apply(mat);
         cv::bitwise_and(note, mat, note);
+
         scene->redraw();
         double minVal, maxVal; 
         cv::Point minLoc, maxLoc;

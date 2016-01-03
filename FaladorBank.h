@@ -3,12 +3,14 @@
 	#include "OcrObject.h"
 	#include "ErodeFilter.h"
 	#include "RangeFilter.h"
+	#include "WindowFilter.h"
 	#include "Dialog.h"
 	#include "ImageObject.h"
 
 	class FaladorBank {
 		private:
 			unique_ptr<Scene> scene;
+			unique_ptr<WindowFilter> windowFilter;
 			unique_ptr<RangeFilter> noteRange;
 			unique_ptr<ErodeFilter> noteErode;
 			unique_ptr<RangeFilter> bankFloorRange;

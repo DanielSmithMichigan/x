@@ -6,6 +6,8 @@
 		minGuessDistance = 50;
 	    unique_ptr<Scene> scene(new Scene());
 		dialog.reset(new Dialog());
+
+        windowFilter.reset(new WindowFilter());
 	    ladderRange.reset(new RangeFilter());
 	    ladderRange->lowHue = 18;
 	    ladderRange->highHue = 24;
@@ -26,8 +28,10 @@
 	    cv::Mat ladder;
         scene->redraw();
         ladder = scene->getSceneImage();
+        ladder = windowFilter->apply(ladder);
         ladder = ladderRange->apply(ladder);
         ladder = ladderErode->apply(ladder);
+
         double minVal, maxVal; 
         cv::Point minLoc, maxLoc;
         while(true) {
