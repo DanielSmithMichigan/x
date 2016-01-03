@@ -63,6 +63,7 @@
 						return true;
 					}
 				}
+        		cv::circle(selectableImage, closestLocation, minGuessDistance, CV_RGB(0,0,0), -1);
 				dialog->select("Cancel");
             } else {
                 break;
