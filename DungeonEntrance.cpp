@@ -3,9 +3,10 @@
 	#include "DungeonEntrance.h"
 
 	DungeonEntrance::DungeonEntrance() {
-		minGuessDistance = 50;
 	    unique_ptr<Scene> scene(new Scene());
-		dialog.reset(new Dialog());
+		select.reset(new Select());
+		goodDialog.push_back("Enter");
+		goodDialog.push_back("Exit");
 
 		windowFilter.reset(new WindowFilter());
 	    symbolRange.reset(new RangeFilter());
@@ -73,38 +74,6 @@
         entranceTwo = entranceTwoDilate->apply(entranceTwo);
         cv::bitwise_and(entranceTwo, symbol, entranceTwo);
         symbol = symbolErode->apply(symbol);
-        return true;
-
-     //    double minVal, maxVal; 
-     //    cv::Point minLoc, maxLoc;
-     //    while(true) {
-     //        minMaxLoc( ladder, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat() );
-     //        if (maxVal > 100) {
-     //            glideToPosition(maxLoc.x, maxLoc.y);
-     //            click(RIGHT_CLICK);
-     //            dialog->initialize();
-     //            if (dialog->match("Climb")) {
-     //            	dialog->select("Climb");
-    	// 			nsleep(5000);
-					// glideToPosition(1081, 180);
-					// click(LEFT_CLICK);
-					// nsleep(1000);
-     //            	return true;
-     //            } else if (dialog->match("Clim")) {
-     //            	dialog->select("Clim");
-    	// 			nsleep(5000);
-					// glideToPosition(1081, 180);
-					// click(LEFT_CLICK);
-					// nsleep(1000);
-     //            	return true;
-     //            } else {
-     //            	dialog->select("Cancel");
-     //            	cv::circle(ladder, maxLoc, minGuessDistance, CV_RGB(0,0,0), -1);
-     //            }
-     //        } else {
-     //            break;
-     //        }
-     //    }
-     //    return false;
+        return select->selectDialog(symbol, goodDialog, badDialog);
 	} 
 #endif
