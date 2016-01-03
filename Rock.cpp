@@ -5,7 +5,7 @@
 	Rock::Rock() {
 		oreType = "COAL";
 	    unique_ptr<Scene> scene(new Scene());
-		select.reset(new Select());
+		select.reset(new Select(50));
 		goodDialog.push_back("Mine");
 		badDialog.push_back("MineRocks");
 

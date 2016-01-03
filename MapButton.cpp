@@ -10,6 +10,7 @@
 	}
 
 	bool MapButton::initialize() {
+		scene->redraw();
 		unique_ptr<Template> mapTemplate (new Template("../images/WorldMap.png"));
 		width = mapTemplate->width;
 		height = mapTemplate->height;
