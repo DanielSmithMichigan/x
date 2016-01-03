@@ -20,6 +20,7 @@
 	}
 
 	bool Select::selectDialog(cv::Mat selectableImage, vector<string> goodDialog, vector<string> badDialog) {
+		initialize();
         cv::Point closestLocation;
         bool found = false;
         double minDistance = -1;

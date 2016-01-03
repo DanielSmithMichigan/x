@@ -25,21 +25,16 @@ int main(int argc, char** argv )
     strings.push_back("Drop");
     strings.push_back("DropUncut");
     strings.push_back("Cancel");
-    strings.push_back("Examine");
-    strings.push_back("Use");
-    strings.push_back("Craft");
     strings.push_back("Mine");
     strings.push_back("MineRocks");
-    strings.push_back("Yournanage");
-    strings.push_back("YouSiving");
-    strings.push_back("Youmanage");
-    strings.push_back("Youswing");
     strings.push_back("Clim");
     strings.push_back("Climb");
     strings.push_back("Bank");
     strings.push_back("Deposit-All");
     strings.push_back("OepositAll");
     strings.push_back("Oeposit");
+    strings.push_back("Enter");
+    strings.push_back("Exit");
 
     // Create a SimString database with two person names.
     simstring::ngram_generator gen(strings.size(), false);
@@ -72,10 +67,6 @@ int main(int argc, char** argv )
         }
     }
     compass->initialize();
-    // compass->clickOn();
-    // nsleep(5);
-    // keypress(ZOOM_OUT_KEY, 3000);
-    // keypress(VIEW_UP_KEY, 3000);
 
     unique_ptr<Inventory> inventory(new Inventory());
     unique_ptr<FaladorLadder> faladorLadder(new FaladorLadder());
