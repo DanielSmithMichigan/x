@@ -13,8 +13,10 @@
 	Minesite::~Minesite() {
 	}
 
-    void Minesite::mine(string miningLocation) {
-        while(!inventory->full) {
+    void Minesite::mine(string miningLocation, string oreType, int oreAmount, int retries) {
+        while(!inventory->full 
+              && inventory->numItems < oreAmount
+              && retries-- > 0) {
             if (chance(1000)) {
                 nsleep(1000 * 60);
             }
@@ -22,14 +24,14 @@
                 nsleep(1000 * 30);
             }
             inventory->initialize();
-            if (rock->use()) {
+            if (rock->use(oreType, interfaceMap->getFlags(miningLocation))) {
                 scene->redraw();
                 inventory->markEmptyCells();
                 waitForOre(inventory->numItems);
                 interfaceMap->goTo(miningLocation, 45);
             }
 
-            nsleep(100);
+            nsleep(250);
         }
     }
 

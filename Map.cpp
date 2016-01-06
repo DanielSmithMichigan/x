@@ -34,6 +34,7 @@
 		minersGuildDungeon1.x = 198;
 		minersGuildDungeon1.y = 214;
 		minersGuildDungeon1.plane = "MINERS_GUILD_DUNGEON";
+		minersGuildDungeon1.flags["DUNGEON_ROCKS"] = true;
 		locations["MINERS_GUILD_DUNGEON_1"] = minersGuildDungeon1;
 		struct location minersGuildDungeonEntrance;
 		minersGuildDungeonEntrance.x = 186;
@@ -44,19 +45,9 @@
 		width = 103;
 		height = 103;
 
-	    unique_ptr<ImageObject> worldMap (new ImageObject("../images/WorldMap.png"));
-	    if (worldMap->initialize()) {
-	        topLeft = cv::Point(worldMap->topLeft.x - 118, worldMap->topLeft.y - 118);
-	    } else {
-	        unique_ptr<ImageObject> helpButton (new ImageObject("../images/HelpButton.png"));
-	        if (helpButton->initialize()) {
-	            topLeft = cv::Point(helpButton->topLeft.x - 118, helpButton->topLeft.y + 32);
-	        } else {
-	            string error = "Could not locate map";
-	            cout << error << endl;
-	            throw(error);
-	        }
-	    }
+		mapButton.reset(new MapButton());
+		mapButton->initialize();
+		topLeft = cv::Point(mapButton->topLeft.x - 118, mapButton->topLeft.y - 118);
 	}
 
 	Map::~Map() {
@@ -71,6 +62,15 @@
 			}
 			nsleep(500);
 		}
+	}
+
+	map<string, bool> Map::getFlags(string location) {
+		if (!locations.count(location)) {
+			string error = "Could not find location: " + location;
+			cout << error << endl;
+			throw(error);
+		}
+		return locations[location].flags;
 	}
 
 	bool Map::locate() {

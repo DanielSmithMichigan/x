@@ -60,7 +60,6 @@
         symbol = scene->getSceneImage();
         symbol = windowFilter->apply(symbol);
         symbol = symbolRange->apply(symbol);
-        symbol = symbolErode->apply(symbol);
         scene->redraw();
         entranceOne = scene->getSceneImage();
         entranceOne = entranceOneRange->apply(entranceOne);
@@ -73,7 +72,6 @@
         entranceTwo = entranceTwoErode->apply(entranceTwo);
         entranceTwo = entranceTwoDilate->apply(entranceTwo);
         cv::bitwise_and(entranceTwo, symbol, entranceTwo);
-        symbol = symbolErode->apply(symbol);
         return select->selectDialog(symbol, goodDialog, badDialog);
 	} 
 #endif

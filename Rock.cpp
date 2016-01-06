@@ -3,7 +3,6 @@
 	#include "Rock.h"
 
 	Rock::Rock() {
-		oreType = "COAL";
 	    unique_ptr<Scene> scene(new Scene());
 		select.reset(new Select(50));
 		goodDialog.push_back("Mine");
@@ -14,6 +13,11 @@
 	    rockBaseRange->highHue = 23;
 	    rockBaseRange->lowSaturation = 148;
 	    rockBaseRange->highSaturation = 153;
+
+	    rockBaseDungeonRange.reset(new RangeFilter());
+	    rockBaseDungeonRange->lowHue = 19;
+	    rockBaseDungeonRange->highHue = 23;
+	    rockBaseDungeonRange->lowSaturation = 184;
 
 	    rockBaseErode.reset(new ErodeFilter());
 	    rockBaseErode->kernelSize = 2;
@@ -55,13 +59,17 @@
 	Rock::~Rock() {
 	}
 
-	bool Rock::use()
+	bool Rock::use(string oreType, map<string, bool> flags)
 	{
 		cv::Mat rockBase, ore;
 
         scene->redraw();
         rockBase = scene->getSceneImage();
-        rockBase = rockBaseRange->apply(rockBase);
+        if (flags["DUNGEON_ROCKS"]) {
+        	rockBase = rockBaseDungeonRange->apply(rockBase);
+        } else {
+        	rockBase = rockBaseRange->apply(rockBase);
+        }
         rockBase = rockBaseErode->apply(rockBase);
         rockBase = rockBaseDilate->apply(rockBase);
 
@@ -73,6 +81,12 @@
         	ore = mithrilRange->apply(ore);
         } else if (oreType == "ADAM") {
         	ore = adamRange->apply(ore);
+        } else if (oreType == "COAL_OR_MITHRIL") {
+        	ore = mithrilRange->apply(ore);
+        	scene->redraw();
+        	cv::Mat coal = scene->getSceneImage();
+        	coal = coalRange->apply(coal);
+        	cv::bitwise_or(ore, coal, ore);
         }
 
         cv::bitwise_and(ore, rockBase, ore);

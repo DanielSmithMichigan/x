@@ -9,7 +9,7 @@
 	int Inventory::cellHeight = 26;
 	int Inventory::cellMarginX = 10;
 	int Inventory::cellMarginY = 5;
-	int Inventory::numItems = 5;
+	int Inventory::numItems = 0;
 	unique_ptr<Object> Inventory::items[INVENTORY_COLS][INVENTORY_ROWS] = {};
 	bool Inventory::slotEmpty[INVENTORY_COLS][INVENTORY_ROWS] = {};
 	bool Inventory::full = false;

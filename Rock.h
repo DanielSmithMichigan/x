@@ -10,6 +10,7 @@
 		private:
 			unique_ptr<Scene> scene;
 			unique_ptr<RangeFilter> rockBaseRange;
+			unique_ptr<RangeFilter> rockBaseDungeonRange;
 			unique_ptr<ErodeFilter> rockBaseErode;
 			unique_ptr<ErodeFilter> rockBaseDilate;
 			unique_ptr<ErodeFilter> oreErode;
@@ -23,7 +24,6 @@
 		public:
 			Rock();
 			~Rock();
-			bool use();
-			string oreType;
+			bool use(string oreType, map<string, bool> flags);
 	};
 #endif
