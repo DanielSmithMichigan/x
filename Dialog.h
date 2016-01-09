@@ -13,7 +13,7 @@
 			vector<unique_ptr<OcrObject>> dialogBoxes;
 		public:
 			Dialog();
-			~Dialog();
+			virtual ~Dialog();
 			bool select(string matchString);
 			bool match(string matchString);
 			bool initialize();

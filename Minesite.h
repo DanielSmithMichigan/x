@@ -13,7 +13,8 @@
 			void waitForOre(int startingAmount, int retries = 20);
 		public:
 			void mine(string miningLocation, string oreType = "COAL_OR_MITHRIL", int oreAmount = 9999, int retries = 9999);
+			void initialize();
 			Minesite();
-			~Minesite();
+			virtual ~Minesite();
 	};
 #endif

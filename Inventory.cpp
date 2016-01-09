@@ -40,6 +40,24 @@
 		markEmptyCells();
 	}
 
+	void Inventory::saveAllItems() {
+		for (int i = 0; i < INVENTORY_COLS; i++) {
+			for (int j = 0; j < INVENTORY_ROWS; j++) {
+				items[i][j]->saveImage(to_string(i) + "_" + to_string(j) + ".png");
+			}
+		}
+	}
+
+	cv::Point Inventory::firstMatch(cv::Mat img) {
+		for (int i = 0; i < INVENTORY_COLS; i++) {
+			for (int j = 0; j < INVENTORY_ROWS; j++) {
+				if (imagesEqual(imageFromSlot(i, j), img)) {
+					return cv::Point(i, j);
+				}
+			}
+		}
+	}
+
 	void Inventory::dropItem(int x, int y) {
 		items[x][y]->clickOn(RIGHT_CLICK);
 		unique_ptr<Dialog> dialog(new Dialog());
@@ -112,6 +130,10 @@
 				}
 			}
 		}
+	}
+
+	void Inventory::clickItem(int x, int y, int click) {
+		items[x][y]->clickOn(click);
 	}
 
 	cv::Mat Inventory::imageFromSlot(int x, int y) {

@@ -17,7 +17,7 @@
 			vector<string> badDialog;
 		public:
 			MiningGuildLadder();
-			~MiningGuildLadder();
+			virtual ~MiningGuildLadder();
 			bool use();
 	};
 #endif

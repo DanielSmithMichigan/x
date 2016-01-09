@@ -4,7 +4,6 @@
 
 	Minesite::Minesite() {
         interfaceMap.reset(new Map());
-        interfaceMap->initialize();
         scene.reset(new Scene());
         inventory.reset(new Inventory());
         rock.reset(new Rock());
@@ -12,6 +11,10 @@
 
 	Minesite::~Minesite() {
 	}
+
+    void Minesite::initialize() {
+        interfaceMap->initialize();
+    }
 
     void Minesite::mine(string miningLocation, string oreType, int oreAmount, int retries) {
         while(!inventory->full 

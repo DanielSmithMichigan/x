@@ -13,7 +13,7 @@
 			static cv::Mat image;
 		public:
 			Scene();
-			~Scene();
+			virtual ~Scene();
 			static void getScreen();
 			static void redraw();
 			static cv::Mat &getSceneImage();

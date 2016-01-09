@@ -26,7 +26,7 @@
 			vector<string> badDialog;
 		public:
 			FaladorLadder();
-			~FaladorLadder();
+			virtual ~FaladorLadder();
 			bool use();
 	};
 #endif

@@ -32,7 +32,7 @@
 			unique_ptr<MapButton> mapButton;
 		public:
 			Map();
-			~Map();
+			virtual ~Map();
 			void initialize();
 			bool locate();
 			bool goTo(string l, int maxDistance = 25);

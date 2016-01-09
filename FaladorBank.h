@@ -25,7 +25,7 @@
 			vector<string> badDialog;
 		public:
 			FaladorBank();
-			~FaladorBank();
+			virtual ~FaladorBank();
 			bool use();
 			bool open();
 			bool close();

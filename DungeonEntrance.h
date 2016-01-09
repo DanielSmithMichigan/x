@@ -23,7 +23,7 @@
 			vector<string> badDialog;
 		public:
 			DungeonEntrance();
-			~DungeonEntrance();
+			virtual ~DungeonEntrance();
 			bool use();
 	};
 #endif

@@ -8,7 +8,7 @@
 		private:
 		public:
 			MapButton();
-			~MapButton();
+			virtual ~MapButton();
 			bool initialize();
 	};
 #endif

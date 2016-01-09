@@ -39,6 +39,10 @@
 		return ImageFromDisplay(width, height, topLeft.x, topLeft.y);
 	}
 
+	void Object::saveImage(string name) {
+		imwrite(name, getImage());
+	}
+
 	void Object::clickOn(int button) {
 		if (center.x == -1
 			|| center.y == -1) {
