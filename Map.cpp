@@ -19,20 +19,15 @@
 		minersGuildLadder.plane = "MINERS_GUILD";
 		locations["MINING_GUILD_LADDER"] = minersGuildLadder;
 		struct location faladorLadder;
-		faladorLadder.x = 302;
-		faladorLadder.y = 275;
+		faladorLadder.x = 128;
+		faladorLadder.y = 181;
 		faladorLadder.plane = "FALADOR";
 		locations["FALADOR_LADDER"] = faladorLadder;
 		struct location faladorBank;
-		faladorBank.x = 271;
-		faladorBank.y = 204;
+		faladorBank.x = 100;
+		faladorBank.y = 123;
 		faladorBank.plane = "FALADOR";
 		locations["FALADOR_BANK"] = faladorBank;
-		struct location faladorFurnace;
-		faladorFurnace.x = 106;
-		faladorFurnace.y = 143;
-		faladorFurnace.plane = "FALADOR";
-		locations["FALADOR_FURNACE"] = faladorFurnace;
 
 		width = 103;
 		height = 103;
