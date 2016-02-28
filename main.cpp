@@ -1,8 +1,13 @@
 #include "routines/FaladorMining.h"
+#include "routines/EvilChickenMining.h"
 #include "routines/SkillChompaHunting.h"
+#include "routines/Agility.h"
+#include "routines/Magic.h"
+#include "routines/Drop.h"
 #define ZOOM_IN_KEY 65369
 #define ZOOM_OUT_KEY 65397
 #define VIEW_UP_KEY 65391
+#define VIEW_DOWN_KEY 65396
 using namespace std;
 
 int main(int argc, char** argv )
@@ -14,12 +19,22 @@ int main(int argc, char** argv )
     vector<string> strings;
     strings.push_back("Drop");
     strings.push_back("DropUncut");
+    strings.push_back("DropFishingbait");
+    strings.push_back("DropBarbarianrod");
+    strings.push_back("DropLeapingsalmon");
+    strings.push_back("DropWoodcutti");
+    strings.push_back("OepositAllStro");
+    strings.push_back("OepositStro");
     strings.push_back("Cancel");
     strings.push_back("Mine");
     strings.push_back("MineRocks");
+    strings.push_back("FaceSouth");
     strings.push_back("Clim");
     strings.push_back("Climb");
     strings.push_back("Bank");
+    strings.push_back("Check");
+    strings.push_back("Rebuild");
+    strings.push_back("Lay");
     strings.push_back("Deposit-All");
     strings.push_back("OepositAll");
     strings.push_back("Oeposit");
@@ -39,6 +54,10 @@ int main(int argc, char** argv )
     unique_ptr<Scene> scene(new Scene());
     unique_ptr<FaladorMining> mining(new FaladorMining());
     unique_ptr<SkillChompaHunting> hunting(new SkillChompaHunting());
+    unique_ptr<EvilChickenMining> evilChickenMining(new EvilChickenMining());
+    unique_ptr<Agility> agility(new Agility());
+    unique_ptr<Magic> magic(new Magic());
+    unique_ptr<Drop> drop(new Drop());
 
     scene->getScreen();
     if (argc == 0) {
@@ -47,6 +66,12 @@ int main(int argc, char** argv )
         mining->run();
     } else if (strcmp(argv[1], "HUNTING") == 0) {
         hunting->run();
+    } else if (strcmp(argv[1], "EVIL_CHICKEN_MINING") == 0) {
+        evilChickenMining->run();
+    } else if (strcmp(argv[1], "MAGIC") == 0) {
+        magic->run();
+    } else if (strcmp(argv[1], "DROP") == 0) {
+        drop->run();
     } else {
         cout << "NO ACTION" << endl;
     }

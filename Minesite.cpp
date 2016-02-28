@@ -28,27 +28,11 @@
             }
             inventory->initialize();
             if (rock->use(oreType, interfaceMap->getFlags(miningLocation))) {
-                scene->redraw();
-                inventory->markEmptyCells();
-                waitForOre(inventory->numItems);
+                inventory->waitForItem();
                 interfaceMap->goTo(miningLocation, 45);
             }
 
             nsleep(250);
         }
-    }
-
-    void Minesite::waitForOre(int startingAmount, int retries) {
-        cout << "Retries: " << retries << endl;
-        if (retries <= 0) {
-            return;
-        }
-        if (inventory->numItems > startingAmount) {
-            return;
-        }
-        nsleep(1000);
-        scene->redraw();
-        inventory->markEmptyCells();
-        waitForOre(startingAmount, --retries);
     }
 #endif

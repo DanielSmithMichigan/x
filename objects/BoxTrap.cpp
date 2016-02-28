@@ -20,7 +20,7 @@
 	    fallenBoxRange->lowHue = 26;
 	    fallenBoxRange->highHue = 29;
 	    fallenBoxRange->lowSaturation = 80;
-	    fallenBoxRange->highSaturation = 97;
+	    fallenBoxRange->highSaturation = 110;
 	    fallenBoxRange->lowValue = 100;
 
 	    boxErode.reset(new ErodeFilter());
@@ -50,7 +50,7 @@
 	    fallenStickRange->lowHue = 27;
 	    fallenStickRange->highHue = 29;
 	    fallenStickRange->lowSaturation = 100;
-	    fallenStickRange->highSaturation = 129;
+	    fallenStickRange->highSaturation = 169;
 	    fallenStickRange->lowValue = 100;
 
 	    stickDilate.reset(new ErodeFilter());
@@ -98,7 +98,6 @@
 
         cv::bitwise_or(fallenBox, box, box);
 
-
         vector<cv::KeyPoint> keypoints;
         cv::SimpleBlobDetector::Params params;
 		params.filterByInertia = false;
@@ -108,12 +107,20 @@
         cv::Ptr<cv::SimpleBlobDetector> detector = cv::SimpleBlobDetector::create(params); 
 		detector->detect( box, keypoints );
 		for (int i=0; i<keypoints.size(); i++){
+			cout << "SIZE: " << keypoints[i].size << endl;
 			if (keypoints[i].size <= maxArea) {
 				glideToPosition(keypoints[i].pt.x, keypoints[i].pt.y);
 				click(RIGHT_CLICK);
                 dialog->initialize();
-                if (dialog->select("SomethingTrap")) {
+                if (dialog->select("Lay")) {
+        			nsleep(4000);
                 	return true;
+                } else if (dialog->select("Check")) {
+        			nsleep(4000);
+                	return true;
+                } else if (dialog->select("Rebuild")) {
+					nsleep(5200);
+					return true;
                 } else {
                 	dialog->select("Cancel");
                 	continue;

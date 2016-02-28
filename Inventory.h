@@ -33,6 +33,7 @@
 			static cv::Mat imageFromSlot(int x, int y);
 			static void markEmptyCells();
 			static void clickItem(int x, int y, int click);
+			static void waitForItem(int startingAmount = -1, int retries = 20);
 			static int numItems;
 			static bool full;
 	};

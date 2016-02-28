@@ -3,24 +3,27 @@
 	#include "WindowFilter.h"
 
 	WindowFilter::WindowFilter() {
+		topLeft.x = -1;
+		topLeft.y = -1;
 	}
 
 	WindowFilter::~WindowFilter() {}
 
 	cv::Mat WindowFilter::apply(cv::Mat in) {
-		cv::Point topLeft;
-	    unique_ptr<ImageObject> worldMap (new ImageObject("../images/WorldMap.png"));
-	    if (worldMap->initialize()) {
-	        topLeft = cv::Point(worldMap->topLeft.x, worldMap->topLeft.y);
-	    } else {
-	        unique_ptr<ImageObject> helpButton (new ImageObject("../images/HelpButton.png"));
-	        if (helpButton->initialize()) {
-	            topLeft = cv::Point(helpButton->topLeft.x, helpButton->topLeft.y + 150);
-	        } else {
-	            string error = "Could not locate map";
-	            cout << error << endl;
-	            throw(error);
-	        }
+		if (topLeft.x == -1 || topLeft.y == -1) {
+		    unique_ptr<ImageObject> worldMap (new ImageObject("../images/WorldMap.png"));
+		    if (worldMap->initialize()) {
+		        topLeft = cv::Point(worldMap->topLeft.x, worldMap->topLeft.y);
+		    } else {
+		        unique_ptr<ImageObject> helpButton (new ImageObject("../images/HelpButton.png"));
+		        if (helpButton->initialize()) {
+		            topLeft = cv::Point(helpButton->topLeft.x, helpButton->topLeft.y + 150);
+		        } else {
+		            string error = "Could not locate map";
+		            cout << error << endl;
+		            throw(error);
+		        }
+		    }
 	    }
 
 	    // left of window

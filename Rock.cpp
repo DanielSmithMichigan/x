@@ -7,6 +7,7 @@
 		select.reset(new Select(50));
 		goodDialog.push_back("Mine");
 		badDialog.push_back("MineRocks");
+        windowFilter.reset(new WindowFilter());
 
 	    rockBaseRange.reset(new RangeFilter());
 	    rockBaseRange->lowHue = 21;
@@ -33,6 +34,12 @@
 	    coalRange->highSaturation = 50;
 	    coalRange->lowValue = 0;
 	    coalRange->highValue = 40;
+
+	    ironRange.reset(new RangeFilter());
+	    ironRange->lowHue = 8;
+	    ironRange->highHue = 9;
+	    ironRange->lowSaturation = 100;
+	    ironRange->highValue = 130;
 
 	    mithrilRange.reset(new RangeFilter());
 	    mithrilRange->lowHue = 119;
@@ -65,6 +72,7 @@
 
         scene->redraw();
         rockBase = scene->getSceneImage();
+        rockBase = windowFilter->apply(rockBase);
         if (flags["DUNGEON_ROCKS"]) {
         	rockBase = rockBaseDungeonRange->apply(rockBase);
         } else {
@@ -81,6 +89,8 @@
         	ore = mithrilRange->apply(ore);
         } else if (oreType == "ADAM") {
         	ore = adamRange->apply(ore);
+        } else if (oreType == "IRON") {
+        	ore = ironRange->apply(ore);
         } else if (oreType == "COAL_OR_MITHRIL") {
         	ore = mithrilRange->apply(ore);
         	scene->redraw();

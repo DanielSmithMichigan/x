@@ -56,6 +56,7 @@
 				}
 			}
 		}
+		return cv::Point(-1, -1);
 	}
 
 	void Inventory::dropItem(int x, int y) {
@@ -63,6 +64,10 @@
 		unique_ptr<Dialog> dialog(new Dialog());
 		if (dialog->initialize()) {
 			if (!dialog->match("DropUncut")
+				&& !dialog->match("DropBarbarianrod")
+				&& !dialog->match("DropFishingbait")
+				&& !dialog->match("DropLeapingsalmon")
+				&& !dialog->match("DropWoodcutti")
 				&& dialog->match("Drop")) {
 				dialog->select("Drop");
 			} else {
@@ -94,7 +99,11 @@
 				items[i][j]->clickOn(RIGHT_CLICK);
 				unique_ptr<Dialog> dialog(new Dialog());
 				if (dialog->initialize()) {
-					if (dialog->match("Deposit-All")) {
+					if (dialog->match("OepositStro")
+						|| dialog->match("OepositAllStro")) {
+						dialog->select("Cancel");
+						nsleep(100);
+					} else if (dialog->match("Deposit-All")) {
 						dialog->select("Deposit-All");
 						nsleep(100);
 						markEmptyCells();
@@ -139,4 +148,24 @@
 	cv::Mat Inventory::imageFromSlot(int x, int y) {
 		return ImageFromDisplay(items[x][y]->width, items[x][y]->height, items[x][y]->topLeft.x, items[x][y]->topLeft.y);
 	}
+
+    void Inventory::waitForItem(int startingAmount, int retries) {
+    	if (startingAmount == -1) {
+            scene->redraw();
+            markEmptyCells();
+    		startingAmount = numItems;
+    	}
+
+        cout << "Retries: " << retries << endl;
+        if (retries <= 0) {
+            return;
+        }
+        if (numItems > startingAmount) {
+            return;
+        }
+        nsleep(1000);
+        scene->redraw();
+        markEmptyCells();
+        waitForItem(startingAmount, --retries);
+    }
 #endif

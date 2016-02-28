@@ -8,6 +8,8 @@
 		planes.push_back(minersGuild);
 		struct plane falador("FALADOR", "../images/Falador.png");
 		planes.push_back(falador);
+		struct plane morytania("MORYTANIA", "../images/Morytania.png");
+		planes.push_back(morytania);
 		struct location miningGuild1;
 		miningGuild1.x = 175;
 		miningGuild1.y = 136;
@@ -28,6 +30,25 @@
 		faladorBank.y = 123;
 		faladorBank.plane = "FALADOR";
 		locations["FALADOR_BANK"] = faladorBank;
+
+		struct location morytania1;
+		morytania1.x = 120;
+		morytania1.y = 108;
+		morytania1.plane = "MORYTANIA";
+		locations["MORYTANIA_1"] = morytania1;
+
+		struct location morytania2;
+		morytania2.x = 130;
+		morytania2.y = 108;
+		morytania2.plane = "MORYTANIA";
+		locations["MORYTANIA_2"] = morytania2;
+
+		struct location morytania3;
+		morytania3.x = 120;
+		morytania3.y = 118;
+		morytania3.plane = "MORYTANIA";
+		locations["MORYTANIA_3"] = morytania3;
+
 
 		width = 103;
 		height = 103;

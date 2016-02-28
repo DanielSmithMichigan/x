@@ -9,6 +9,7 @@
 		public:
 			MapButton();
 			virtual ~MapButton();
+			bool rs3;
 			bool initialize();
 	};
 #endif

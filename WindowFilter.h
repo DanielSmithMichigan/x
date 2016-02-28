@@ -7,6 +7,7 @@
 
 	class WindowFilter : public Filter {
 		private:
+			cv::Point topLeft;
 		protected:
 		public:
 			WindowFilter();

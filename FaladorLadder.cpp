@@ -98,7 +98,7 @@
         cv::bitwise_and(ladder, blackness, ladder);
         ladder = ladderErode->apply(ladder);
         if (select->selectDialog(ladder, goodDialog, badDialog)) {
-			glideToPosition(1081, 180);
+			glideToPosition(1045, 180);
 			click(LEFT_CLICK);
 			nsleep(1000);
 			return true;
