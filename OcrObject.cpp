@@ -20,7 +20,7 @@
 	    cv::Mat sceneImage = scene->getSceneImage();
 		cv::Mat preparedImage = prepareImage(sceneImage);
 		ocr->run(preparedImage, bestGuess);
-		cout << "Best Guess: " << bestGuess << endl;
+		// cout << "Best Guess: " << bestGuess << endl;
 		Object::initialize();
 	}
 

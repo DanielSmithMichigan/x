@@ -30,6 +30,7 @@
 			static void bankAllItems();
 			static void saveAllItems();
 			static cv::Point firstMatch(cv::Mat img);
+			static cv::Point firstNonEmpty();
 			static cv::Mat imageFromSlot(int x, int y);
 			static void markEmptyCells();
 			static void clickItem(int x, int y, int click);

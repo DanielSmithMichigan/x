@@ -15,7 +15,11 @@
   		double seconds, hours;
 		double totalExp = 0;
 		double expPerRock = 70;
-		double remainingXp = 1086574;
+		double currentXp = 3222101;
+		double goalXp = 3258594;
+		double remainingXp = goalXp - currentXp;
+		double expPerHour = 29000;
+		double hoursRemaining = 0;
 		map<string, bool> flags;
 		string str = "DUNGEON_ROCKS";
 		flags[str] = true;
@@ -23,24 +27,23 @@
 	        inventory->initialize();
 
 	        if (!inventory->full) {
-	        	cout << "INVENTORY NOT FULL" << endl;
 	        	if(rock->use("IRON", flags)) {
 	        		inventory->waitForItem();
 	        		totalExp += expPerRock;
-	        		remainingXp -= expPerRock;
   					clock_t end = clock();
   					seconds = double(end - begin) / (CLOCKS_PER_SEC);
-  					hours = seconds / (60 * 60);
-  					cout << "Elapsed Seconds: " << seconds << endl;
+  					hours = seconds / (60 * 60 * .18);
+  					hoursRemaining = (remainingXp - totalExp) / expPerHour;
+  					system("clear");
+  					cout << "Elapsed hours: " << hours << endl;
   					cout << "Total exp: " << totalExp << endl;
-  					cout << "Exp/Hour: " << (totalExp / hours) << endl;
-  					cout << "Hours Remaining: " << remainingXp / (totalExp / hours) << endl;
+  					cout << "Exp/Hour: " << expPerHour << endl;
+  					cout << "Hours Remaining: " << hoursRemaining << endl;
+  					cout << "PCT: " << ((int)((totalExp / remainingXp) * 100)) << endl;
 	        	} else {
-	        		cout << "NO ROCKS" << endl;
 	        		nsleep(1000);
 	        	}
 	        } else {
-	        	cout << "INVENTORY FULL" << endl;
 	        	inventory->dropAllItems();
 	        }
 	    }

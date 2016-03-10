@@ -49,7 +49,7 @@
 		int retriesAvailable = this->retries;
 		topLeft = performMatch(sceneImage);
 		while(--retriesAvailable > 0 && (topLeft.x == -1 || topLeft.y == -1)) {
-			cout << "Matching template retry: " << retriesAvailable << endl;
+			// cout << "Matching template retry: " << retriesAvailable << endl;
 			sceneImage = prepareForRetry(sceneImage);
 			topLeft = performMatch(sceneImage);
 		}
@@ -78,12 +78,12 @@
 		double minVal, maxVal; 
 		cv::Point minLoc, maxLoc;
 		minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, cv::Mat() );
-		cout << "MinVal: " << minVal << endl;
+		// cout << "MinVal: " << minVal << endl;
 		if (minVal < threshold) {
 			topLeft.x = minLoc.x;
 			topLeft.y = minLoc.y;
 		} else if (logFailure) {
-			cout << "Could not find template in image" << endl;
+			// cout << "Could not find template in image" << endl;
 			string numString = to_string(randomBetween(1000, 9999));
 			cv::imwrite("../log/Template" + numString + ".png", scene->getSceneImage());
 		}

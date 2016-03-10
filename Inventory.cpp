@@ -59,11 +59,24 @@
 		return cv::Point(-1, -1);
 	}
 
+	cv::Point Inventory::firstNonEmpty() {
+		for (int i = 0; i < INVENTORY_COLS; i++) {
+			for (int j = 0; j < INVENTORY_ROWS; j++) {
+				if (slotEmpty[i][j]) {
+					continue;
+				}
+				return cv::Point(i, j);
+			}
+		}
+		return cv::Point(-1, -1);
+	}
+
 	void Inventory::dropItem(int x, int y) {
 		items[x][y]->clickOn(RIGHT_CLICK);
 		unique_ptr<Dialog> dialog(new Dialog());
 		if (dialog->initialize()) {
-			if (!dialog->match("DropUncut")
+			if (true 
+				// && !dialog->match("DropUncut")
 				&& !dialog->match("DropBarbarianrod")
 				&& !dialog->match("DropFishingbait")
 				&& !dialog->match("DropLeapingsalmon")
@@ -156,7 +169,7 @@
     		startingAmount = numItems;
     	}
 
-        cout << "Retries: " << retries << endl;
+        // cout << "Retries: " << retries << endl;
         if (retries <= 0) {
             return;
         }

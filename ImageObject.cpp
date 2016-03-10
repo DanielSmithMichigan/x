@@ -24,6 +24,8 @@
 
 	bool ImageObject::initialize() 
 	{
+		topLeft.x = -1;
+		topLeft.y = -1;
 		match();
 		Object::initialize();
 		return topLeft.x != -1 && topLeft.y != -1;

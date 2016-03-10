@@ -51,10 +51,10 @@
 
 	bool Dialog::match(string matchString)
 	{
-		cout << "Attemping to find " << matchString << endl;
+		// cout << "Attemping to find " << matchString << endl;
 		for(vector<unique_ptr<OcrObject>>::iterator iter = dialogBoxes.begin(); iter != dialogBoxes.end(); ++iter) {
 			if ((*iter)->match(matchString)) {
-				cout << "Found match" << endl;
+				// cout << "Found match" << endl;
 				return true;
 			}
 		}
@@ -63,10 +63,10 @@
 
 	bool Dialog::select(string matchString)
 	{
-		cout << "Attemping to find " << matchString << endl;
+		// cout << "Attemping to find " << matchString << endl;
 		for(vector<unique_ptr<OcrObject>>::iterator iter = dialogBoxes.begin(); iter != dialogBoxes.end(); ++iter) {
 			if ((*iter)->match(matchString)) {
-				cout << "Found match" << endl;
+				// cout << "Found match" << endl;
 				(*iter)->clickOn();
 				return true;
 			}

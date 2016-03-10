@@ -46,6 +46,7 @@
 			exit(EXIT_FAILURE);
 		}
 		XTestFakeButtonEvent(display, button, true, 0);
+		nsleep(20);
 		XTestFakeButtonEvent(display, button, false, 0);
 	    XFlush(display);
 	    XCloseDisplay(display);
