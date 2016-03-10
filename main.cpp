@@ -5,6 +5,7 @@
 #include "routines/Magic.h"
 #include "routines/Drop.h"
 #include "routines/Fletching.h"
+#include "routines/Fishing.h"
 #define ZOOM_IN_KEY 65369
 #define ZOOM_OUT_KEY 65397
 #define VIEW_UP_KEY 65391
@@ -19,6 +20,7 @@ int main(int argc, char** argv )
 
     vector<string> strings;
     strings.push_back("UseBank");
+    strings.push_back("Net");
     strings.push_back("Drop");
     strings.push_back("DropUncut");
     strings.push_back("DropFishingbait");
@@ -61,6 +63,7 @@ int main(int argc, char** argv )
     unique_ptr<Magic> magic(new Magic());
     unique_ptr<Drop> drop(new Drop());
     unique_ptr<Fletching> fletching(new Fletching());
+    unique_ptr<Fishing> fishing(new Fishing());
 
     scene->getScreen();
     if (argc == 0) {
@@ -77,6 +80,8 @@ int main(int argc, char** argv )
         drop->run();
     } else if (strcmp(argv[1], "FLETCHING") == 0) {
         fletching->run();
+    } else if (strcmp(argv[1], "FISHING") == 0) {
+        fishing->run();
     } else {
         cout << "NO ACTION" << endl;
     }
