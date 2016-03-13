@@ -162,6 +162,21 @@
 		return ImageFromDisplay(items[x][y]->width, items[x][y]->height, items[x][y]->topLeft.x, items[x][y]->topLeft.y);
 	}
 
+	void Inventory::waitUntilGone(cv::Mat item, int waitTime) {
+		int numRetries = 0;
+		while(has(item)) {
+			numRetries++;
+			cout << "Retry: " << numRetries << endl;
+			nsleep(waitTime);
+		}
+	}
+
+	bool Inventory::has(cv::Mat item) {
+		initialize();
+		cv::Point match = firstMatch(item);
+		return match.x != -1 && match.y != -1;
+	}
+
     void Inventory::waitForItem(int startingAmount, int retries) {
     	if (startingAmount == -1) {
             scene->redraw();

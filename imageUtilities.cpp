@@ -7,7 +7,7 @@
     bool imagesEqual(cv::Mat a, cv::Mat b) 
     {    
         cv::Point topLeft;
-        findImage(a, b, topLeft, .1);
+        findImage(a, b, topLeft, .05);
         return topLeft.x == 0 && topLeft.y == 0;
     }
 

@@ -19,7 +19,7 @@
 		playerLocation.y = mapButton->topLeft.y + 263;
 	}
 
-	bool Select::selectDialog(cv::Mat selectableImage, vector<string> goodDialog, vector<string> badDialog) {
+	bool Select::selectDialog(cv::Mat selectableImage, vector<string> goodDialog, vector<string> badDialog, void (*beforeSelect)()) {
 		initialize();
         cv::Point closestLocation;
         bool found = false;
@@ -46,6 +46,9 @@
 			}
 
             if (found) {
+            	if (beforeSelect != NULL) {
+	            	(*beforeSelect)();
+	            }
                 glideToPosition(closestLocation.x, closestLocation.y, 4);
                 click(RIGHT_CLICK);
                 dialog->initialize();

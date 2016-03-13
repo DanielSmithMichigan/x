@@ -15,7 +15,7 @@
 			int minGuessDistance;
 			int minWaitTime;
 		public:
-			bool selectDialog(cv::Mat selectableImage, vector<string> goodDialog, vector<string> badDialog);
+			bool selectDialog(cv::Mat selectableImage, vector<string> goodDialog, vector<string> badDialog, void (*beforeSelect)() = NULL);
 			void initialize();
 			Select(int minWaitTime = 5000, int minGuessDistance = 50);
 			virtual ~Select();

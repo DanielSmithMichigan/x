@@ -6,6 +6,9 @@
 #include "routines/Drop.h"
 #include "routines/Fletching.h"
 #include "routines/Fishing.h"
+#include "routines/Smithing.h"
+#include "routines/SaveInventory.h"
+#include "routines/Crafting.h"
 #define ZOOM_IN_KEY 65369
 #define ZOOM_OUT_KEY 65397
 #define VIEW_UP_KEY 65391
@@ -19,11 +22,15 @@ int main(int argc, char** argv )
 
 
     vector<string> strings;
+    strings.push_back("Form");
+    strings.push_back("Fire");
+    strings.push_back("UseClaySink");
     strings.push_back("UseBank");
     strings.push_back("Net");
     strings.push_back("Drop");
     strings.push_back("DropUncut");
     strings.push_back("DropFishingbait");
+    strings.push_back("Withdr");
     strings.push_back("DropBarbarianrod");
     strings.push_back("DropLeapingsalmon");
     strings.push_back("DropWoodcutti");
@@ -42,6 +49,8 @@ int main(int argc, char** argv )
     strings.push_back("Deposit-All");
     strings.push_back("OepositAll");
     strings.push_back("Oeposit");
+    strings.push_back("Deposit");
+    strings.push_back("Smith");
     strings.push_back("Enter");
     strings.push_back("Exit");
 
@@ -64,6 +73,9 @@ int main(int argc, char** argv )
     unique_ptr<Drop> drop(new Drop());
     unique_ptr<Fletching> fletching(new Fletching());
     unique_ptr<Fishing> fishing(new Fishing());
+    unique_ptr<Smithing> smithing(new Smithing());
+    unique_ptr<SaveInventory> saveInventory(new SaveInventory());
+    unique_ptr<Crafting> crafting(new Crafting());
 
     scene->getScreen();
     if (argc == 0) {
@@ -82,6 +94,12 @@ int main(int argc, char** argv )
         fletching->run();
     } else if (strcmp(argv[1], "FISHING") == 0) {
         fishing->run();
+    } else if (strcmp(argv[1], "SMITHING") == 0) {
+        smithing->run();
+    } else if (strcmp(argv[1], "SAVE_INVENTORY") == 0) {
+        saveInventory->run();
+    } else if (strcmp(argv[1], "CRAFTING") == 0) {
+        crafting->run();
     } else {
         cout << "NO ACTION" << endl;
     }

@@ -21,7 +21,7 @@
 
 	void SkillChompaHunting::run() {
         inventory->initialize();
-        cv::Mat boxTrapItem = cv::imread("../images/inventoryItems/boxTrap.png");
+        cv::Mat boxTrapItem = cv::imread("../images/inventoryItems/BoxTrap.png");
         while(true) {
         	if (boxTrap->use()) {
         		continue;

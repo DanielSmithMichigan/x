@@ -20,6 +20,7 @@
 			unique_ptr<ErodeFilter> oreDilate;
 			unique_ptr<RangeFilter> coalRange;
 			unique_ptr<RangeFilter> ironRange;
+			unique_ptr<RangeFilter> clayRange;
 			unique_ptr<RangeFilter> mithrilRange;
 			unique_ptr<RangeFilter> adamRange;
 			unique_ptr<Select> select;

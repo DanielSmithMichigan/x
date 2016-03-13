@@ -41,6 +41,13 @@
 	    ironRange->lowSaturation = 100;
 	    ironRange->highValue = 130;
 
+	    clayRange.reset(new RangeFilter());
+	    clayRange->lowHue = 18;
+	    clayRange->highHue = 20;
+	    clayRange->lowSaturation = 108;
+	    clayRange->highSaturation = 125;
+	    clayRange->lowValue = 195;
+
 	    mithrilRange.reset(new RangeFilter());
 	    mithrilRange->lowHue = 119;
 	    mithrilRange->highHue = 120;
@@ -83,6 +90,7 @@
 
         scene->redraw();
     	ore = scene->getSceneImage();
+        ore = windowFilter->apply(ore);
         if (oreType == "COAL") {
         	ore = coalRange->apply(ore);
         } else if (oreType == "MITHRIL") {
@@ -91,6 +99,8 @@
         	ore = adamRange->apply(ore);
         } else if (oreType == "IRON") {
         	ore = ironRange->apply(ore);
+        } else if (oreType == "CLAY") {
+        	ore = clayRange->apply(ore);
         } else if (oreType == "COAL_OR_MITHRIL") {
         	ore = mithrilRange->apply(ore);
         	scene->redraw();
