@@ -15,7 +15,7 @@
 	    wheelRange->lowSaturation = 19;
 	    wheelRange->highSaturation = 24;
 	    wheelRange->lowValue = 159;
-	    wheelRange->highValue = 171;
+	    wheelRange->highValue = 180;
 
 	    wheelErode.reset(new ErodeFilter());
 	    wheelErode->kernelSize = 2;

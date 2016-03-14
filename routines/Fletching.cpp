@@ -23,7 +23,10 @@
 
 		while(true) {
 			inventory->initialize();
-			chest->use();
+			while(!chest->use()) {
+				cout << "Using chest" << endl;
+				nsleep(200);
+			}
 			while(!chest->open()) {
 				nsleep(200);
 			}

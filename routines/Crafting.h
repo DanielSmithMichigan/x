@@ -19,6 +19,7 @@
 		    unique_ptr<Sink> sink;
 		    unique_ptr<CraftingFurnace> craftingFurnace;
 		    unique_ptr<CraftingGuildWaterSymbol> craftingGuildWaterSymbol;
+		    vector<cv::Mat> dontDrop;
 		    cv::Mat clay;
 		    cv::Mat softClay;
 		    cv::Mat firedUrn;

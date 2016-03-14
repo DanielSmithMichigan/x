@@ -22,7 +22,7 @@
 	    blacknessErode->kernelSize = 1;
 
 	    blacknessDilate.reset(new ErodeFilter());
-	    blacknessDilate->kernelSize = 10;
+	    blacknessDilate->kernelSize = 25;
 	    blacknessDilate->mode = "DILATE";
 
 	    rockRange.reset(new RangeFilter());
@@ -77,7 +77,7 @@
         blackness = blacknessRange->apply(blackness);
         blackness = blacknessErode->apply(blackness);
         blackness = blacknessDilate->apply(blackness);
-
+        
         scene->redraw();
         rock = scene->getSceneImage();
         rock = windowFilter->apply(rock);

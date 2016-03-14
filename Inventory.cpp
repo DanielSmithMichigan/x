@@ -59,6 +59,46 @@
 		return cv::Point(-1, -1);
 	}
 
+	cv::Point Inventory::firstNonMatch(cv::Mat img) {
+		for (int i = 0; i < INVENTORY_COLS; i++) {
+			for (int j = 0; j < INVENTORY_ROWS; j++) {
+				if (!slotEmpty[i][j]
+					&& !imagesEqual(imageFromSlot(i, j), img)) {
+					return cv::Point(i, j);
+				}
+			}
+		}
+		return cv::Point(-1, -1);
+	}
+
+	void Inventory::dropEverythingBut(cv::Mat img) {
+		vector<cv::Mat> imgs;
+		imgs.push_back(img);
+		dropEverythingBut(imgs);
+		return;
+	}
+
+	void Inventory::dropEverythingBut(vector<cv::Mat> imgs) {
+		for (int i = 0; i < INVENTORY_COLS; i++) {
+			for (int j = 0; j < INVENTORY_ROWS; j++) {
+				if (!slotEmpty[i][j]) {
+					bool match = false;
+					for(vector<cv::Mat>::iterator img = imgs.begin(); img != imgs.end(); ++img) {
+						if (imagesEqual(imageFromSlot(i, j), *img)) {
+							match = true;
+							break;
+						}
+					}
+					if (match) {
+						continue;
+					}
+					dropItem(i, j);
+				}
+			}
+		}
+		return;
+	}
+
 	cv::Point Inventory::firstNonEmpty() {
 		for (int i = 0; i < INVENTORY_COLS; i++) {
 			for (int j = 0; j < INVENTORY_ROWS; j++) {
@@ -83,6 +123,7 @@
 				&& !dialog->match("DropWoodcutti")
 				&& dialog->match("Drop")) {
 				dialog->select("Drop");
+				nsleep(400);
 			} else {
 				dialog->select("Cancel");
 			}
@@ -97,7 +138,6 @@
 					continue;
 				}
 				dropItem(i, j);
-				nsleep(200);
 			}
 		}
 	}
@@ -172,10 +212,32 @@
 	}
 
 	bool Inventory::has(cv::Mat item) {
-		initialize();
-		cv::Point match = firstMatch(item);
-		return match.x != -1 && match.y != -1;
+		scene->redraw();
+		for (int i = 0; i < INVENTORY_COLS; i++) {
+			for (int j = 0; j < INVENTORY_ROWS; j++) {
+				if (imagesEqual(imageFromSlot(i, j), item)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
+
+	int Inventory::countItem(cv::Mat item) {
+		scene->redraw();
+		int count = 0;
+		for (int i = 0; i < INVENTORY_COLS; i++) {
+			for (int j = 0; j < INVENTORY_ROWS; j++) {
+				if (imagesEqual(imageFromSlot(i, j), item)) {
+					count ++;
+				}
+			}
+		}
+
+		cout << "Count: " << count << endl;
+		return count;
+	}
+
 
     void Inventory::waitForItem(int startingAmount, int retries) {
     	if (startingAmount == -1) {

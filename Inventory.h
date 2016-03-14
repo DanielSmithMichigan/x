@@ -29,7 +29,11 @@
 			static void dropAllItems();
 			static void bankAllItems();
 			static void saveAllItems();
+			static void dropEverythingBut(vector<cv::Mat> imgs);
+			static void dropEverythingBut(cv::Mat img);
+			static int countItem(cv::Mat item);
 			static cv::Point firstMatch(cv::Mat img);
+			static cv::Point firstNonMatch(cv::Mat img);
 			static cv::Point firstNonEmpty();
 			static cv::Mat imageFromSlot(int x, int y);
 			static void markEmptyCells();
