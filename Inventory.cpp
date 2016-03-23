@@ -13,6 +13,7 @@
 	unique_ptr<Object> Inventory::items[INVENTORY_COLS][INVENTORY_ROWS] = {};
 	bool Inventory::slotEmpty[INVENTORY_COLS][INVENTORY_ROWS] = {};
 	bool Inventory::full = false;
+	bool Inventory::empty = false;
 	unique_ptr<Scene> Inventory::scene(new Scene());
 
 	Inventory::Inventory() {
@@ -181,6 +182,7 @@
 	void Inventory::markEmptyCells() {
 		numItems = 0;
 		full = true;
+		empty = true;
 		cv::Mat emptySlotImage = cv::imread("../images/EmptySlot.png");
 		for (int i = 0; i < INVENTORY_COLS; i++) {
 			for (int j = 0; j < INVENTORY_ROWS; j++) {
@@ -188,6 +190,7 @@
 				if (slotEmpty[i][j]) {
 					full = false;
 				} else {
+					empty = false;
 					numItems++;
 				}
 			}

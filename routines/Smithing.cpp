@@ -22,19 +22,36 @@
 		unique_ptr<ArmorDeposit> armorDeposit(new ArmorDeposit());
 		unique_ptr<Anvil> anvil(new Anvil());
 		while(true) {
-			while(!oreSmelter->use()) {
-				nsleep(500);
-			}			
-			smeltButton->waitForMatch();
-			smeltButton->clickOn();
-			scene->redraw();
-			while(!anvil->use()) {
-				nsleep(500);
-			}			
-			inventory->waitUntilGone(ingot, 3000);
+			if (inventory->has(ingot)) {
+				while(!anvil->use()) {
+					nsleep(500);
+				}			
+				inventory->waitUntilGone(ingot, 3000);
+				continue;
+			}
+			inventory->initialize();
+			if (inventory->empty) {
+				cout << "Inventory is empty. Using ore smelter." << endl;
+				while(!oreSmelter->use()) {
+					nsleep(500);
+				}			
+				if (!smeltButton->waitForMatch()) {
+					cout << "Job finished" << endl;
+					return;
+				}
+				smeltButton->clickOn();
+				while(!inventory->has(ingot)) {
+					nsleep(500);
+				}
+				continue;
+			}
 			while(!armorDeposit->use()) {
 				nsleep(500);
 			}			
+			while(!inventory->empty) {
+				nsleep(500);
+				inventory->initialize();
+			}
 		}
 	}
 

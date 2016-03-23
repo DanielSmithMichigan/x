@@ -20,51 +20,7 @@ int main(int argc, char** argv )
 {
 	time_t t;
 	srand((unsigned) time(&t));
-
-
-    vector<string> strings;
-    strings.push_back("Form");
-    strings.push_back("Fire");
-    strings.push_back("UseClaySink");
-    strings.push_back("UseBank");
-    strings.push_back("Net");
-    strings.push_back("Drop");
-    strings.push_back("DropUncut");
-    strings.push_back("DropFishingbait");
-    strings.push_back("Withdr");
-    strings.push_back("DropBarbarianrod");
-    strings.push_back("DropLeapingsalmon");
-    strings.push_back("DropWoodcutti");
-    strings.push_back("OepositAllStro");
-    strings.push_back("OepositStro");
-    strings.push_back("Cancel");
-    strings.push_back("Mine");
-    strings.push_back("MineRocks");
-    strings.push_back("FaceSouth");
-    strings.push_back("Clim");
-    strings.push_back("Climb");
-    strings.push_back("Bank");
-    strings.push_back("Check");
-    strings.push_back("Rebuild");
-    strings.push_back("Lay");
-    strings.push_back("Deposit-All");
-    strings.push_back("OepositAll");
-    strings.push_back("Oeposit");
-    strings.push_back("Deposit");
-    strings.push_back("Smith");
-    strings.push_back("Enter");
-    strings.push_back("Exit");
-
-    // Create a SimString database with two person names.
-    simstring::ngram_generator gen(strings.size(), false);
-    simstring::writer_base<std::string> dbw(gen, "../simstring/words.db");
-
-    // Output the retrieved strings separated by ", ".
-    for (int i = 0;i < (int)strings.size();++i) {
-        dbw.insert(strings[i]);
-    }
     
-    dbw.close();
     unique_ptr<Scene> scene(new Scene());
     unique_ptr<FaladorMining> mining(new FaladorMining());
     unique_ptr<SkillChompaHunting> hunting(new SkillChompaHunting());
@@ -109,6 +65,5 @@ int main(int argc, char** argv )
     }
 
     cout << "Finished!!" << endl;
-    cv::waitKey(0);
     return 0;
 }

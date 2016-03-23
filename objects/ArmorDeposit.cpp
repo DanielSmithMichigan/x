@@ -11,9 +11,9 @@
 		windowFilter.reset(new WindowFilter());
 
 	    blacknessRange.reset(new RangeFilter());
-	    blacknessRange->lowSaturation = 26;
+	    blacknessRange->lowSaturation = 13;
 	    blacknessRange->highSaturation = 45;
-	    blacknessRange->lowValue = 22;
+	    blacknessRange->lowValue = 19;
 	    blacknessRange->highValue = 24;
 
 	    blacknessErode.reset(new ErodeFilter());

@@ -8,7 +8,6 @@
 		maxValue = 255;
 		threshold = 120;
 		minHeight = 40;
-		simstringThreshold = .95;
 		thresholdType = cv::THRESH_BINARY;
 	}
 
@@ -16,7 +15,6 @@
 	}
 
 	void OcrObject::initialize() {
-	    dbr.open("../simstring/words.db");
 	    cv::Mat sceneImage = scene->getSceneImage();
 		cv::Mat preparedImage = prepareImage(sceneImage);
 		ocr->run(preparedImage, bestGuess);
@@ -37,12 +35,10 @@
 	}
 
 	bool OcrObject::match(string matchString) {
-	    vector<string> matches;
 	    string searchString = bestGuess;
 	    searchString.erase(remove_if(searchString.begin(), searchString.end(), ::isspace), searchString.end());
 	    searchString = searchString.substr(0, matchString.length());
-	    dbr.retrieve(searchString, simstring::cosine, simstringThreshold, back_inserter(matches));
-	    return find(matches.begin(), matches.end(), matchString) != matches.end();
+	    return matchString.compare(searchString) == 0;
 	}
 
 #endif

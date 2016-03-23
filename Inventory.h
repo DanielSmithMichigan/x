@@ -43,5 +43,6 @@
 			static void waitUntilGone(cv::Mat item, int waitTime = 500);
 			static int numItems;
 			static bool full;
+			static bool empty;
 	};
 #endif

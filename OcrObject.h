@@ -1,7 +1,6 @@
 #ifndef ocrobject_h
 #define ocrobject_h
 	#include "Object.h"
-	#include <simstring/simstring.h>
 	
 	using namespace std;
 
@@ -12,8 +11,6 @@
 			int thresholdType;
 			int minHeight;
 			cv::Mat prepareImage(cv::Mat &imageIn);
-			simstring::reader dbr;
-			double simstringThreshold;
 		public:
 			OcrObject();
 			virtual ~OcrObject();
