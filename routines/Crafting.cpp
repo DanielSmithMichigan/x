@@ -30,7 +30,7 @@
 			if (inventory->has(unfiredUrn)) {
 				cout << "Using Furnace" << endl;
 				while(!craftingFurnace->use()) {
-					cout << "Could not find sink. Going to center of crafting guild" << endl;
+					cout << "Could not find furnace. Going to center of crafting guild" << endl;
 					while (!craftingGuildWaterSymbol->initialize()) {
 						nsleep(500);
 					}
@@ -41,7 +41,9 @@
 			}
 			while (!inventory->full) {
 				cout << "Mining Clay" << endl;
-				craftingGuildWaterSymbol->initialize();
+				while(!craftingGuildWaterSymbol->initialize()) {
+					nsleep(250);
+				}
 				craftingGuildWaterSymbol->goToMinesite();
 				while(!inventory->full) {
 					rock->use("CLAY");
@@ -53,12 +55,12 @@
 			if (inventory->has(clay)) {
 				cout << "Using sink" << endl;
 				while(!sink->use()) {
-					cout << "Could not find furnace. Clicking water symbol" << endl;
+					cout << "Could not find sink. Clicking water symbol" << endl;
 					while (!craftingGuildWaterSymbol->initialize()) {
 						nsleep(500);
 					}
 					craftingGuildWaterSymbol->clickOn(LEFT_CLICK);
-					nsleep(5000);
+					nsleep(3000);
 					scene->redraw();
 				}
 				inventory->waitUntilGone(clay);

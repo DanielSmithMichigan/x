@@ -18,6 +18,7 @@
 			void addTemplate(unique_ptr<Template> tmpl);
 			bool initialize();
 			bool match();
+			bool waitForMatch(int numRetries = 20);
 			int matchType;
 	};
 #endif

@@ -40,7 +40,7 @@
 			static void clickItem(int x, int y, int click);
 			static void waitForItem(int startingAmount = -1, int retries = 20);
 			static bool has(cv::Mat item);
-			static void waitUntilGone(cv::Mat item, int waitTime = 3000);
+			static void waitUntilGone(cv::Mat item, int waitTime = 500);
 			static int numItems;
 			static bool full;
 	};

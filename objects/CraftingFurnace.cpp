@@ -5,7 +5,7 @@
 	CraftingFurnace::CraftingFurnace() {
 	    fireButton.reset(new ImageObject("../images/FireButton.png"));
 	    unique_ptr<Scene> scene(new Scene());
-		select.reset(new Select());
+		select.reset(new Select(4000));
 		goodDialog.push_back("Fire");
 
 		windowFilter.reset(new WindowFilter());

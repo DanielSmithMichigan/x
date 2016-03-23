@@ -1,10 +1,10 @@
 #ifndef MiningGuildLadder_h
 #define MiningGuildLadder_h
-	#include "OcrObject.h"
-	#include "ErodeFilter.h"
-	#include "RangeFilter.h"
-	#include "WindowFilter.h"
-	#include "Select.h"
+	#include "../OcrObject.h"
+	#include "../ErodeFilter.h"
+	#include "../RangeFilter.h"
+	#include "../WindowFilter.h"
+	#include "../Select.h"
 
 	class MiningGuildLadder {
 		private:

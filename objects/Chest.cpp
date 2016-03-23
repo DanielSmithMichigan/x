@@ -119,13 +119,13 @@
 
 	bool Chest::open() {
 		cout << "Checking if bank is open" << endl;
+		scene->redraw();
 		unique_ptr<Template> bankCornerTemplate(new Template("../images/BankCorner.png"));
 		bankCornerTemplate->threshold = .05;
 		bankCornerTemplate->retries = 5;
 		bankCornerTemplate->retryInterval = 200;
 		unique_ptr<ImageObject> bankCorner(new ImageObject());
 		bankCorner->addTemplate(move(bankCornerTemplate));
-		bankCorner->initialize();
-		return bankCorner->match();
+		return bankCorner->initialize();
 	}
 #endif

@@ -5,7 +5,7 @@
 	PottersWheel::PottersWheel() {
 	    mouldButton.reset(new ImageObject("../images/MouldButton.png"));
 	    unique_ptr<Scene> scene(new Scene());
-		select.reset(new Select());
+		select.reset(new Select(4000));
 		goodDialog.push_back("Form");
 
 		windowFilter.reset(new WindowFilter());
@@ -23,9 +23,9 @@
 	    boxRange.reset(new RangeFilter());
 	    boxRange->lowHue = 16;
 	    boxRange->highHue = 18;
-	    boxRange->lowSaturation = 152;
+	    boxRange->lowSaturation = 150;
 	    boxRange->highSaturation = 158;
-	    boxRange->lowValue = 98;
+	    boxRange->lowValue = 94;
 	    boxRange->highValue = 125;
 
 	    boxErode.reset(new ErodeFilter());

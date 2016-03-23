@@ -4,7 +4,7 @@
 
 	FaladorBank::FaladorBank() {
 	    unique_ptr<Scene> scene(new Scene());
-	    select.reset(new Select());
+	    select.reset(new Select(0));
 	    goodDialog.push_back("Bank");
 
 
@@ -87,28 +87,4 @@
         cv::bitwise_and(note, mat, note);
         return select->selectDialog(note, goodDialog, badDialog);
 	} 
-
-	bool FaladorBank::open() {
-		cout << "Checking if bank is open" << endl;
-		unique_ptr<Template> bankCornerTemplate(new Template("../images/BankCorner.png"));
-		bankCornerTemplate->threshold = .05;
-		bankCornerTemplate->retries = 5;
-		bankCornerTemplate->retryInterval = 200;
-		unique_ptr<ImageObject> bankCorner(new ImageObject());
-		bankCorner->addTemplate(move(bankCornerTemplate));
-		bankCorner->initialize();
-		return bankCorner->match();
-	}
-
-	bool FaladorBank::close() {
-		cout << "Checking if bank is open" << endl;
-		scene->redraw();
-		unique_ptr<ImageObject> bankCorner(new ImageObject("../images/BankCloseButton.png"));
-		bankCorner->initialize();
-		if (bankCorner->match()) {
-			bankCorner->clickOn();
-			return true;
-		}
-		return false;
-	}
 #endif

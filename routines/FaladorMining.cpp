@@ -9,6 +9,7 @@
 		miningGuildLadder.reset(new MiningGuildLadder());
 		interfaceMap.reset(new Map());
 		minesite.reset(new Minesite());
+		bankScreen.reset(new BankScreen());
 	}
 
 	FaladorMining::~FaladorMining() {
@@ -31,18 +32,16 @@
 	                }
 	                while(true) {
 	                    bank->use();
-	                    if (bank->open()) {
+	                    if (bankScreen->open()) {
 	                        break;
 	                    }
 	                }
-	                inventory->bankAllItems();
 
-	                while (true) {
-	                    bank->close();
-	                    if (!bank->open()) {
-	                        break;
-	                    }
-	                }
+	                bankScreen->storeAll();
+					while(bankScreen->open()) {
+	                	bankScreen->close();
+						nsleep(200);
+					}
 	            } else {
 	                while (true) {
 	                    if (interfaceMap->goTo("MINING_GUILD_LADDER")) {
@@ -62,10 +61,8 @@
 	                        break;
 	                    }
 	                }
-	                while(true) {
-	                    if (faladorLadder->use()) {
-	                        break;
-	                    }
+	                while(!faladorLadder->use()) {
+	                	interfaceMap->goTo("FALADOR_LADDER");
 	                }
 	            } else {
 	                while (true) {

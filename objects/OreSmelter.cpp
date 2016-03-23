@@ -4,7 +4,7 @@
 
 	OreSmelter::OreSmelter() {
 	    unique_ptr<Scene> scene(new Scene());
-		select.reset(new Select());
+		select.reset(new Select(0));
 		goodDialog.push_back("Withdr");
 
 		windowFilter.reset(new WindowFilter());

@@ -2,9 +2,10 @@
 #define faladormining_h
 	#include "../Inventory.h"
 	#include "../Map.h"
-	#include "../FaladorLadder.h"
-	#include "../FaladorBank.h"
-	#include "../MiningGuildLadder.h"
+	#include "../objects/FaladorLadder.h"
+	#include "../objects/FaladorBank.h"
+	#include "../objects/MiningGuildLadder.h"
+	#include "../BankScreen.h"
 	#include "../Minesite.h"
 
 	using namespace std;
@@ -17,6 +18,7 @@
 		    unique_ptr<MiningGuildLadder> miningGuildLadder;
 		    unique_ptr<Map> interfaceMap;
 		    unique_ptr<Minesite> minesite;
+		    unique_ptr<BankScreen> bankScreen;
 		protected:
 		public:
 			FaladorMining();

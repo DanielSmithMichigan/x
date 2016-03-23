@@ -9,6 +9,7 @@
 #include "routines/Smithing.h"
 #include "routines/SaveInventory.h"
 #include "routines/Crafting.h"
+#include "routines/DragonhideCrafting.h"
 #define ZOOM_IN_KEY 65369
 #define ZOOM_OUT_KEY 65397
 #define VIEW_UP_KEY 65391
@@ -76,6 +77,7 @@ int main(int argc, char** argv )
     unique_ptr<Smithing> smithing(new Smithing());
     unique_ptr<SaveInventory> saveInventory(new SaveInventory());
     unique_ptr<Crafting> crafting(new Crafting());
+    unique_ptr<DragonhideCrafting> dragonhideCrafting(new DragonhideCrafting());
 
     scene->getScreen();
     if (argc == 0) {
@@ -100,6 +102,8 @@ int main(int argc, char** argv )
         saveInventory->run();
     } else if (strcmp(argv[1], "CRAFTING") == 0) {
         crafting->run();
+    } else if (strcmp(argv[1], "DRAGONHIDE_CRAFTING") == 0) {
+        dragonhideCrafting->run();
     } else {
         cout << "NO ACTION" << endl;
     }

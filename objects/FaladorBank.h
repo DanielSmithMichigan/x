@@ -1,11 +1,11 @@
 #ifndef FaladorBank_h
 #define FaladorBank_h
-	#include "OcrObject.h"
-	#include "ErodeFilter.h"
-	#include "RangeFilter.h"
-	#include "WindowFilter.h"
-	#include "ImageObject.h"
-	#include "Select.h"
+	#include "../OcrObject.h"
+	#include "../ErodeFilter.h"
+	#include "../RangeFilter.h"
+	#include "../WindowFilter.h"
+	#include "../ImageObject.h"
+	#include "../Select.h"
 
 	class FaladorBank {
 		private:
@@ -27,7 +27,5 @@
 			FaladorBank();
 			virtual ~FaladorBank();
 			bool use();
-			bool open();
-			bool close();
 	};
 #endif

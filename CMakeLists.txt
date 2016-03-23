@@ -2,5 +2,56 @@ cmake_minimum_required(VERSION 2.8)
 project( main )
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 find_package( OpenCV REQUIRED )
-add_executable( main main.cpp imageUtilities.cpp utilities.cpp interface.cpp Object.cpp Scene.cpp ImageObject.cpp Inventory.cpp Template.cpp MapButton.cpp Filter.cpp ErodeFilter.cpp RangeFilter.cpp WindowFilter.cpp CornerFilter.cpp SurfTemplate.cpp OcrObject.cpp Dialog.cpp Map.cpp FaladorLadder.cpp FaladorBank.cpp MiningGuildLadder.cpp DungeonEntrance.cpp Rock.cpp Minesite.cpp Select.cpp objects/BoxTrap.cpp objects/OreSmelter.cpp objects/Chest.cpp objects/Anvil.cpp objects/Sink.cpp objects/ArmorDeposit.cpp objects/PottersWheel.cpp objects/FishingSpot.cpp objects/CraftingFurnace.cpp objects/mapObjects/CraftingGuildWaterSymbol.cpp routines/FaladorMining.cpp routines/SkillChompaHunting.cpp routines/Agility.cpp routines/Magic.cpp routines/Crafting.cpp routines/Drop.cpp routines/EvilChickenMining.cpp routines/Fletching.cpp routines/Fishing.cpp routines/Smithing.cpp routines/SaveInventory.cpp)
+add_executable(
+	main
+	main.cpp
+	imageUtilities.cpp
+	interface.cpp
+	utilities.cpp
+	Object.cpp
+	Scene.cpp
+	ImageObject.cpp
+	Inventory.cpp
+	Template.cpp
+	MapButton.cpp
+	Filter.cpp
+	ErodeFilter.cpp
+	RangeFilter.cpp
+	WindowFilter.cpp
+	CornerFilter.cpp
+	SurfTemplate.cpp
+	OcrObject.cpp
+	Dialog.cpp
+	Map.cpp
+	Rock.cpp
+	Minesite.cpp
+	Select.cpp
+	BankScreen.cpp
+	objects/FaladorLadder.cpp
+	objects/FaladorBank.cpp
+	objects/MiningGuildLadder.cpp
+	objects/BoxTrap.cpp
+	objects/OreSmelter.cpp
+	objects/Chest.cpp
+	objects/Anvil.cpp
+	objects/Sink.cpp
+	objects/ArmorDeposit.cpp
+	objects/PottersWheel.cpp
+	objects/FaladorBank.cpp
+	objects/FishingSpot.cpp
+	objects/CraftingFurnace.cpp
+	objects/mapObjects/CraftingGuildWaterSymbol.cpp
+	routines/FaladorMining.cpp
+	routines/SkillChompaHunting.cpp
+	routines/Agility.cpp
+	routines/Magic.cpp
+	routines/Crafting.cpp
+	routines/Drop.cpp
+	routines/EvilChickenMining.cpp
+	routines/Fletching.cpp
+	routines/Fishing.cpp
+	routines/Smithing.cpp
+	routines/SaveInventory.cpp
+	routines/DragonhideCrafting.cpp
+	)
 target_link_libraries( main ${OpenCV_LIBS} X11 Xtst)

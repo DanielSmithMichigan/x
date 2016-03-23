@@ -5,17 +5,17 @@
 	Sink::Sink() {
 	    softenButton.reset(new ImageObject("../images/SoftenButton.png"));
 	    unique_ptr<Scene> scene(new Scene());
-		select.reset(new Select());
+		select.reset(new Select(2000));
 		goodDialog.push_back("UseClaySink");
 
 		windowFilter.reset(new WindowFilter());
 
 	    waterRange.reset(new RangeFilter());
 	    waterRange->lowHue = 109;
-	    waterRange->highHue = 110;
+	    waterRange->highHue = 111;
 	    waterRange->lowSaturation = 116;
-	    waterRange->highSaturation = 126;
-	    waterRange->lowValue = 230;
+	    waterRange->highSaturation = 127;
+	    waterRange->lowValue = 220;
 	    waterRange->highValue = 255;
 
 	    waterErode.reset(new ErodeFilter());

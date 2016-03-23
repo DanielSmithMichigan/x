@@ -44,12 +44,12 @@
 	{
 		glideToPosition(topLeft.x + 30, topLeft.y - 13);
 		click(LEFT_CLICK);
-		nsleep(10000);
+		nsleep(5000);
 	}
 	void CraftingGuildWaterSymbol::goToCraftingGuildCenter()
 	{
 		glideToPosition(topLeft.x, topLeft.y - 13);
 		click(LEFT_CLICK);
-		nsleep(10000);
+		nsleep(7000);
 	}
 #endif
