@@ -12,8 +12,10 @@
 	    rockBaseRange.reset(new RangeFilter());
 	    rockBaseRange->lowHue = 21;
 	    rockBaseRange->highHue = 23;
-	    rockBaseRange->lowSaturation = 148;
-	    rockBaseRange->highSaturation = 153;
+	    rockBaseRange->lowSaturation = 150;
+	    rockBaseRange->highSaturation = 155;
+	    rockBaseRange->lowValue = 160;
+	    rockBaseRange->highValue = 185;
 
 	    rockBaseDungeonRange.reset(new RangeFilter());
 	    rockBaseDungeonRange->lowHue = 19;

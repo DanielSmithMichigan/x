@@ -4,10 +4,10 @@
 
     using namespace std;
 
-    bool imagesEqual(cv::Mat a, cv::Mat b) 
+    bool imagesEqual(cv::Mat a, cv::Mat b, float threshold) 
     {    
         cv::Point topLeft;
-        findImage(a, b, topLeft, .025);
+        findImage(a, b, topLeft, threshold);
         return topLeft.x == 0 && topLeft.y == 0;
     }
 

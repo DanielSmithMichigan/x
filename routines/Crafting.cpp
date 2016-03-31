@@ -39,7 +39,7 @@
 		        inventory->waitUntilGone(unfiredUrn);
 				inventory->dropAllItems();
 			}
-			while (!inventory->full) {
+			if (!inventory->full) {
 				cout << "Mining Clay" << endl;
 				while(!craftingGuildWaterSymbol->initialize()) {
 					nsleep(250);
@@ -48,9 +48,9 @@
 				while(!inventory->full) {
 					rock->use("CLAY");
 					inventory->waitForItem();
+					inventory->dropEverythingBut(dontDrop);
+					inventory->initialize();
 				}
-				inventory->dropEverythingBut(dontDrop);
-				inventory->initialize();
 			}
 			if (inventory->has(clay)) {
 				cout << "Using sink" << endl;
@@ -59,9 +59,7 @@
 					while (!craftingGuildWaterSymbol->initialize()) {
 						nsleep(500);
 					}
-					craftingGuildWaterSymbol->clickOn(LEFT_CLICK);
-					nsleep(3000);
-					scene->redraw();
+					craftingGuildWaterSymbol->goToCraftingGuildCenter();
 				}
 				inventory->waitUntilGone(clay);
 			}

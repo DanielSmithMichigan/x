@@ -38,7 +38,7 @@
 			static cv::Mat imageFromSlot(int x, int y);
 			static void markEmptyCells();
 			static void clickItem(int x, int y, int click);
-			static void waitForItem(int startingAmount = -1, int retries = 20);
+			static void waitForItem(int startingAmount = -1, int retries = 3);
 			static bool has(cv::Mat item);
 			static void waitUntilGone(cv::Mat item, int waitTime = 500);
 			static int numItems;

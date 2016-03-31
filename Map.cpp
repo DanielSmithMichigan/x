@@ -44,12 +44,6 @@
 
 	void Map::initialize() {
 	    Object::initialize();
-		while(true) {
-			if (locate()) {
-				break;
-			}
-			nsleep(500);
-		}
 	}
 
 	map<string, bool> Map::getFlags(string location) {
@@ -97,6 +91,20 @@
 		clickY += directionY == "SOUTH"? distanceY : -1 * distanceY;
 		glideToPosition(clickX, clickY);
 		click(LEFT_CLICK);
+	}
+
+	void Map::waitDuringMovement(int maxRetries) {
+		nsleep(1000);
+		scene->redraw();
+		while (maxRetries-- > 0) {
+			cv::Mat currentMap = getImage();
+			nsleep(250);
+			scene->redraw();
+			cv::Mat newMap = getImage();
+			if (imagesEqual(currentMap, newMap, .05)) {
+				return;
+			}
+		}
 	}
 
 	bool Map::goTo(string l, int maxDistance) {

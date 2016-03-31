@@ -5,7 +5,7 @@
 	Sink::Sink() {
 	    softenButton.reset(new ImageObject("../images/SoftenButton.png"));
 	    unique_ptr<Scene> scene(new Scene());
-		select.reset(new Select(2000));
+		select.reset(new Select(0));
 		goodDialog.push_back("UseClaySink");
 
 		windowFilter.reset(new WindowFilter());
@@ -69,8 +69,7 @@
 
         cv::bitwise_and(water, sink, water);
         if (select->selectDialog(water, goodDialog, badDialog, beforeSelect)) {
-        	scene->redraw();
-        	if (softenButton->initialize()) {
+        	if (softenButton->waitForMatch()) {
         		softenButton->clickOn();
         		return true;
         	}

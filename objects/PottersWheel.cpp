@@ -5,7 +5,7 @@
 	PottersWheel::PottersWheel() {
 	    mouldButton.reset(new ImageObject("../images/MouldButton.png"));
 	    unique_ptr<Scene> scene(new Scene());
-		select.reset(new Select(4000));
+		select.reset(new Select(0));
 		goodDialog.push_back("Form");
 
 		windowFilter.reset(new WindowFilter());
@@ -58,8 +58,7 @@
         cv::bitwise_and(wheel, box, wheel);
 
         if (select->selectDialog(wheel, goodDialog, badDialog)) {
-        	scene->redraw();
-        	if (mouldButton->initialize()) {
+        	if (mouldButton->waitForMatch()) {
         		mouldButton->clickOn();
         		return true;
         	}

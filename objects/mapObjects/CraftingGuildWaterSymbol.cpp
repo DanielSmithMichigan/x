@@ -3,6 +3,7 @@
 	#include "CraftingGuildWaterSymbol.h"
 
 	CraftingGuildWaterSymbol::CraftingGuildWaterSymbol() {
+		map.reset(new Map());
 	}
 
 	CraftingGuildWaterSymbol::~CraftingGuildWaterSymbol() {
@@ -10,6 +11,8 @@
 
 	bool CraftingGuildWaterSymbol::initialize()
 	{
+		map->initialize();
+		scene->redraw();
 		topLeft.x = -1; topLeft.y = -1;
 		unique_ptr<Template> waterIconTemplate(new Template("../images/mapObjects/waterIcon.png"));
 		waterIconTemplate->threshold = .025;
@@ -44,12 +47,12 @@
 	{
 		glideToPosition(topLeft.x + 30, topLeft.y - 13);
 		click(LEFT_CLICK);
-		nsleep(5000);
+		map->waitDuringMovement();
 	}
 	void CraftingGuildWaterSymbol::goToCraftingGuildCenter()
 	{
 		glideToPosition(topLeft.x, topLeft.y - 13);
 		click(LEFT_CLICK);
-		nsleep(7000);
+		map->waitDuringMovement();
 	}
 #endif

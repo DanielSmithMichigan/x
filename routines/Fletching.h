@@ -6,6 +6,7 @@
 	#include "../ImageObject.h"
 	#include "../Template.h"
 	#include "../Scene.h"
+	#include "../BankScreen.h"
 
 	using namespace std;
 

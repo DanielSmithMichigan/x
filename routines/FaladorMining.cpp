@@ -20,6 +20,12 @@
 	    while (true) {
 	    	minesite->initialize();
 	        interfaceMap->initialize();
+	        while(true) {
+	        	if (interfaceMap->locate()) {
+	        		break;
+	        	}
+	        	nsleep(500);
+	        }
 	        inventory->initialize();
 
 	        if (inventory->full) {

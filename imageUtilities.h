@@ -17,7 +17,7 @@
 	#include <ctype.h>
 
 	using namespace std;
-	bool imagesEqual(cv::Mat a, cv::Mat b);
+	bool imagesEqual(cv::Mat a, cv::Mat b, float threshold = .025);
 	cv::Mat ImageFromDisplay(int Width, int Height, int x = 0, int y = 0);
 	void findImage(cv::Mat &img_scene, cv::Mat &img_object, cv::Point &topLeft, float threshold = .25);
 #endif

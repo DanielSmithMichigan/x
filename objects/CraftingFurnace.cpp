@@ -5,7 +5,7 @@
 	CraftingFurnace::CraftingFurnace() {
 	    fireButton.reset(new ImageObject("../images/FireButton.png"));
 	    unique_ptr<Scene> scene(new Scene());
-		select.reset(new Select(4000));
+		select.reset(new Select(0));
 		goodDialog.push_back("Fire");
 
 		windowFilter.reset(new WindowFilter());
@@ -22,10 +22,10 @@
 	    ringErode->kernelSize = 1;
 
 	    fireRange.reset(new RangeFilter());
-	    fireRange->lowHue = 3;
+	    fireRange->lowHue = 1;
 	    fireRange->highHue = 5;
-	    fireRange->lowSaturation = 234;
-	    fireRange->highValue = 99;
+	    fireRange->lowSaturation = 230;
+	    fireRange->highValue = 108;
 
 	    fireErode.reset(new ErodeFilter());
 	    fireErode->kernelSize = 1;
@@ -47,7 +47,7 @@
         ring = windowFilter->apply(ring);
         ring = ringRange->apply(ring);
         ring = ringErode->apply(ring);
-
+        
         scene->redraw();
         fire = scene->getSceneImage();
         fire = windowFilter->apply(fire);
@@ -57,8 +57,7 @@
         cv::bitwise_and(fire, ring, ring);
 
         if (select->selectDialog(ring, goodDialog, badDialog)) {
-        	scene->redraw();
-        	if (fireButton->initialize()) {
+        	if (fireButton->waitForMatch()) {
         		fireButton->clickOn();
         		return true;
         	}

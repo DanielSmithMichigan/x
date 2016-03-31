@@ -33,6 +33,7 @@
 		public:
 			Map();
 			virtual ~Map();
+			void waitDuringMovement(int maxRetries = 20);
 			void initialize();
 			bool locate();
 			bool goTo(string l, int maxDistance = 25);
