@@ -34,7 +34,7 @@
 			Map();
 			virtual ~Map();
 			void waitDuringMovement(int maxRetries = 20);
-			void initialize();
+			bool initialize();
 			bool locate();
 			bool goTo(string l, int maxDistance = 25);
 			map<string, bool> getFlags(string location);

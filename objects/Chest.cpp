@@ -78,13 +78,13 @@
         blackness = blacknessErode->apply(blackness);
         blackness = blacknessDilate->apply(blackness);
         
-        scene->redraw();
-        rock = scene->getSceneImage();
-        rock = windowFilter->apply(rock);
-        rock = rockRange->apply(rock);
-        rock = rockErode->apply(rock);
-        rock = rockDilate->apply(rock);
-        cv::bitwise_and(blackness, rock, blackness);
+        // scene->redraw();
+        // rock = scene->getSceneImage();
+        // rock = windowFilter->apply(rock);
+        // rock = rockRange->apply(rock);
+        // rock = rockErode->apply(rock);
+        // rock = rockDilate->apply(rock);
+        // cv::bitwise_and(blackness, rock, blackness);
 
         scene->redraw();
         chest = scene->getSceneImage();

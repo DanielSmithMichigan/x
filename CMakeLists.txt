@@ -27,6 +27,7 @@ add_executable(
 	Minesite.cpp
 	Select.cpp
 	BankScreen.cpp
+	objects/ActionButton.cpp
 	objects/FaladorLadder.cpp
 	objects/FaladorBank.cpp
 	objects/MiningGuildLadder.cpp
@@ -40,7 +41,9 @@ add_executable(
 	objects/FaladorBank.cpp
 	objects/FishingSpot.cpp
 	objects/CraftingFurnace.cpp
+	objects/SmeltingFurnace.cpp
 	objects/mapObjects/CraftingGuildWaterSymbol.cpp
+	objects/mapObjects/LumbridgeSmeltingMap.cpp
 	routines/FaladorMining.cpp
 	routines/SkillChompaHunting.cpp
 	routines/Agility.cpp
@@ -49,6 +52,7 @@ add_executable(
 	routines/Drop.cpp
 	routines/EvilChickenMining.cpp
 	routines/Fletching.cpp
+	routines/GoldSmithing.cpp
 	routines/Fishing.cpp
 	routines/Smithing.cpp
 	routines/SaveInventory.cpp

@@ -16,8 +16,9 @@
 		
 	}
 
-	void Object::initialize() {
+	bool Object::initialize() {
 		center = cv::Point(topLeft.x + (width / 2), topLeft.y + (height/ 2));
+		return true;
 	}
 
 	void Object::draw(const cv::Scalar &borderColor, int borderWidth) {
@@ -54,5 +55,20 @@
 		int y = randomBetween(topLeft.y + clickMarginHeight, topLeft.y + height - clickMarginHeight);
 		glideToPosition(x, y);
 		click(button);
+	}
+
+	bool Object::waitForMatch(int numRetries)
+	{
+		if (--numRetries < 0) {
+			return false;
+		}
+
+		scene->redraw();
+		if (!initialize()) {
+			nsleep(250);
+			waitForMatch(numRetries);
+		} else {
+			return true;
+		}
 	}
 #endif

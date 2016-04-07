@@ -42,8 +42,8 @@
 
 	}
 
-	void Map::initialize() {
-	    Object::initialize();
+	bool Map::initialize() {
+	    return Object::initialize();
 	}
 
 	map<string, bool> Map::getFlags(string location) {

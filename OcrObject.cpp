@@ -14,7 +14,7 @@
 	OcrObject::~OcrObject() {
 	}
 
-	void OcrObject::initialize() {
+	bool OcrObject::initialize() {
 	    cv::Mat sceneImage = scene->getSceneImage();
 		cv::Mat preparedImage = prepareImage(sceneImage);
 		ocr->run(preparedImage, bestGuess);
