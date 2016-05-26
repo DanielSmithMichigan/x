@@ -11,6 +11,9 @@
 #include "routines/Crafting.h"
 #include "routines/DragonhideCrafting.h"
 #include "routines/GoldSmithing.h"
+#include "routines/AmuletStringing.h"
+#include "routines/AmuletCharging.h"
+#include "routines/Prayer.h"
 #define ZOOM_IN_KEY 65369
 #define ZOOM_OUT_KEY 65397
 #define VIEW_UP_KEY 65391
@@ -36,6 +39,9 @@ int main(int argc, char** argv )
     unique_ptr<Crafting> crafting(new Crafting());
     unique_ptr<DragonhideCrafting> dragonhideCrafting(new DragonhideCrafting());
     unique_ptr<GoldSmithing> goldSmithing(new GoldSmithing());
+    unique_ptr<AmuletStringing> amuletStringing(new AmuletStringing());
+    unique_ptr<AmuletCharging> amuletCharging(new AmuletCharging());
+    unique_ptr<Prayer> prayer(new Prayer());
 
     scene->getScreen();
     if (argc == 0) {
@@ -64,6 +70,14 @@ int main(int argc, char** argv )
         dragonhideCrafting->run();
     } else if (strcmp(argv[1], "GOLD_SMITHING") == 0) {
         goldSmithing->run();
+    } else if (strcmp(argv[1], "AMULET_STRINGING") == 0) {
+        amuletStringing->run();
+    } else if (strcmp(argv[1], "AMULET_CHARGING") == 0) {
+        amuletCharging->run();
+    } else if (strcmp(argv[1], "SPELL_CASTING") == 0) {
+        amuletCharging->run(argv[2]);
+    } else if (strcmp(argv[1], "PRAYER") == 0) {
+        prayer->run();
     } else {
         cout << "NO ACTION" << endl;
     }

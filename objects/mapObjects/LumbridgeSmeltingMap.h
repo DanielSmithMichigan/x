@@ -10,6 +10,7 @@
 		public:
 			LumbridgeSmeltingMap();
 			~LumbridgeSmeltingMap();
+			bool waitUntilInitialize();
 			bool initialize();
 			void goToBank();
 			void goToFurnace();

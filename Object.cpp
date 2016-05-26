@@ -57,7 +57,7 @@
 		click(button);
 	}
 
-	bool Object::waitForMatch(int numRetries)
+	bool Object::waitForMatch(int retryInterval, int numRetries)
 	{
 		if (--numRetries < 0) {
 			return false;
@@ -65,8 +65,8 @@
 
 		scene->redraw();
 		if (!initialize()) {
-			nsleep(250);
-			waitForMatch(numRetries);
+			nsleep(retryInterval);
+			waitForMatch(retryInterval, numRetries);
 		} else {
 			return true;
 		}

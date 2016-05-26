@@ -24,6 +24,17 @@
 		presetOne->clickOn();
 	}
 
+	bool BankScreen::waitUntilOpen(int retries) {
+		if (open()) {
+			return true;
+		}
+		if (--retries <= 0) {
+			return false;
+		}
+		
+		return waitUntilOpen(retries);
+	}
+
 	bool BankScreen::open() {
 		cout << "Checking if bank is open" << endl;
 		scene->redraw();

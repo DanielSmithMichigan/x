@@ -3,7 +3,7 @@
 	#include "Fletching.h"
 
 	Fletching::Fletching() {
-
+		actionButton.reset(new ActionButton());
 	}
 
 	Fletching::~Fletching() {
@@ -20,7 +20,7 @@
 		unique_ptr<ImageObject> fletchingKnife(new ImageObject());
 		fletchingKnife->addTemplate(move(fletchingKnifeTemplate));
 		unique_ptr<ImageObject> fletchingButton(new ImageObject("../images/FletchButton.png"));
-		cv::Mat mapleLog = cv::imread("../images/MapleLog.png");
+		cv::Mat mapleLog = cv::imread("../images/inventoryItems/YewLog.png");
 		inventory->initialize();
 		while(true) {
 			while(!chest->use()) {
@@ -44,8 +44,8 @@
 			if (fletchingKnife->waitForMatch(4)) {
 				fletchingKnife->clickOn();
 			}
-			fletchingButton->waitForMatch();
-			fletchingButton->clickOn();
+			actionButton->waitForMatch();
+			actionButton->clickOn(LEFT_CLICK);
 			inventory->waitUntilGone(mapleLog);
 		}
 

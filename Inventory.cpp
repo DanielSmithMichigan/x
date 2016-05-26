@@ -214,6 +214,19 @@
 		}
 	}
 
+	vector<cv::Point> Inventory::getAllMatches(cv::Mat item) {
+		vector<cv::Point> matches;
+		scene->redraw();
+		for (int j = 0; j < INVENTORY_ROWS; j++) {
+			for (int i = 0; i < INVENTORY_COLS; i++) {
+				if (imagesEqual(imageFromSlot(i, j), item)) {
+					matches.push_back(cv::Point(i, j));
+				}
+			}
+		}
+		return matches;
+	}
+
 	bool Inventory::has(cv::Mat item) {
 		scene->redraw();
 		for (int i = 0; i < INVENTORY_COLS; i++) {

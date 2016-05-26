@@ -13,8 +13,8 @@
 			vector<unique_ptr<Template>> templates;
 		public:
 			ImageObject();
-			ImageObject(string imageLocation);
-			virtual ~ImageObject();
+			ImageObject(string imageLocation, float threshold = -1);
+			virtual ~ImageObject(); 
 			void addTemplate(unique_ptr<Template> tmpl);
 			bool initialize();
 			bool match();

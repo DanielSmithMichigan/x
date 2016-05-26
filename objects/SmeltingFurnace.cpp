@@ -11,9 +11,9 @@
 		windowFilter.reset(new WindowFilter());
 
 	    redRange.reset(new RangeFilter());
-	    redRange->lowHue = 2;
+	    redRange->lowHue = 0;
 	    redRange->highHue = 3;
-	    redRange->lowSaturation = 234;
+	    redRange->lowSaturation = 232;
 	    redRange->lowValue = 160;
 
 	    redErode.reset(new ErodeFilter());
@@ -36,12 +36,12 @@
 
 
 	    hammerRange.reset(new RangeFilter());
-	    hammerRange->lowHue = 16;
+	    hammerRange->lowHue = 15;
 	    hammerRange->highHue = 17;
-	    hammerRange->lowSaturation = 93;
+	    hammerRange->lowSaturation = 90;
 	    hammerRange->highSaturation = 96;
 	    hammerRange->lowValue = 19;
-	    hammerRange->highValue = 93;
+	    hammerRange->highValue = 101;
 
 	    hammerErode.reset(new ErodeFilter());
 	    hammerErode->kernelSize = 1;
@@ -49,6 +49,22 @@
 	    hammerDilate.reset(new ErodeFilter());
 	    hammerDilate->kernelSize = 30;
 	    hammerDilate->mode = "DILATE";
+
+
+	    bricksRange.reset(new RangeFilter());
+	    bricksRange->lowHue = 20;
+	    bricksRange->highHue = 26;
+	    bricksRange->lowSaturation = 59;
+	    bricksRange->highSaturation = 62;
+	    bricksRange->lowValue = 134;
+	    bricksRange->highValue = 166;
+
+	    bricksErode.reset(new ErodeFilter());
+	    bricksErode->kernelSize = 1;
+
+	    bricksDilate.reset(new ErodeFilter());
+	    bricksDilate->kernelSize = 25;
+	    bricksDilate->mode = "DILATE";
 	}
 
 	SmeltingFurnace::~SmeltingFurnace() {
@@ -56,7 +72,7 @@
 
 	bool SmeltingFurnace::use()
 	{
-	    cv::Mat red, gate, hammer;
+	    cv::Mat red, gate, hammer, bricks;
 
         scene->redraw();
         red = scene->getSceneImage();
@@ -79,7 +95,15 @@
         hammer = hammerErode->apply(hammer);
         hammer = hammerDilate->apply(hammer);
         cv::bitwise_and(hammer, red, red);
-
+        
+        scene->redraw();
+        bricks = scene->getSceneImage();
+        bricks = windowFilter->apply(bricks);
+        bricks = bricksRange->apply(bricks);
+        bricks = bricksErode->apply(bricks);
+        bricks = bricksDilate->apply(bricks);
+        cv::bitwise_and(bricks, red, red);
+        
         if (select->selectDialog(red, goodDialog, badDialog)) {
         	if (actionButton->waitForMatch()) {
         		actionButton->clickOn();

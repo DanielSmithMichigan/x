@@ -2,8 +2,9 @@
 #define Chest_cpp
 	#include "Chest.h"
 
-	Chest::Chest() {
-	    unique_ptr<Scene> scene(new Scene());
+	Chest::Chest(string location) : location(location) {
+	    scene.reset(new Scene());
+	    bankScreen.reset(new BankScreen());
 	    select.reset(new Select(0));
 		dialog.reset(new Dialog());
 		goodDialog.push_back("UseBank");
@@ -15,7 +16,7 @@
 	    blacknessRange->highHue = 22;
 	    blacknessRange->lowSaturation = 70;
 	    blacknessRange->highSaturation = 110;
-	    blacknessRange->lowValue = 23;
+	    blacknessRange->lowValue = 21;
 	    blacknessRange->highValue = 26;
 
 	    blacknessErode.reset(new ErodeFilter());
@@ -24,6 +25,20 @@
 	    blacknessDilate.reset(new ErodeFilter());
 	    blacknessDilate->kernelSize = 25;
 	    blacknessDilate->mode = "DILATE";
+
+	    bookRange.reset(new RangeFilter());
+	    bookRange->lowHue = 15;
+	    bookRange->highHue = 17;
+	    bookRange->lowSaturation = 58;
+	    bookRange->highSaturation = 63;
+	    bookRange->lowValue = 224;
+
+	    bookErode.reset(new ErodeFilter());
+	    bookErode->kernelSize = 1;
+
+	    bookDilate.reset(new ErodeFilter());
+	    bookDilate->kernelSize = 50;
+	    bookDilate->mode = "DILATE";
 
 	    rockRange.reset(new RangeFilter());
 	    rockRange->lowHue = 18;
@@ -69,7 +84,7 @@
 
 	bool Chest::use()
 	{
-	    cv::Mat blackness, rock, chest, lock;
+	    cv::Mat blackness, rock, book, chest, lock;
 
         scene->redraw();
         blackness = scene->getSceneImage();
@@ -78,13 +93,23 @@
         blackness = blacknessErode->apply(blackness);
         blackness = blacknessDilate->apply(blackness);
         
-        // scene->redraw();
-        // rock = scene->getSceneImage();
-        // rock = windowFilter->apply(rock);
-        // rock = rockRange->apply(rock);
-        // rock = rockErode->apply(rock);
-        // rock = rockDilate->apply(rock);
-        // cv::bitwise_and(blackness, rock, blackness);
+        if (location == "PORT_SARIM") {
+	        scene->redraw();
+	        rock = scene->getSceneImage();
+	        rock = windowFilter->apply(rock);
+	        rock = rockRange->apply(rock);
+	        rock = rockErode->apply(rock);
+	        rock = rockDilate->apply(rock);
+	        cv::bitwise_and(blackness, rock, blackness);
+    	} else if (location == "LUMBRIDGE") {
+	        scene->redraw();
+	        book = scene->getSceneImage();
+	        book = windowFilter->apply(book);
+	        book = bookRange->apply(book);
+	        book = bookErode->apply(book);
+	        book = bookDilate->apply(book);
+	        cv::bitwise_and(blackness, book, blackness);
+    	}
 
         scene->redraw();
         chest = scene->getSceneImage();
@@ -100,7 +125,11 @@
         lock = lockRange->apply(lock);
         cv::bitwise_and(blackness, lock, blackness);
 
-        return select->selectDialog(blackness, goodDialog, badDialog);
+        if (select->selectDialog(blackness, goodDialog, badDialog)) {
+        	return bankScreen->waitUntilOpen();
+        }
+
+        return false;
 	} 
 
 	void Chest::storeAll()

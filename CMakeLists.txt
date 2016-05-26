@@ -8,6 +8,7 @@ add_executable(
 	imageUtilities.cpp
 	interface.cpp
 	utilities.cpp
+	ActionBar.cpp
 	Object.cpp
 	Scene.cpp
 	ImageObject.cpp
@@ -54,8 +55,11 @@ add_executable(
 	routines/Fletching.cpp
 	routines/GoldSmithing.cpp
 	routines/Fishing.cpp
+	routines/Prayer.cpp
 	routines/Smithing.cpp
 	routines/SaveInventory.cpp
 	routines/DragonhideCrafting.cpp
+	routines/AmuletStringing.cpp
+	routines/AmuletCharging.cpp
 	)
 target_link_libraries( main ${OpenCV_LIBS} X11 Xtst)

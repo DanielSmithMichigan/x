@@ -37,6 +37,19 @@
 	    unique_ptr<ImageObject> fishIcon (new ImageObject());
 	    fishIcon->addTemplate(move(fishIconTemplate));
 
+		unique_ptr<Template> furnaceIconTemplate(new Template("../images/mapObjects/furnaceIcon.png"));
+		furnaceIconTemplate->threshold = .025;
+	    unique_ptr<ImageObject> furnaceIcon (new ImageObject());
+	    furnaceIcon->addTemplate(move(furnaceIconTemplate));
+
+	    if (topLeft.x == -1 || topLeft.y == -1) {
+	        if (furnaceIcon->initialize()) {
+	            topLeft = cv::Point(furnaceIcon->topLeft.x - 52, furnaceIcon->topLeft.y - 4);
+			    width = furnaceIcon->width;
+			    height = furnaceIcon->height;
+	        }
+	    }
+
 	    if (topLeft.x == -1 || topLeft.y == -1) {
 		    if (dollarIcon->initialize()) {
 		        topLeft = cv::Point(dollarIcon->topLeft.x, dollarIcon->topLeft.y);
@@ -75,9 +88,16 @@
 	    }
 	    return false;
 	} 
+
+	bool LumbridgeSmeltingMap::waitUntilInitialize() {
+		while(!initialize()) {
+			nsleep(500);
+		}
+		return true;
+	}
 	void LumbridgeSmeltingMap::goToBank()
 	{
-		glideToPosition(topLeft.x - 5, topLeft.y);
+		glideToPosition(topLeft.x, topLeft.y);
 		click(LEFT_CLICK);
 		map->waitDuringMovement();
 	}

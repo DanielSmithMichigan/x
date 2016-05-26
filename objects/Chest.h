@@ -7,10 +7,12 @@
 	#include "../Dialog.h"
 	#include "../Select.h"
 	#include "../ImageObject.h"
-
+	#include "../BankScreen.h"
 	class Chest {
 		private:
+			string location;
 			unique_ptr<Scene> scene;
+			unique_ptr<BankScreen> bankScreen;
 			unique_ptr<WindowFilter> windowFilter;
 			unique_ptr<RangeFilter> blacknessRange;
 			unique_ptr<ErodeFilter> blacknessErode;
@@ -18,6 +20,9 @@
 			unique_ptr<RangeFilter> rockRange;
 			unique_ptr<ErodeFilter> rockErode;
 			unique_ptr<ErodeFilter> rockDilate;
+			unique_ptr<RangeFilter> bookRange;
+			unique_ptr<ErodeFilter> bookErode;
+			unique_ptr<ErodeFilter> bookDilate;
 			unique_ptr<RangeFilter> chestRange;
 			unique_ptr<ErodeFilter> chestErode;
 			unique_ptr<ErodeFilter> chestDilate;
@@ -28,7 +33,7 @@
 			vector<string> badDialog;
 			float maxArea;
 		public:
-			Chest();
+			Chest(string location = "PORT_SARIM");
 			~Chest();
 			bool use();
 			void storeAll();

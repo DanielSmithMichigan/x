@@ -10,9 +10,12 @@
 		vector<unique_ptr<Template>>().swap(templates);
 	}
 
-	ImageObject::ImageObject(string imageLocation)
+	ImageObject::ImageObject(string imageLocation, float threshold)
 	{
 		unique_ptr<Template> tmpl(new Template(imageLocation));
+		if (threshold != -1) {
+			tmpl->threshold = threshold;
+		}
 		templates.push_back(move(tmpl));
 		ImageObject();
 	}

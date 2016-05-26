@@ -1,5 +1,5 @@
-#ifndef Fletching_h
-#define Fletching_h
+#ifndef Prayer_h
+#define Prayer_h
 
 	#include "../objects/Chest.h"
 	#include "../Inventory.h"
@@ -7,17 +7,15 @@
 	#include "../Template.h"
 	#include "../Scene.h"
 	#include "../BankScreen.h"
-	#include "../objects/ActionButton.h"
 
 	using namespace std;
 
-	class Fletching {
+	class Prayer {
 		private:
-			unique_ptr<ActionButton> actionButton;
 		protected:
 		public:
-			Fletching();
-			virtual ~Fletching();
+			Prayer();
+			virtual ~Prayer();
 			void run();
 	};
 #endif

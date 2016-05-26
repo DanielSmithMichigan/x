@@ -22,6 +22,9 @@
 			unique_ptr<RangeFilter> hammerRange;
 			unique_ptr<ErodeFilter> hammerErode;
 			unique_ptr<ErodeFilter> hammerDilate;
+			unique_ptr<RangeFilter> bricksRange;
+			unique_ptr<ErodeFilter> bricksErode;
+			unique_ptr<ErodeFilter> bricksDilate;
 			unique_ptr<Select> select;
 			vector<string> goodDialog;
 			vector<string> badDialog;

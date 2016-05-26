@@ -13,5 +13,6 @@
 			void storeAll();
 			void loadPresetOne();
 			bool open();
+			bool waitUntilOpen(int retries = 5);
 	};
 #endif
