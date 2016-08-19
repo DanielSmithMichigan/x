@@ -18,6 +18,7 @@ add_executable(
 	Filter.cpp
 	ErodeFilter.cpp
 	RangeFilter.cpp
+	ShiftFilter.cpp
 	WindowFilter.cpp
 	CornerFilter.cpp
 	SurfTemplate.cpp

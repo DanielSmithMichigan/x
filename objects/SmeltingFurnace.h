@@ -2,6 +2,7 @@
 #define SmeltingFurnace_h
 	#include "../ErodeFilter.h"
 	#include "../RangeFilter.h"
+	#include "../ShiftFilter.h"
 	#include "../WindowFilter.h"
 	#include "../Select.h"
 	#include "../Inventory.h"
@@ -16,6 +17,8 @@
 			unique_ptr<WindowFilter> windowFilter;
 			unique_ptr<RangeFilter> redRange;
 			unique_ptr<ErodeFilter> redErode;
+			unique_ptr<ErodeFilter> redRoofDilate;
+			unique_ptr<ShiftFilter> redRoofShiftFilter;
 			unique_ptr<RangeFilter> gateRange;
 			unique_ptr<ErodeFilter> gateErode;
 			unique_ptr<ErodeFilter> gateDilate;

@@ -5,7 +5,7 @@
 	GoldSmithing::GoldSmithing() {
 		smeltingFurnace.reset(new SmeltingFurnace());
 		bankScreen.reset(new BankScreen());
-		chest.reset(new Chest("LUMBRIDGE"));
+		chest.reset(new Chest("ELSE"));
 		inventory.reset(new Inventory());
 		lumbridgeSmeltingMap.reset(new LumbridgeSmeltingMap());
 	}

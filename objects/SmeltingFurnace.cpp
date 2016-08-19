@@ -19,6 +19,13 @@
 	    redErode.reset(new ErodeFilter());
 	    redErode->kernelSize = 1;
 
+	    redRoofDilate.reset(new ErodeFilter());
+	    redRoofDilate->mode = "DILATE";
+	    redRoofDilate->kernelSize = 10;
+
+	    redRoofShiftFilter.reset(new ShiftFilter());
+	    redRoofShiftFilter->offsetY = 78;
+
 	    gateRange.reset(new RangeFilter());
 	    gateRange->lowHue = 30;
 	    gateRange->highHue = 30;
@@ -72,13 +79,21 @@
 
 	bool SmeltingFurnace::use()
 	{
-	    cv::Mat red, gate, hammer, bricks;
+	    cv::Mat red, redRoof, gate, hammer, bricks;
 
         scene->redraw();
         red = scene->getSceneImage();
         red = windowFilter->apply(red);
         red = redRange->apply(red);
         red = redErode->apply(red);
+
+        scene->redraw();
+        redRoof = scene->getSceneImage();
+        redRoof = windowFilter->apply(redRoof);
+        redRoof = redRange->apply(redRoof);
+        redRoof = redRoofShiftFilter->apply(redRoof);
+        redRoof = redRoofDilate->apply(redRoof);
+        cv::bitwise_and(red, redRoof, red);
         
         scene->redraw();
         gate = scene->getSceneImage();
